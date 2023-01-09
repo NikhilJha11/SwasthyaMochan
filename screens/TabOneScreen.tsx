@@ -1,23 +1,28 @@
+import { Button, Calendar, Datepicker } from '@ui-kitten/components';
+import { useState } from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+import { View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 
 export default function TabOneScreen({
   navigation,
 }: RootTabScreenProps<'TabOne'>) {
+  const [date, setDate] = useState(new Date());
+
+  console.log('date is , ', date);
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>planspiel</Text>
       <View
         style={styles.separator}
         lightColor='#eee'
         darkColor='rgba(255,255,255,0.1)'
       />
-      <TouchableOpacity>
-        <Text>NAv</Text>
-      </TouchableOpacity>
+      <Button onPress={() => console.log('hi')}>BUTTON</Button>
+      <Datepicker date={date} onSelect={(nextDate) => setDate(nextDate)} />
+      <Calendar date={date} onSelect={(nextDate) => setDate(nextDate)} />
       <EditScreenInfo path='/screens/TabOneScreen.tsx' />
     </View>
   );
