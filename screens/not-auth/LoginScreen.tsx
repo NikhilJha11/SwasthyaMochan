@@ -26,46 +26,45 @@ const LoginScreen = () => {
       keyboardVerticalOffset={-20}
     >
       <OneHealSafeArea statusBar='dark' styles={{ flex: 1 }}>
-        <View style={styles.container}>
-          <TouchableWithoutFeedback
-            onPress={Keyboard.dismiss}
-            style={{ flex: 1, borderWidth: 5, borderColor: 'red' }}
-          >
-            <View style={{ flex: 1 }}>
-              <Image
-                source={require('../../assets/images/logo-full-1.png')}
-                resizeMode='contain'
-                style={styles.image}
-              />
-              <TextInput
-                label='Email'
-                placeholder='example@email.com'
-                mode='outlined'
-                style={styles.input}
-                outlineColor={darkGreen1}
-                activeOutlineColor={darkGreen}
-              />
-              <TextInput
-                label='Password'
-                mode='outlined'
-                secureTextEntry
-                style={styles.input}
-                outlineColor={darkGreen1}
-                activeOutlineColor={darkGreen}
-                right={<TextInput.Icon icon='eye' />}
-              />
-              <Button loading mode='elevated' style={{ paddingVertical: 7 }}>
-                LOGIN
+        <TouchableWithoutFeedback
+          onPress={Keyboard.dismiss}
+          style={{ flex: 1, borderWidth: 5, borderColor: 'red' }}
+        >
+          <View style={styles.container}>
+            <Image
+              source={require('../../assets/images/logo-full-1.png')}
+              resizeMode='contain'
+              style={styles.image}
+            />
+            <TextInput
+              label='Email'
+              placeholder='example@email.com'
+              mode='outlined'
+              style={styles.input}
+              outlineColor={darkGreen1}
+              activeOutlineColor={darkGreen}
+            />
+            <TextInput
+              label='Password'
+              mode='outlined'
+              secureTextEntry
+              style={styles.input}
+              outlineColor={darkGreen1}
+              activeOutlineColor={darkGreen}
+              right={<TextInput.Icon icon='eye' />}
+            />
+
+            <Button loading mode='elevated' style={{ paddingVertical: 7 }}>
+              LOGIN
+            </Button>
+            <View style={styles.register}>
+              <Text variant='labelMedium'>Don't have an account? </Text>
+              <Button mode='text' textColor='#000'>
+                Register here!
               </Button>
-              <View style={styles.register}>
-                <Text variant='labelMedium'>Don't have an account? </Text>
-                <Button mode='text' textColor='#000'>
-                  Register here!
-                </Button>
-              </View>
             </View>
-          </TouchableWithoutFeedback>
-        </View>
+          </View>
+        </TouchableWithoutFeedback>
       </OneHealSafeArea>
     </KeyboardAvoidingView>
   );
