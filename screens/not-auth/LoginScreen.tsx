@@ -4,19 +4,21 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
-  ScrollView,
   StyleSheet,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import React, { useState } from 'react';
-import { darkGreen, darkGreen1, sharedStyles } from '../../sharedStyles';
-import { Button, TextInput, Text } from 'react-native-paper';
+import { darkGreen, sharedStyles } from '../../sharedStyles';
+import { Button, TextInput, Text, useTheme } from 'react-native-paper';
 import OneHealSafeArea from '../../components/OneHealSafeArea';
+import { useNavigation } from '@react-navigation/native';
 
 const LoginScreen = () => {
+  const theme = useTheme();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
 
   return (
     <KeyboardAvoidingView
@@ -28,7 +30,7 @@ const LoginScreen = () => {
       <OneHealSafeArea statusBar='dark' styles={{ flex: 1 }}>
         <TouchableWithoutFeedback
           onPress={Keyboard.dismiss}
-          style={{ flex: 1, borderWidth: 5, borderColor: 'red' }}
+          style={{ flex: 1 }}
         >
           <View style={styles.container}>
             <Image
@@ -41,25 +43,37 @@ const LoginScreen = () => {
               placeholder='example@email.com'
               mode='outlined'
               style={styles.input}
-              outlineColor={darkGreen1}
+              outlineColor={darkGreen}
               activeOutlineColor={darkGreen}
+              autoCapitalize='none'
             />
             <TextInput
               label='Password'
               mode='outlined'
               secureTextEntry
               style={styles.input}
-              outlineColor={darkGreen1}
+              outlineColor={darkGreen}
               activeOutlineColor={darkGreen}
-              right={<TextInput.Icon icon='eye' />}
+              right={<TextInput.Icon icon='eye-off' />}
+              autoCapitalize='none'
             />
 
-            <Button loading mode='elevated' style={{ paddingVertical: 7 }}>
+            <Button
+              mode='contained'
+              style={styles.button}
+              buttonColor={theme.colors.tertiary}
+            >
               LOGIN
             </Button>
             <View style={styles.register}>
               <Text variant='labelMedium'>Don't have an account? </Text>
-              <Button mode='text' textColor='#000'>
+              <Button
+                mode='text'
+                textColor={theme.colors.tertiary}
+                onPress={() =>
+                  navigation.navigate('NotAuth', { screen: 'RegisterScreen' })
+                }
+              >
                 Register here!
               </Button>
             </View>
@@ -75,26 +89,18 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderWidth: 3,
-    borderColor: 'blue',
-    backgroundColor: sharedStyles.viewStyles.backgroundColor,
     paddingHorizontal: sharedStyles.viewStyles.paddingHorizontal,
     paddingBottom: 20,
   },
   image: {
-    borderWidth: 1,
-    borderColor: 'red',
     flex: 1,
   },
   safeAreaContainer: {
     flex: 1,
-    backgroundColor: sharedStyles.viewStyles.backgroundColor,
   },
   input: {
     backgroundColor: sharedStyles.viewStyles.backgroundColor,
     padding: 10,
-    borderWidth: 1,
-    borderColor: 'red',
     marginBottom: 40,
   },
   keyboard: {
@@ -105,5 +111,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-evenly',
+    paddingTop: 10,
+  },
+  button: {
+    paddingVertical: 5,
   },
 });
