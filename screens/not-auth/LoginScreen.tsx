@@ -16,9 +16,10 @@ import { useNavigation } from '@react-navigation/native';
 
 const LoginScreen = () => {
   const theme = useTheme();
+  const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigation = useNavigation();
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <KeyboardAvoidingView
@@ -52,16 +53,25 @@ const LoginScreen = () => {
               outlineColor={darkGreen}
               activeOutlineColor={darkGreen}
               autoCapitalize='none'
+              value={email}
+              onChangeText={(text) => setEmail(text)}
             />
             <TextInput
               label='Password'
               mode='outlined'
-              secureTextEntry
+              secureTextEntry={showPassword}
               style={styles.input}
               outlineColor={darkGreen}
               activeOutlineColor={darkGreen}
-              right={<TextInput.Icon icon='eye-off' />}
+              right={
+                <TextInput.Icon
+                  icon={`eye${showPassword ? '-off' : ''}`}
+                  onPress={() => setShowPassword(!showPassword)}
+                />
+              }
               autoCapitalize='none'
+              value={password}
+              onChangeText={(text) => setPassword(text)}
             />
 
             <Button
