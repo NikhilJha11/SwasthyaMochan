@@ -27,6 +27,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, Screen>;
 
 export type NotAuthStackParamList = {
+  WelcomeScreen: undefined;
   LoginScreen: undefined;
   RegisterScreen: undefined;
 };
