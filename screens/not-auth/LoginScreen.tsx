@@ -38,6 +38,12 @@ const LoginScreen = () => {
               resizeMode='contain'
               style={styles.image}
             />
+            <Text
+              variant='titleLarge'
+              style={[styles.title, { color: theme.colors.tertiary }]}
+            >
+              LOGIN
+            </Text>
             <TextInput
               label='Email'
               placeholder='example@email.com'
@@ -115,5 +121,9 @@ const styles = StyleSheet.create({
   },
   button: {
     paddingVertical: 5,
+  },
+  title: {
+    paddingBottom: 20,
+    fontWeight: '600',
   },
 });
