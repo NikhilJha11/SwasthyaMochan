@@ -55,17 +55,20 @@ const LoginScreen = () => {
           style={{ flex: 1 }}
         >
           <View style={styles.container}>
-            <Image
-              source={require('../../assets/images/logo-full-1.png')}
-              resizeMode='contain'
-              style={styles.image}
-            />
-            <Text
-              variant='titleLarge'
-              style={[styles.title, { color: theme.colors.tertiary }]}
-            >
-              LOGIN
-            </Text>
+            <View style={styles.topContainer}>
+              <Image
+                source={require('../../assets/images/logo-3x.png')}
+                resizeMode='contain'
+                style={styles.image}
+              />
+              <Text
+                variant='headlineLarge'
+                style={[styles.title, { color: theme.colors.tertiary }]}
+              >
+                LOGIN
+              </Text>
+            </View>
+
             <TextInput
               label='Email'
               placeholder='example@email.com'
@@ -132,6 +135,10 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: sharedStyles.viewStyles.paddingHorizontal,
     paddingBottom: 20,
+  },
+  topContainer: {
+    flex: 1,
+    alignItems: 'center',
   },
   image: {
     flex: 1,
