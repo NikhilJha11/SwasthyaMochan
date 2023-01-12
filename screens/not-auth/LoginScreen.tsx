@@ -13,6 +13,7 @@ import { darkGreen, sharedStyles } from '../../sharedStyles';
 import { Button, TextInput, Text, useTheme } from 'react-native-paper';
 import OneHealSafeArea from '../../components/OneHealSafeArea';
 import { useNavigation } from '@react-navigation/native';
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 const LoginScreen = () => {
   const theme = useTheme();
@@ -20,6 +21,26 @@ const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const { getItem, setItem, removeItem } = useAsyncStorage('credentials');
+
+  const login = async (email = 'admin@example.com', password = '123123') => {
+    try {
+      setLoading(true);
+      await setItem(JSON.stringify({ email, password }));
+
+      new Promise(() =>
+        setTimeout(() => {
+          setLoading(false);
+          navigation.navigate('Root');
+        }, 2000)
+      );
+    } catch (e) {
+      console.log('error is ,', e);
+      setLoading(false);
+    }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -55,11 +76,12 @@ const LoginScreen = () => {
               autoCapitalize='none'
               value={email}
               onChangeText={(text) => setEmail(text)}
+              textContentType='emailAddress'
             />
             <TextInput
               label='Password'
               mode='outlined'
-              secureTextEntry={showPassword}
+              secureTextEntry={!showPassword}
               style={styles.input}
               outlineColor={darkGreen}
               activeOutlineColor={darkGreen}
@@ -72,12 +94,15 @@ const LoginScreen = () => {
               autoCapitalize='none'
               value={password}
               onChangeText={(text) => setPassword(text)}
+              textContentType='password'
             />
 
             <Button
               mode='contained'
               style={styles.button}
               buttonColor={theme.colors.tertiary}
+              onPress={() => login(email, password)}
+              loading={loading}
             >
               LOGIN
             </Button>
