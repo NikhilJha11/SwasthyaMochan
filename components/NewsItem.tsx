@@ -2,7 +2,13 @@ import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { Text } from 'react-native-paper';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
-import { darkGreen, darkGreen100, darkGreen200 } from '../sharedStyles';
+import {
+  darkGreen,
+  darkGreen000,
+  darkGreen050,
+  darkGreen100,
+  darkGreen200,
+} from '../sharedStyles';
 
 type Props = {
   title: string;
@@ -25,19 +31,15 @@ export default NewsItem;
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
-    borderColor: 'red',
     flex: 1,
     justifyContent: 'center',
     padding: 10,
     borderRadius: 10,
     paddingRight: 50,
-    backgroundColor: darkGreen100,
+    backgroundColor: darkGreen050,
     marginRight: 30,
   },
   textTop: {
-    borderWidth: 1,
-    borderColor: 'red',
     padding: 5,
     flexDirection: 'row',
     alignItems: 'center',
@@ -46,8 +48,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   textBottom: {
-    borderWidth: 1,
-    borderColor: 'red',
     padding: 5,
     fontWeight: '600',
     opacity: 0.8,
