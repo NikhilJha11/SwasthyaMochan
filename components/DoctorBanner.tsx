@@ -147,6 +147,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2.22,
     elevation: 3,
     marginBottom: 40,
+    borderRadius: 10,
   },
   appointmentsTopSection: {
     backgroundColor: darkGreen000,

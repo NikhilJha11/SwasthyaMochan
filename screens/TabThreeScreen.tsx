@@ -1,41 +1,32 @@
-import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { Feather } from '@expo/vector-icons';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Avatar, Text } from 'react-native-paper';
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+import OneHealSafeArea from '../components/OneHealSafeArea';
+import ProfileButton from '../components/ProfileButton';
+import ProfileButtons from '../components/ProfileButtons';
+import ProfileTop from '../components/ProfileTop';
+import { View } from '../components/Themed';
+import { darkGreen, darkGreen000 } from '../sharedStyles';
 import { RootTabScreenProps } from '../types';
 
 export default function TabThreeScreen({
   navigation,
 }: RootTabScreenProps<'TabThree'>) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>tab three</Text>
-      <View
-        style={styles.separator}
-        lightColor='#eee'
-        darkColor='rgba(255,255,255,0.1)'
-      />
-      <TouchableOpacity>
-        <Text>NAv</Text>
-      </TouchableOpacity>
-      <EditScreenInfo path='/screens/TabOneScreen.tsx' />
-    </View>
+    <OneHealSafeArea statusBar='dark'>
+      <View style={styles.container}>
+        <ProfileTop />
+        <ProfileButtons />
+      </View>
+    </OneHealSafeArea>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+    backgroundColor: 'transparent',
+    paddingHorizontal: 20,
   },
 });

@@ -1,6 +1,7 @@
-import { Feather, MaterialIcons } from '@expo/vector-icons';
+import { Feather, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { FlashList } from '@shopify/flash-list';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useState } from 'react';
 import {
   Dimensions,
   FlatList,
@@ -10,7 +11,15 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from 'react-native';
-import { Avatar, Button, Text, useTheme } from 'react-native-paper';
+import {
+  Avatar,
+  Button,
+  Divider,
+  Menu,
+  Text,
+  useTheme,
+} from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import DoctorBanner from '../components/DoctorBanner';
 import NewsItem from '../components/NewsItem';
 import OneHealSafeArea from '../components/OneHealSafeArea';
@@ -37,39 +46,42 @@ const DATA = [
 ];
 export default function TabTwoScreen() {
   const theme = useTheme();
+  const [visible, setVisible] = useState(false);
+  const insets = useSafeAreaInsets();
+
+  const openMenu = () => setVisible(true);
+  const closeMenu = () => setVisible(false);
 
   return (
-    <OneHealSafeArea
-      statusBar='dark'
-      styles={{ borderWidth: 3, borderColor: 'blue' }}
-    >
+    <OneHealSafeArea statusBar='light'>
       <View style={styles.container}>
-        <View style={styles.welcomer}>
+        <View
+          style={[
+            styles.welcomer,
+            { paddingTop: insets.top * 1.2, marginTop: -insets.top },
+          ]}
+        >
           <Avatar.Image source={require('../assets/images/avatar.jpg')} />
 
-          <View style={{ backgroundColor: darkGreen000 }}>
-            <View
-              style={{
-                backgroundColor: darkGreen000,
-                flexDirection: 'row',
-                marginBottom: 5,
-              }}
-            >
-              <Text variant='labelLarge' style={styles.text}>
-                Welcome,
-              </Text>
-              <Text variant='labelLarge' style={{ fontWeight: '800' }}>
-                {' '}
-                Suat Bayrak
-              </Text>
-            </View>
-
-            <View style={{ backgroundColor: darkGreen000 }}>
-              <Text variant='labelSmall' style={styles.text}>
-                You have 0 appointments
-              </Text>
-            </View>
+          <View style={{ backgroundColor: darkGreen }}>
+            <Image
+              source={require('../assets/images/logo-reverted.png')}
+              style={{ width: 150, height: 50 }}
+              resizeMode='contain'
+            />
           </View>
+          <Menu
+            visible={visible}
+            onDismiss={closeMenu}
+            anchor={
+              <Button onPress={openMenu} textColor='#fff'>
+                <Ionicons name='earth' /> EN
+              </Button>
+            }
+          >
+            <Menu.Item onPress={() => {}} title='Item 1' />
+            <Menu.Item onPress={() => {}} title='Item 2' />
+          </Menu>
         </View>
         <ScrollView style={{ flex: 1 }}>
           <View style={styles.news}>
@@ -82,6 +94,18 @@ export default function TabTwoScreen() {
               decelerationRate={'fast'}
               snapToInterval={Dimensions.get('window').width - 100}
             />
+          </View>
+          <View style={styles.bookAppointment}>
+            <TouchableOpacity style={styles.bookAppointmentButton}>
+              <Feather
+                name='calendar'
+                color='rgba(255,255,255,0.8)'
+                size={24}
+              />
+              <Text variant='headlineSmall' style={styles.bookAppointmentText}>
+                Book Appointment
+              </Text>
+            </TouchableOpacity>
           </View>
           <DoctorBanner
             doctor={{
@@ -118,15 +142,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderColor: 'red',
   },
   welcomer: {
     paddingHorizontal: 20,
     paddingVertical: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: darkGreen000,
+    justifyContent: 'space-between',
+    backgroundColor: darkGreen,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -146,5 +169,33 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
     marginTop: 10,
+  },
+  bookAppointment: {
+    backgroundColor: darkGreen,
+
+    marginHorizontal: 10,
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginVertical: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3,
+    alignItems: 'center',
+  },
+  bookAppointmentText: {
+    color: 'rgba(255,255,255,0.8)',
+    fontWeight: '600',
+    marginLeft: 12,
+  },
+  bookAppointmentButton: {
+    backgroundColor: darkGreen,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
