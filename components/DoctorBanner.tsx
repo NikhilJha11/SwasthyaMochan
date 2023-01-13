@@ -117,7 +117,8 @@ const DoctorBanner = (props: Props) => {
           <View style={styles.appointmentsBottomSectionRight}>
             <Image
               source={props.doctor.image}
-              style={{ width: 120, height: 190 }}
+              style={{ width: 130, height: 200 }}
+              resizeMode='contain'
             />
           </View>
         </View>
@@ -183,8 +184,8 @@ const styles = StyleSheet.create({
   appointmentsBottomSectionRight: {
     flex: 1,
     position: 'absolute',
-    top: 5,
-    right: 10,
+    top: -10,
+    right: 5,
     backgroundColor: 'transparent',
   },
   doctorText: {
