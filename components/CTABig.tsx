@@ -67,7 +67,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     zIndex: 2,
     width: '100%',
-    borderWidth: 1,
-    borderColor: 'red',
   },
 });
