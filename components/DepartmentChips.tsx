@@ -1,7 +1,7 @@
 import { StyleSheet, View, ViewStyle } from 'react-native';
 import React from 'react';
 import { Chip, Text } from 'react-native-paper';
-import { darkGreen, darkGreen200 } from '../sharedStyles';
+import { darkGreen, darkGreen100, darkGreen200 } from '../sharedStyles';
 
 type Chips = {
   id: number;
@@ -90,7 +90,8 @@ const styles = StyleSheet.create({
   },
   container: {
     borderWidth: 1,
-    borderColor: 'blue',
+    borderColor: darkGreen100,
     borderRadius: 10,
+    marginBottom: 10,
   },
 });

@@ -25,8 +25,14 @@ type Props = {
 };
 
 const LocationFilter = (props: Props) => {
-  const { locations, setLocations, setValue, setVisible, value, visible } =
-    props;
+  const {
+    locations,
+    setLocations,
+    setValue,
+    setVisible,
+    value: loc,
+    visible,
+  } = props;
 
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
@@ -49,15 +55,19 @@ const LocationFilter = (props: Props) => {
             >
               <RadioButton.Group
                 onValueChange={(value) => {
-                  setValue(value);
+                  if (value === loc) {
+                    setValue('');
+                  } else {
+                    setValue(value);
+                  }
                   setVisible(!visible);
                 }}
-                value={value}
+                value={loc}
               >
                 {locations.map((location) => (
                   <RadioButton.Item
                     label={location.name}
-                    value={location.name.toLowerCase()}
+                    value={location.name}
                     key={location.id}
                   />
                 ))}
