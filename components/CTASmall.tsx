@@ -3,7 +3,7 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { darkGreen, darkGreen500 } from '../sharedStyles';
 import { Text } from 'react-native-paper';
-import { Feather } from '@expo/vector-icons';
+import { Feather, MaterialIcons } from '@expo/vector-icons';
 
 const CTASmall = () => {
   return (
@@ -25,7 +25,7 @@ const CTASmall = () => {
       >
         See All
       </Text>
-      <Feather name='arrow-right' />
+      <MaterialIcons name='keyboard-arrow-right' />
     </TouchableOpacity>
   );
 };

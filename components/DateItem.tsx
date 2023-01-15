@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import React, { useState } from 'react';
 import {
   darkGreen,
@@ -8,15 +8,44 @@ import {
   darkGreen400,
 } from '../sharedStyles';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
-import { Chip } from 'react-native-paper';
+import { Button, Chip, Dialog, Portal, Text } from 'react-native-paper';
 
 type Props = {
   day: string;
   date: string;
+  time: string;
+  setTime: React.Dispatch<React.SetStateAction<string>>;
+  doctor: string;
+  confirmAppointment: (data: {
+    time: string;
+    day: string;
+    date: string;
+  }) => void;
+  choosenDay: string;
+  choosenDate: string;
+  setChoosenDay: React.Dispatch<React.SetStateAction<string>>;
+  setChoosenDate: React.Dispatch<React.SetStateAction<string>>;
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  visible: boolean;
 };
 
 const DateItem = (props: Props) => {
   const [showTime, setShowTime] = useState(false);
+
+  const setDateAndAppointment = ({
+    time,
+    day,
+    date,
+  }: {
+    time: string;
+    day: string;
+    date: string;
+  }) => {
+    props.setVisible(true);
+    props.setChoosenDate(date);
+    props.setChoosenDay(day);
+    props.setTime(time);
+  };
 
   return (
     <View style={styles.container}>
@@ -34,16 +63,76 @@ const DateItem = (props: Props) => {
       </TouchableOpacity>
       {showTime ? (
         <View style={styles.chipContainer}>
-          <Chip style={styles.chip} textStyle={{ color: '#fff' }}>
+          <Chip
+            style={styles.chip}
+            textStyle={{ color: '#fff' }}
+            onPress={() =>
+              setDateAndAppointment({
+                time: '08:00',
+                day: props.day,
+                date: props.date,
+              })
+            }
+            selected={
+              props.time === '08:00' &&
+              props.date === props.choosenDate &&
+              props.visible
+            }
+          >
             08:00
           </Chip>
-          <Chip style={styles.chip} textStyle={{ color: '#fff' }}>
+          <Chip
+            style={styles.chip}
+            textStyle={{ color: '#fff' }}
+            onPress={() =>
+              setDateAndAppointment({
+                time: '10:30',
+                day: props.day,
+                date: props.date,
+              })
+            }
+            selected={
+              props.time === '10:30' &&
+              props.date === props.choosenDate &&
+              props.visible
+            }
+          >
             10:30
           </Chip>
-          <Chip style={styles.chip} textStyle={{ color: '#fff' }}>
+          <Chip
+            style={styles.chip}
+            textStyle={{ color: '#fff' }}
+            onPress={() =>
+              setDateAndAppointment({
+                time: '10:45',
+                day: props.day,
+                date: props.date,
+              })
+            }
+            selected={
+              props.time === '10:45' &&
+              props.date === props.choosenDate &&
+              props.visible
+            }
+          >
             10:45
           </Chip>
-          <Chip style={styles.chip} textStyle={{ color: '#fff' }}>
+          <Chip
+            style={styles.chip}
+            textStyle={{ color: '#fff' }}
+            onPress={() =>
+              setDateAndAppointment({
+                time: '13:15',
+                day: props.day,
+                date: props.date,
+              })
+            }
+            selected={
+              props.time === '13:15' &&
+              props.date === props.choosenDate &&
+              props.visible
+            }
+          >
             13:15
           </Chip>
         </View>
