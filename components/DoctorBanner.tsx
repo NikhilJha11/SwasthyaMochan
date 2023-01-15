@@ -54,7 +54,7 @@ const DoctorBanner = (props: Props) => {
           >
             See All
           </Text>
-          <Feather name='arrow-right' />
+          <MaterialIcons name='keyboard-arrow-right' />
         </TouchableOpacity>
       </View>
       <TouchableWithoutFeedback
