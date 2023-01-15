@@ -36,8 +36,17 @@ export type Doctor = {
   location: string;
   id?: number;
 };
+export type AppointmentConfirmationScreenParams = {
+  doctor: string;
+  date: string;
+  day: string;
+  time: string;
+};
+
 export type AppointmentStackParamList = {
   AppointmentScreen: Doctor;
+  AppointmentConfirmationScreen: AppointmentConfirmationScreenParams;
+  AppointmentsScreen: undefined;
 };
 export type NotAuthStackParamList = {
   WelcomeScreen: undefined;
@@ -47,6 +56,7 @@ export type NotAuthStackParamList = {
 export type RootTabParamList = {
   TabOne: undefined;
   TabTwo: undefined;
+  ChatScreen: undefined;
   TabThree: undefined;
 };
 

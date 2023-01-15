@@ -1,11 +1,13 @@
-import { FontAwesome } from '@expo/vector-icons';
+import { Feather, FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Pressable } from 'react-native';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
+import ChatScreen from '../screens/ChatScreen';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabThreeScreen from '../screens/TabThreeScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
+import { darkGreen } from '../sharedStyles';
 import { RootTabParamList, RootTabScreenProps } from '../types';
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
@@ -18,6 +20,11 @@ export function BottomTabNavigator() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
         headerShown: false,
+        tabBarStyle: {
+          backgroundColor: darkGreen,
+          height: 90,
+        },
+        tabBarInactiveTintColor: 'rgba(255,255,255,0.5)',
       }}
       initialRouteName='TabTwo'
     >
@@ -25,8 +32,10 @@ export function BottomTabNavigator() {
         name='TabOne'
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name='code' color={color} />,
+          title: 'Appointment',
+          tabBarIcon: ({ color }) => (
+            <Feather name='calendar' size={24} color={color} />
+          ),
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
@@ -49,16 +58,32 @@ export function BottomTabNavigator() {
         name='TabTwo'
         component={TabTwoScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name='code' color={color} />,
+          title: 'Home',
+          tabBarIcon: ({ color }) => (
+            <Feather name='home' size={24} color={color} />
+          ),
+        }}
+      />
+
+      <BottomTab.Screen
+        name='ChatScreen'
+        component={ChatScreen}
+        options={{
+          title: 'Chat',
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons name='chat-bubble-outline' size={24} color={color} />
+          ),
         }}
       />
       <BottomTab.Screen
         name='TabThree'
         component={TabThreeScreen}
         options={{
-          title: 'Tab Three',
-          tabBarIcon: ({ color }) => <TabBarIcon name='code' color={color} />,
+          title: 'Profile',
+          tabBarIcon: ({ color }) => (
+            <Feather name='user' size={24} color={color} />
+          ),
+          tabBarBadge: 1,
         }}
       />
     </BottomTab.Navigator>

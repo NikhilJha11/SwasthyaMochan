@@ -172,8 +172,6 @@ export default function TabOneScreen({
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
-    borderColor: 'red',
     flex: 1,
     backgroundColor: 'transparent',
     paddingHorizontal: 20,

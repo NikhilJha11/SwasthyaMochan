@@ -174,8 +174,6 @@ export default AppointmentScreen;
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
-    borderColor: 'red',
     flex: 1,
   },
 });

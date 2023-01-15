@@ -7,11 +7,12 @@ import { darkGreen, darkGreen000 } from '../sharedStyles';
 type Props = {
   icon: any;
   text: string;
+  onPress?: () => void;
 };
 
 const ProfileButton = (props: Props) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={() => console.log('hi')}>
+    <TouchableOpacity style={styles.button} onPress={props.onPress}>
       <Feather name={props.icon} color={darkGreen} size={24} />
       <Text variant='titleMedium' style={styles.buttonText}>
         {props.text}
