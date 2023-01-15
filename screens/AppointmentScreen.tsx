@@ -1,11 +1,12 @@
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import OneHealSafeArea from '../components/OneHealSafeArea';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Doctor as DoctorType } from '../types';
 import Doctor from '../components/Doctor';
 import DateItem from '../components/DateItem';
 import CTABig from '../components/CTABig';
+import { Button, Dialog, Portal, Text } from 'react-native-paper';
 
 const FULL_MONTHS = [
   'January',
@@ -32,9 +33,33 @@ const FULL_WEEK = [
 ];
 
 const AppointmentScreen = () => {
+  const navigation = useNavigation();
   const params = useRoute().params as DoctorType;
   const [days, setDays] = useState<any>([]);
   const [showMoreDays, setShowMoreDays] = useState(7);
+  const [time, setTime] = useState('');
+  const [choosenDay, setChoosenDay] = useState('');
+  const [choosenDate, setChoosenDate] = useState('');
+  const [visible, setVisible] = React.useState(false);
+
+  const showDialog = () => setVisible(true);
+  const hideDialog = () => setVisible(false);
+
+  const confirmAppointment = ({
+    time,
+    day,
+    date,
+  }: {
+    time: string;
+    day: string;
+    date: string;
+  }) => {
+    setVisible(false);
+    navigation.navigate('AppointmentStack', {
+      screen: 'AppointmentConfirmationScreen',
+      params: { time, day, date, doctor: params.name },
+    });
+  };
 
   const generateDays = () => {
     const nextWeek = new Date();
@@ -83,7 +108,23 @@ const AppointmentScreen = () => {
                 (
                   day: { day: string; fullDate: string },
                   index: React.Key | null | undefined
-                ) => <DateItem key={index} day={day.day} date={day.fullDate} />
+                ) => (
+                  <DateItem
+                    key={index}
+                    day={day.day}
+                    date={day.fullDate}
+                    time={time}
+                    setTime={setTime}
+                    doctor={`${params.name}`}
+                    confirmAppointment={confirmAppointment}
+                    choosenDate={choosenDate}
+                    setChoosenDate={setChoosenDate}
+                    choosenDay={choosenDay}
+                    setChoosenDay={setChoosenDay}
+                    setVisible={setVisible}
+                    visible={visible}
+                  />
+                )
               )
             : null}
           <CTABig
@@ -92,6 +133,37 @@ const AppointmentScreen = () => {
             onPress={() => setShowMoreDays((prev) => prev + 7)}
             style={{ marginHorizontal: 20 }}
           />
+          <Portal>
+            <Dialog visible={visible} onDismiss={hideDialog}>
+              <Dialog.Title>Confirm Appointment</Dialog.Title>
+              <Dialog.Content>
+                <Text variant='bodyLarge' style={{ fontWeight: '500' }}>
+                  {params.name}
+                </Text>
+              </Dialog.Content>
+              <Dialog.Content>
+                <Text variant='bodyMedium'>
+                  {choosenDay}
+                  {choosenDate}
+                </Text>
+                <Text variant='bodyMedium'>{time}</Text>
+              </Dialog.Content>
+              <Dialog.Actions>
+                <Button onPress={hideDialog}>Cancel</Button>
+                <Button
+                  onPress={() =>
+                    confirmAppointment({
+                      time,
+                      day: choosenDay,
+                      date: choosenDate,
+                    })
+                  }
+                >
+                  Confirm
+                </Button>
+              </Dialog.Actions>
+            </Dialog>
+          </Portal>
         </ScrollView>
       </View>
     </OneHealSafeArea>
