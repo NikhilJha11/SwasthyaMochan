@@ -148,6 +148,7 @@ export default function TabOneScreen({
                       image={doctor.image}
                       key={doctor.id}
                       location={doctor.location}
+                      id={doctor.id}
                     />
                   );
                 })
