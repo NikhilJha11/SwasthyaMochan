@@ -22,7 +22,7 @@ const CTABig = (props: Props) => {
           <Feather name={props.icon} color='rgba(255,255,255,0.8)' size={24} />
         ) : (
           <MaterialIcons
-            name='location-on'
+            name={props.icon}
             color='rgba(255,255,255,0.8)'
             size={24}
           />
