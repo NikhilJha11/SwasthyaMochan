@@ -7,6 +7,7 @@ export const darkGreen400 = '#74a5a5';
 export const darkGreen300 = '#97bfbf';
 export const darkGreen200 = '#add1d1';
 export const darkGreen100 = '#c5e0e0';
+export const darkGreen050 = '#DCF0F0';
 export const darkGreen000 = '#eff7f7';
 
 export const lightGreen = '#38abab';
