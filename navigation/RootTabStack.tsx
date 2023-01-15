@@ -19,6 +19,7 @@ export function BottomTabNavigator() {
         tabBarActiveTintColor: Colors[colorScheme].tint,
         headerShown: false,
       }}
+      initialRouteName='TabTwo'
     >
       <BottomTab.Screen
         name='TabOne'

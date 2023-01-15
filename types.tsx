@@ -20,12 +20,25 @@ export type RootStackParamList = {
   NotAuth: NavigatorScreenParams<NotAuthStackParamList> | undefined;
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
+  AppointmentStack:
+    | NavigatorScreenParams<AppointmentStackParamList>
+    | undefined;
   NotFound: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, Screen>;
 
+export type Doctor = {
+  image: string;
+  name: string;
+  department: string;
+  location: string;
+  id?: number;
+};
+export type AppointmentStackParamList = {
+  AppointmentScreen: Doctor;
+};
 export type NotAuthStackParamList = {
   WelcomeScreen: undefined;
   LoginScreen: undefined;

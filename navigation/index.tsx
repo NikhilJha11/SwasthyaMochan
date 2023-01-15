@@ -29,6 +29,12 @@ import {
 import LinkingConfiguration from './LinkingConfiguration';
 import { NotAuthNavigator } from './NotAuthStack';
 import { BottomTabNavigator } from './RootTabStack';
+import { useEffect, useState } from 'react';
+import AsyncStorage, {
+  useAsyncStorage,
+} from '@react-native-async-storage/async-storage';
+import AppointmentScreen from '../screens/AppointmentScreen';
+import { AppointmentNavigator } from './AppointmentStack';
 
 export default function Navigation({
   colorScheme,
@@ -52,6 +58,21 @@ export default function Navigation({
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
+  const [credentials, setCredentials] = useState<string | null>();
+  const [loading, setLoading] = useState(false);
+  const { getItem, setItem, removeItem } = useAsyncStorage('credentials');
+
+  const readFromAsyncStorage = async () => {
+    const item = await getItem();
+    setCredentials(item);
+  };
+
+  useEffect(() => {
+    readFromAsyncStorage();
+  }, []);
+
+  console.log('creds are ', credentials);
+
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name='NotAuth' component={NotAuthNavigator} />
@@ -60,6 +81,7 @@ function RootNavigator() {
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
+      <Stack.Screen name='AppointmentStack' component={AppointmentNavigator} />
       <Stack.Screen
         name='NotFound'
         component={NotFoundScreen}
