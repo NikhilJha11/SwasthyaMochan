@@ -25,6 +25,7 @@ import DoctorBanner from '../components/DoctorBanner';
 import NewsItem from '../components/NewsItem';
 import OneHealAppBar from '../components/OneHealAppBar';
 import OneHealSafeArea from '../components/OneHealSafeArea';
+import { PillReminder } from '../components/PillReminder';
 
 import { View } from '../components/Themed';
 import {
@@ -87,6 +88,8 @@ export default function TabTwoScreen() {
             buttonRight={{ button: 'Cancel' }}
             key={1}
           />
+
+          <PillReminder />
 
           <DoctorBanner
             doctor={{
