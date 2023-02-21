@@ -52,7 +52,7 @@ const OnboardingScreens = () => {
     navigation.navigate('Root');
   };
 
-  /*const checkOnboardingStatus = async () => {
+  const checkOnboardingStatus = async () => {
     const hasOnboarded = await AsyncStorage.getItem('hasOnboarded');
     if (hasOnboarded) {
       navigation.navigate('Root');
@@ -60,7 +60,7 @@ const OnboardingScreens = () => {
   };
   React.useEffect(() => {
     checkOnboardingStatus();
-  }, []);*/
+  }, []);
 
   return (
     <Swiper showsButtons={true}>
