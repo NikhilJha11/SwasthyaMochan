@@ -52,6 +52,8 @@ export type NotAuthStackParamList = {
   WelcomeScreen: undefined;
   LoginScreen: undefined;
   RegisterScreen: undefined;
+  OnboardingScreens: undefined;
+
 };
 export type RootTabParamList = {
   TabOne: undefined;

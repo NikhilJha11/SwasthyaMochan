@@ -33,7 +33,8 @@ const LoginScreen = () => {
       new Promise(() =>
         setTimeout(() => {
           setLoading(false);
-          navigation.navigate('Root');
+          //navigation.navigate('Root');
+          navigation.navigate('NotAuth', { screen: 'OnboardingScreens' })
         }, 2000)
       );
     } catch (e) {
