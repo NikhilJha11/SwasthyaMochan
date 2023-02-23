@@ -24,6 +24,7 @@ export type RootStackParamList = {
     | NavigatorScreenParams<AppointmentStackParamList>
     | undefined;
   NotFound: undefined;
+  ChatStack: NavigatorScreenParams<ChatStackParamList> | undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -49,6 +50,10 @@ export type AppointmentStackParamList = {
   AppointmentConfirmationScreen: AppointmentConfirmationScreenParams;
   AppointmentsScreen: undefined;
 };
+export type ChatStackParamList = {
+  ChatScreen: undefined;
+  Chat: undefined;
+};
 export type NotAuthStackParamList = {
   WelcomeScreen: undefined;
   LoginScreen: undefined;
@@ -58,7 +63,7 @@ export type NotAuthStackParamList = {
 export type RootTabParamList = {
   TabOne: undefined;
   TabTwo: undefined;
-  ChatScreen: undefined;
+  ChatStack: undefined;
   TabThree: undefined;
 };
 

@@ -35,6 +35,7 @@ import AsyncStorage, {
 } from '@react-native-async-storage/async-storage';
 import AppointmentScreen from '../screens/AppointmentScreen';
 import { AppointmentNavigator } from './AppointmentStack';
+import { ChatStack } from './ChatStack';
 
 export default function Navigation({
   colorScheme,
@@ -82,6 +83,7 @@ function RootNavigator() {
         options={{ headerShown: false }}
       />
       <Stack.Screen name='AppointmentStack' component={AppointmentNavigator} />
+      <Stack.Screen name='ChatStack' component={ChatStack} />
       <Stack.Screen
         name='NotFound'
         component={NotFoundScreen}
