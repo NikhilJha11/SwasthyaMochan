@@ -31,7 +31,7 @@ const ChatScreen = () => {
         icon={'chat-bubble-outline'}
         text='Start Chat'
         onPress={() => console.log('')}
-        style={{ paddingHorizontal: 20 }}
+        style={{ marginHorizontal: 20, marginVertical: 40 }}
       />
       <View style={styles.chat}>
         <TouchableOpacity
@@ -44,7 +44,7 @@ const ChatScreen = () => {
           />
           <View style={styles.chatRight}>
             <Text variant='titleMedium'>Davide Garofoli</Text>
-            <Text variant='bodySmall'>
+            <Text variant='bodySmall' numberOfLines={4}>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore,
               odio.
             </Text>
