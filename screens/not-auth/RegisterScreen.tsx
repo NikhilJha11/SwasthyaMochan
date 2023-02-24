@@ -7,18 +7,21 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
+  ScrollView,
 } from 'react-native';
 import React, { useState } from 'react';
 import { darkGreen, sharedStyles } from '../../sharedStyles';
 import { Button, TextInput, Text, useTheme } from 'react-native-paper';
 import OneHealSafeArea from '../../components/OneHealSafeArea';
 import { useNavigation } from '@react-navigation/native';
+import moment from 'moment';
 
 const RegisterScreen = () => {
   const theme = useTheme();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
+  const [birthdate, setBirthdate] = useState('');
 
   return (
     <KeyboardAvoidingView
@@ -32,7 +35,7 @@ const RegisterScreen = () => {
           onPress={Keyboard.dismiss}
           style={{ flex: 1 }}
         >
-          <View style={styles.container}>
+          <ScrollView style={styles.container}>
             <Image
               source={require('../../assets/images/logo-full-1.png')}
               resizeMode='contain'
@@ -45,8 +48,70 @@ const RegisterScreen = () => {
               REGISTER
             </Text>
             <TextInput
+            label='Name'
+              placeholder='name'
+              left={<TextInput.Icon icon={'account-circle'}/>}
+              mode='outlined'
+              style={styles.input}
+              outlineColor={darkGreen}
+              activeOutlineColor={darkGreen}
+              autoCapitalize='none'
+            />
+             <TextInput
+              label='Surename'
+              placeholder='surename'
+              mode='outlined'
+              left={<TextInput.Icon icon={'account-circle'}/>}
+              secureTextEntry
+              style={styles.input}
+              outlineColor={darkGreen}
+              activeOutlineColor={darkGreen}
+              autoCapitalize='none'
+            />
+            <TextInput
+              label='Date of Birth'
+              mode='outlined'
+              left={<TextInput.Icon icon='calendar'/>}
+              placeholder={`YYYY-MM-DD (e.g. ${moment().subtract(18, 'years').format('YYYY-MM-DD')})`}
+              value={birthdate}
+              onChangeText={(text) => setBirthdate(text)}
+              style={styles.input}
+              outlineColor={darkGreen}
+              activeOutlineColor={darkGreen}
+              autoCapitalize='none'
+            />
+            <TextInput
+              label='Street'
+              mode='outlined'
+              left={<TextInput.Icon icon={'map-marker-account'}/>}
+              style={styles.input}
+              outlineColor={darkGreen}
+              activeOutlineColor={darkGreen}
+              autoCapitalize='none'
+            />
+            
+             <TextInput
+              label='Zip'
+              mode='outlined'
+              left={<TextInput.Icon icon={'home-city'}/>}
+              style={styles.input}
+              outlineColor={darkGreen}
+              activeOutlineColor={darkGreen}
+              autoCapitalize='none'
+            />
+             <TextInput
+              label='City'
+              mode='outlined'
+              left={<TextInput.Icon icon={'home-city'}/>}
+              style={styles.input}
+              outlineColor={darkGreen}
+              activeOutlineColor={darkGreen}
+              autoCapitalize='none'
+            />
+            <TextInput
               label='Email'
               placeholder='example@email.com'
+              left={<TextInput.Icon icon='email'/>}
               mode='outlined'
               style={styles.input}
               outlineColor={darkGreen}
@@ -60,7 +125,18 @@ const RegisterScreen = () => {
               style={styles.input}
               outlineColor={darkGreen}
               activeOutlineColor={darkGreen}
+              left={<TextInput.Icon icon='account-lock'/>}
               right={<TextInput.Icon icon='eye-off' />}
+              autoCapitalize='none'
+            />
+             <TextInput
+              label='Telephone Number'
+              mode='outlined'
+              left={<TextInput.Icon icon='phone' color={darkGreen}/>}
+              secureTextEntry
+              style={styles.input}
+              outlineColor={darkGreen}
+              activeOutlineColor={darkGreen}
               autoCapitalize='none'
             />
 
@@ -83,7 +159,7 @@ const RegisterScreen = () => {
                 Login here!
               </Button>
             </View>
-          </View>
+          </ScrollView>
         </TouchableWithoutFeedback>
       </OneHealSafeArea>
     </KeyboardAvoidingView>
@@ -96,7 +172,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: sharedStyles.viewStyles.paddingHorizontal,
-    paddingBottom: 20,
+    paddingBottom: 10,
   },
   image: {
     flex: 1,
