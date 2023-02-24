@@ -13,7 +13,9 @@ import { darkGreen, sharedStyles } from '../../sharedStyles';
 import { Button, TextInput, Text, useTheme } from 'react-native-paper';
 import OneHealSafeArea from '../../components/OneHealSafeArea';
 import { useNavigation } from '@react-navigation/native';
-import { useAsyncStorage } from '@react-native-async-storage/async-storage';
+import AsyncStorage, {
+  useAsyncStorage,
+} from '@react-native-async-storage/async-storage';
 
 const LoginScreen = () => {
   const theme = useTheme();
@@ -29,12 +31,17 @@ const LoginScreen = () => {
     try {
       setLoading(true);
       await setItem(JSON.stringify({ email, password }));
+      const hasOnboardedAlready = await AsyncStorage.getItem('hasOnboarded');
 
       new Promise(() =>
         setTimeout(() => {
           setLoading(false);
-          //navigation.navigate('Root');
-          navigation.navigate('NotAuth', { screen: 'OnboardingScreens' })
+
+          if (hasOnboardedAlready) {
+            navigation.navigate('Root');
+          } else if (!hasOnboardedAlready) {
+            navigation.navigate('NotAuth', { screen: 'OnboardingScreens' });
+          }
         }, 2000)
       );
     } catch (e) {
