@@ -3,14 +3,23 @@ import {
   Image,
   Keyboard,
   KeyboardAvoidingView,
+  Linking,
   Platform,
   StyleSheet,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import React, { useState } from 'react';
 import { darkGreen, sharedStyles } from '../../sharedStyles';
-import { Button, TextInput, Text, useTheme } from 'react-native-paper';
+import {
+  Button,
+  TextInput,
+  Text,
+  useTheme,
+  Portal,
+  Dialog,
+} from 'react-native-paper';
 import OneHealSafeArea from '../../components/OneHealSafeArea';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage, {
@@ -24,6 +33,10 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
+
+  const showDialog = () => setVisible(true);
+  const hideDialog = () => setVisible(false);
 
   const { getItem, setItem, removeItem } = useAsyncStorage('credentials');
 
@@ -78,19 +91,7 @@ const LoginScreen = () => {
             </View>
 
             <TextInput
-              label='Email'
-              placeholder='example@email.com'
-              mode='outlined'
-              style={styles.input}
-              outlineColor={darkGreen}
-              activeOutlineColor={darkGreen}
-              autoCapitalize='none'
-              value={email}
-              onChangeText={(text) => setEmail(text)}
-              textContentType='emailAddress'
-            />
-            <TextInput
-              label='Password'
+              label='Kielstein ID'
               mode='outlined'
               secureTextEntry={!showPassword}
               style={styles.input}
@@ -107,6 +108,49 @@ const LoginScreen = () => {
               onChangeText={(text) => setPassword(text)}
               textContentType='password'
             />
+            <TouchableOpacity
+              onPress={() => setVisible(true)}
+              style={styles.idNumber}
+            >
+              <Text variant='bodySmall' style={styles.idNumberText}>
+                How do I obtain the ID number ?
+              </Text>
+            </TouchableOpacity>
+
+            <Portal>
+              <Dialog visible={visible} onDismiss={() => setVisible(false)}>
+                <Dialog.Title>What is Kielstein ID ?</Dialog.Title>
+                <Dialog.Content>
+                  <Text variant='bodyMedium'>
+                    Kielstein Patient ID number is used to identify each patient
+                    in the app. This is simply equivalent to your sign in
+                    credentials in order to use this app.
+                  </Text>
+                </Dialog.Content>
+                <Dialog.Content>
+                  <Text variant='bodyMedium'>
+                    To obtain one, you must go to nearest Kielstein clinics and
+                    get one ID number for yourself.
+                  </Text>
+                </Dialog.Content>
+                <Dialog.Content>
+                  <Text
+                    variant='bodySmall'
+                    style={styles.kielstein}
+                    onPress={() =>
+                      Linking.openURL(
+                        'https://www.kielstein.de/standorte-uebersicht-2/'
+                      )
+                    }
+                  >
+                    Click here to find the nearest Kielstein to you!
+                  </Text>
+                </Dialog.Content>
+                <Dialog.Actions>
+                  <Button onPress={() => setVisible(false)}>OK</Button>
+                </Dialog.Actions>
+              </Dialog>
+            </Portal>
 
             <Button
               mode='contained'
@@ -157,7 +201,6 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: sharedStyles.viewStyles.backgroundColor,
     padding: 10,
-    marginBottom: 40,
   },
   keyboard: {
     flex: 1,
@@ -175,5 +218,18 @@ const styles = StyleSheet.create({
   title: {
     paddingBottom: 20,
     fontWeight: '600',
+  },
+  idNumber: {
+    marginBottom: 50,
+    marginVertical: 20,
+  },
+  idNumberText: {
+    textAlign: 'right',
+    opacity: 0.7,
+  },
+  kielstein: {
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+    textDecorationLine: 'underline',
   },
 });

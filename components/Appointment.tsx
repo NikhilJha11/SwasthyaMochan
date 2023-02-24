@@ -1,19 +1,36 @@
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import {
+  Linking,
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import { Avatar, Divider, Text } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
 import { darkGreen } from '../sharedStyles';
 
 const Appointment = () => {
+  const openGps = (lat: any, lng: any) => {
+    Linking.openURL(
+      `https://www.google.com/maps/search/?api=1&query=${lat}%2C${lng}`
+    );
+  };
   return (
     <View style={styles.appointment}>
       <View style={styles.appointmentTop}>
         <View>
-          <Text variant='labelLarge' style={{ fontWeight: '500' }}>
+          <Text
+            variant='labelLarge'
+            style={{ fontWeight: '500', marginBottom: 5 }}
+          >
             Dr. Kyle Bush
           </Text>
           <Text variant='labelSmall' style={{ opacity: 0.6 }}>
             Cardiology
+          </Text>
+          <Text variant='labelSmall' style={{ opacity: 0.6 }}>
+            Polyklinik - Erfurt
           </Text>
         </View>
         <Avatar.Image source={require('../assets/images/avatar1.png')} />
@@ -29,8 +46,11 @@ const Appointment = () => {
         </Text>
       </View>
       <View style={styles.appointmentBottomDown}>
-        <TouchableOpacity style={styles.buttonReschedule}>
-          <Text style={{ color: '#fff' }}>Reschedule</Text>
+        <TouchableOpacity
+          style={styles.buttonReschedule}
+          onPress={() => openGps('50.964265277365115', '11.042652780566502')}
+        >
+          <Text style={{ color: '#fff' }}>Maps</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonCancel}>
           <Text>Cancel</Text>
