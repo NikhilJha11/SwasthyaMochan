@@ -1,21 +1,41 @@
 import { Image, StyleSheet, View } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import {
-  darkGreen,
-  darkGreen200,
-  darkGreen500,
-  darkGreen600,
-} from '../sharedStyles';
+import { darkGreen } from '../sharedStyles';
 import { Text } from 'react-native-paper';
 import CTABigWhite from '../components/CTABigWhite';
 import { AppointmentConfirmationScreenParams } from '../types';
+import * as Notifications from 'expo-notifications';
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
 
 const AppointmentConfirmationScreen = () => {
   const params = useRoute().params as AppointmentConfirmationScreenParams;
   const navigation = useNavigation();
 
   console.log(params);
+
+  useEffect(() => {
+    (async () => {
+      await Notifications.setBadgeCountAsync(1);
+      const res = await Notifications.scheduleNotificationAsync({
+        content: {
+          title: 'OneHeal',
+          subtitle: 'Upcoming appointment!',
+          body: `You have an appointment at ${params.day} ${params.date}, ${params.time}`,
+        },
+        trigger: {
+          seconds: 5,
+        },
+      });
+    })();
+  }, []);
 
   return (
     <View style={styles.container}>
