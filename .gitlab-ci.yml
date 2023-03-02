@@ -10,10 +10,13 @@ cache:
 
 build:
   stage: build
-  image: node:latest
   script:
     - npm install
     - npm run build
+    
+  tags:
+    - shared
+    - tag2
 
 test:
   stage: test
