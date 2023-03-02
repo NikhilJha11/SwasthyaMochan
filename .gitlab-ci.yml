@@ -1,0 +1,30 @@
+stages:
+  - build
+  - test
+  - deploy
+
+cache:
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - node_modules/
+
+build:
+  stage: build
+  image: node:latest
+  script:
+    - npm install
+    - npm run build
+
+test:
+  stage: test
+  image: node:latest
+  script:
+    - npm install
+    - npm run test
+
+deploy:
+  stage: deploy
+  image: node:latest
+  script:
+    - npm install
+    - npm run deploy
