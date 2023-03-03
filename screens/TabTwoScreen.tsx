@@ -11,6 +11,7 @@ import * as Notifications from 'expo-notifications';
 import { View } from '../components/Themed';
 import { darkGreen000 } from '../sharedStyles';
 import { useNavigation } from '@react-navigation/native';
+import { useLogin } from '../hooks/useLogin';
 
 const DATA = [
   {
@@ -33,6 +34,7 @@ Notifications.setNotificationHandler({
 });
 export default function TabTwoScreen() {
   const navigation = useNavigation();
+  const { data, isLoading, error } = useLogin();
 
   useEffect(() => {
     (async () => {
