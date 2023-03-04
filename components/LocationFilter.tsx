@@ -1,41 +1,42 @@
 import { ScrollView, StyleSheet, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import CTABig from './CTABig';
-import { Button, Dialog, Portal, RadioButton } from 'react-native-paper';
+import {
+  Button,
+  Dialog,
+  Divider,
+  Portal,
+  RadioButton,
+  Text,
+} from 'react-native-paper';
 
-type Location = {
-  id: number;
-  name: string;
+export type Location = {
+  address: string;
+  city: string;
+  latitude: string;
+  locationId: string;
+  longitude: string;
+  zipCode: string;
+  locationName: string;
 };
 
 type Props = {
-  locations: Location[];
-  setLocations: React.Dispatch<
-    React.SetStateAction<
-      {
-        id: number;
-        name: string;
-      }[]
-    >
-  >;
+  locations?: Location[];
+  setLocation: React.Dispatch<React.SetStateAction<number>>;
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  location: number;
 };
 
 const LocationFilter = (props: Props) => {
-  const {
-    locations,
-    setLocations,
-    setValue,
-    setVisible,
-    value: loc,
-    visible,
-  } = props;
+  const { locations, location, setLocation, setVisible, visible } = props;
 
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
+
+  const loc1 = useMemo(() => locations?.filter((l) => l.city === 'Jena'), []);
+  const loc2 = useMemo(() => locations?.filter((l) => l.city === 'Erfurt'), []);
+
   return (
     <>
       <CTABig
@@ -53,22 +54,46 @@ const LocationFilter = (props: Props) => {
               }}
               style={{ height: 250 }}
             >
+              <Text variant='headlineSmall'>Erfurt</Text>
               <RadioButton.Group
                 onValueChange={(value) => {
-                  if (value === loc) {
-                    setValue('');
-                  } else {
-                    setValue(value);
-                  }
+                  // if (value === loc) {
+                  //   setValue('');
+                  // } else {
+                  //   setValue(value);
+                  // }
+                  setLocation(Number(value));
                   setVisible(!visible);
                 }}
-                value={loc}
+                value={location.toString()}
               >
-                {locations.map((location) => (
+                {loc2?.map((location) => (
                   <RadioButton.Item
-                    label={location.name}
-                    value={location.name}
-                    key={location.id}
+                    label={location.locationName}
+                    value={location.locationId}
+                    key={Number(location.locationId)}
+                  />
+                ))}
+              </RadioButton.Group>
+              <Divider />
+              <Text variant='headlineSmall'>Jena</Text>
+              <RadioButton.Group
+                onValueChange={(value) => {
+                  // if (value === loc) {
+                  //   setValue('');
+                  // } else {
+                  //   setValue(value);
+                  // }
+                  setLocation(Number(value));
+                  setVisible(!visible);
+                }}
+                value={location.toString()}
+              >
+                {loc1?.map((location) => (
+                  <RadioButton.Item
+                    label={location.locationName}
+                    value={location.locationId}
+                    key={Number(location.locationId)}
                   />
                 ))}
               </RadioButton.Group>
