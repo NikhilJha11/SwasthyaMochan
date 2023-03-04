@@ -93,12 +93,11 @@ const AppointmentScreen = () => {
     <OneHealSafeArea statusBar='light'>
       <View style={styles.container}>
         <Doctor
-          department={params.department}
+          specialization={params.specialization}
           name={params.name}
-          image={params.image}
-          key={params.id}
-          location={params.location}
-          id={params.id}
+          key={params.doctorId}
+          doctorId={params.doctorId}
+          locationId={params.locationId}
           styles={{ marginTop: 20, backgroundColor: '#fff' }}
         />
 
