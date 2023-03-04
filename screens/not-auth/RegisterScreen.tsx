@@ -58,8 +58,8 @@ const RegisterScreen = () => {
               autoCapitalize='none'
             />
              <TextInput
-              label='Surename'
-              placeholder='surename'
+              label='Surname'
+              placeholder='surname'
               mode='outlined'
               left={<TextInput.Icon icon={'account-circle'}/>}
               secureTextEntry
