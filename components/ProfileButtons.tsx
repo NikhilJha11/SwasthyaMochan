@@ -21,7 +21,7 @@ const ProfileButtons = () => {
         }
       />
       <ProfileButton icon='clock' text={t('RecentAppointments')} />
-      <ProfileButton icon='paperclip' text='Documents' />
+      <ProfileButton icon='paperclip' text={t ('Documents')} />
     </>
   );
 };
