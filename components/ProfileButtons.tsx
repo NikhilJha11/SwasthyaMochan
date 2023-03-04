@@ -23,7 +23,7 @@ const ProfileButtons = () => {
       icon='clipboard' 
       text='Patient Profile'
       onPress={() =>
-        navigation.navigate('NotAuth', { screen: 'PrivacyStatmentScreen'})
+        navigation.navigate('Profile', { screen: 'PrivacyStatmentScreen'})
       }
        /> 
     </>
