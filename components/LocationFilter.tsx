@@ -2,6 +2,8 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import React, { useState } from 'react';
 import CTABig from './CTABig';
 import { Button, Dialog, Portal, RadioButton } from 'react-native-paper';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
 type Location = {
   id: number;
@@ -36,11 +38,12 @@ const LocationFilter = (props: Props) => {
 
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
+  const { t } = useTranslation();
   return (
     <>
       <CTABig
         icon={'location-on'}
-        text='Locations'
+        text={t('Locations')}
         onPress={() => showDialog()}
       />
       <Portal>

@@ -15,6 +15,8 @@ import { Button, TextInput, Text, useTheme } from 'react-native-paper';
 import OneHealSafeArea from '../../components/OneHealSafeArea';
 import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../../i18n';
 
 const RegisterScreen = () => {
   const theme = useTheme();
@@ -22,6 +24,7 @@ const RegisterScreen = () => {
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
   const [birthdate, setBirthdate] = useState('');
+  const { t } = useTranslation();
 
   return (
     <KeyboardAvoidingView
@@ -45,7 +48,7 @@ const RegisterScreen = () => {
               variant='titleLarge'
               style={[styles.title, { color: theme.colors.tertiary }]}
             >
-              REGISTER
+              <I18nextProvider i18n={i18n}> <Text>{t('register')}</Text> </I18nextProvider>
             </Text>
             <TextInput
             label='Name'
@@ -109,7 +112,7 @@ const RegisterScreen = () => {
               autoCapitalize='none'
             />
             <TextInput
-              label='Email'
+              label= {<I18nextProvider i18n={i18n}> <Text>{t('email')}</Text> </I18nextProvider>}
               placeholder='example@email.com'
               left={<TextInput.Icon icon='email'/>}
               mode='outlined'
@@ -145,7 +148,7 @@ const RegisterScreen = () => {
               style={styles.button}
               buttonColor={theme.colors.tertiary}
             >
-              REGISTER
+              <I18nextProvider i18n={i18n}> <Text>{t('register')}</Text> </I18nextProvider>
             </Button>
             <View style={styles.register}>
               <Text variant='labelMedium'>Already have an account? </Text>
@@ -156,7 +159,7 @@ const RegisterScreen = () => {
                   navigation.navigate('NotAuth', { screen: 'LoginScreen' })
                 }
               >
-                Login here!
+                <I18nextProvider i18n={i18n}> <Text>{t('login')}</Text> </I18nextProvider>
               </Button>
             </View>
           </ScrollView>

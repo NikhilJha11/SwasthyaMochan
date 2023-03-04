@@ -25,6 +25,8 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage, {
   useAsyncStorage,
 } from '@react-native-async-storage/async-storage';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../../i18n';
 
 const LoginScreen = () => {
   const theme = useTheme();
@@ -37,6 +39,7 @@ const LoginScreen = () => {
 
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
+  const { t } = useTranslation();
 
   const { getItem, setItem, removeItem } = useAsyncStorage('credentials');
 
@@ -86,7 +89,7 @@ const LoginScreen = () => {
                 variant='headlineLarge'
                 style={[styles.title, { color: theme.colors.tertiary }]}
               >
-                LOGIN
+                <I18nextProvider i18n={i18n}> <Text>{t('login')}</Text> </I18nextProvider>
               </Text>
             </View>
 
@@ -113,7 +116,7 @@ const LoginScreen = () => {
               style={styles.idNumber}
             >
               <Text variant='bodySmall' style={styles.idNumberText}>
-                How do I obtain the ID number ?
+              <I18nextProvider i18n={i18n}> <Text>{t('obtainid')}</Text> </I18nextProvider>
               </Text>
             </TouchableOpacity>
 
@@ -122,15 +125,12 @@ const LoginScreen = () => {
                 <Dialog.Title>What is Kielstein ID ?</Dialog.Title>
                 <Dialog.Content>
                   <Text variant='bodyMedium'>
-                    Kielstein Patient ID number is used to identify each patient
-                    in the app. This is simply equivalent to your sign in
-                    credentials in order to use this app.
+                  <I18nextProvider i18n={i18n}> <Text>{t('whtisID')}</Text> </I18nextProvider>
                   </Text>
                 </Dialog.Content>
                 <Dialog.Content>
                   <Text variant='bodyMedium'>
-                    To obtain one, you must go to nearest Kielstein clinics and
-                    get one ID number for yourself.
+                  <I18nextProvider i18n={i18n}> <Text>{t('obtainidhow')}</Text> </I18nextProvider>
                   </Text>
                 </Dialog.Content>
                 <Dialog.Content>
@@ -143,7 +143,7 @@ const LoginScreen = () => {
                       )
                     }
                   >
-                    Click here to find the nearest Kielstein to you!
+                     <I18nextProvider i18n={i18n}> <Text>{t('nearestKielstein')}</Text> </I18nextProvider>
                   </Text>
                 </Dialog.Content>
                 <Dialog.Actions>
@@ -159,10 +159,10 @@ const LoginScreen = () => {
               onPress={() => login(email, password)}
               loading={loading}
             >
-              LOGIN
+              <I18nextProvider i18n={i18n}> <Text>{t('login')}</Text> </I18nextProvider>
             </Button>
             <View style={styles.register}>
-              <Text variant='labelMedium'>Don't have an account? </Text>
+              <Text variant='labelMedium'><I18nextProvider i18n={i18n}> <Text>{t('noaccount')}</Text> </I18nextProvider> </Text>
               <Button
                 mode='text'
                 textColor={theme.colors.tertiary}
@@ -170,7 +170,7 @@ const LoginScreen = () => {
                   navigation.navigate('NotAuth', { screen: 'RegisterScreen' })
                 }
               >
-                Register here!
+                <I18nextProvider i18n={i18n}> <Text>{t('newregiseter')}</Text> </I18nextProvider>
               </Button>
             </View>
           </View>

@@ -28,6 +28,8 @@ import OneHealAppBar from '../components/OneHealAppBar';
 
 import OneHealSafeArea from '../components/OneHealSafeArea';
 import { CHIPS, DOCTORS, LOCATIONS } from '../helpers/statics';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 import {
   darkGreen,
   darkGreen000,
@@ -105,6 +107,7 @@ export default function TabOneScreen({
   }, [chips, value]);
 
   console.log('doctors are ,', doctors);
+  const { t } = useTranslation();
 
   return (
     <OneHealSafeArea statusBar='light'>
@@ -113,13 +116,13 @@ export default function TabOneScreen({
         <View style={styles.container}>
           <View style={styles.topSection}>
             <Searchbar
-              placeholder='Search...'
+              placeholder= {t('Search')}
               onChangeText={onChangeSearch}
               value={searchQuery}
               style={styles.search}
             />
             <Text style={styles.or} variant='bodyMedium'>
-              OR
+            {t('OR')}
             </Text>
 
             <DepartmentChips chips={chips} setChips={setChips} />

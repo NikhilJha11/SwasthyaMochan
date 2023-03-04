@@ -5,11 +5,15 @@ import OneHealSafeArea from '../../components/OneHealSafeArea';
 import { Button, useTheme } from 'react-native-paper';
 import { lightGreen } from '../../sharedStyles';
 import { StatusBar } from 'expo-status-bar';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../../i18n';
 
 const WelcomeScreen = () => {
   const navigation = useNavigation();
 
   const theme = useTheme();
+  const { t } = useTranslation();
+  const regester = <I18nextProvider i18n={i18n}> <Text>{t('register')}</Text> </I18nextProvider>
 
   return (
     <ImageBackground
@@ -37,7 +41,7 @@ const WelcomeScreen = () => {
               navigation.navigate('NotAuth', { screen: 'RegisterScreen' })
             }
           >
-            REGISTER
+            {regester}
           </Button>
           <Button
             mode='outlined'
@@ -46,7 +50,7 @@ const WelcomeScreen = () => {
               navigation.navigate('NotAuth', { screen: 'LoginScreen' })
             }
           >
-            LOGIN
+            <I18nextProvider i18n={i18n}> <Text>{t('login')}</Text> </I18nextProvider>
           </Button>
         </View>
       </View>

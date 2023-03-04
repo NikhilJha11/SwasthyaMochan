@@ -11,6 +11,8 @@ import * as Notifications from 'expo-notifications';
 import { View } from '../components/Themed';
 import { darkGreen000 } from '../sharedStyles';
 import { useNavigation } from '@react-navigation/native';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
 const DATA = [
   {
@@ -33,6 +35,7 @@ Notifications.setNotificationHandler({
 });
 export default function TabTwoScreen() {
   const navigation = useNavigation();
+  const { t } = useTranslation();
 
   useEffect(() => {
     (async () => {
@@ -65,7 +68,7 @@ export default function TabTwoScreen() {
           </View>
           <CTABig
             icon={'calendar'}
-            text='Book Appointment'
+            text=  {t('Bookappointment')} 
             style={styles.ctaBig}
             onPress={() => navigation.navigate('Root', { screen: 'TabOne' })}
           />
@@ -76,9 +79,9 @@ export default function TabTwoScreen() {
               image: require('../assets/images/doctor.png'),
               location: 'Home Visit',
             }}
-            buttonLeft={{ button: 'Maps' }}
-            topText='Upcoming Appointments'
-            buttonRight={{ button: 'Cancel' }}
+            buttonLeft={{ button: t('Maps') }}
+            topText={t('UpcomingAppointments')} 
+            buttonRight={{ button: t('Cancel')  }}
             key={1}
           />
 
@@ -91,9 +94,9 @@ export default function TabTwoScreen() {
               image: require('../assets/images/doctor2.png'),
               location: 'Home Visit',
             }}
-            buttonLeft={{ button: 'Maps' }}
-            topText='Recent Appointments'
-            buttonRight={{ button: 'See Detail' }}
+            buttonLeft={{ button: t('Maps')  }}
+            topText={t('RecentAppointments')}
+            buttonRight={{ button: t('SeeDetail')}}
             key={2}
           />
         </ScrollView>

@@ -9,6 +9,8 @@ import React from 'react';
 import { Avatar, Divider, Text } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
 import { darkGreen } from '../sharedStyles';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
 const Appointment = () => {
   const openGps = (lat: any, lng: any) => {
@@ -16,6 +18,7 @@ const Appointment = () => {
       `https://www.google.com/maps/search/?api=1&query=${lat}%2C${lng}`
     );
   };
+  const { t } = useTranslation();
   return (
     <View style={styles.appointment}>
       <View style={styles.appointmentTop}>
@@ -50,10 +53,10 @@ const Appointment = () => {
           style={styles.buttonReschedule}
           onPress={() => openGps('50.964265277365115', '11.042652780566502')}
         >
-          <Text style={{ color: '#fff' }}>Maps</Text>
+          <Text style={{ color: '#fff' }}>{t("Maps")}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonCancel}>
-          <Text>Cancel</Text>
+          <Text>{t("Cancel")}</Text>
         </TouchableOpacity>
       </View>
     </View>
