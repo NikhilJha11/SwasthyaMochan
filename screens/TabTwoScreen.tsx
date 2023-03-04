@@ -13,6 +13,7 @@ import { darkGreen000 } from '../sharedStyles';
 import { useNavigation } from '@react-navigation/native';
 import { useLogin } from '../hooks/useLogin';
 import axios from 'axios';
+import { useLocations } from '../hooks/useLocations';
 
 const DATA = [
   {
@@ -36,6 +37,8 @@ Notifications.setNotificationHandler({
 export default function TabTwoScreen() {
   const navigation = useNavigation();
   const [locations, setLocations] = useState<any>();
+  const { data, isLoading, error } = useLocations();
+  console.log('data is2 ', data);
 
   useEffect(() => {
     (async () => {
@@ -54,7 +57,9 @@ export default function TabTwoScreen() {
       console.log('run');
 
       try {
-        const res = await axios.get('http://localhost:5000/');
+        const res = await axios.get(
+          'https://lachs.informatik.tu-chemnitz.de/planspiel/v1/locations'
+        );
         const res2 = await res.data;
         setLocations(res2);
       } catch (error) {
@@ -65,7 +70,7 @@ export default function TabTwoScreen() {
     })();
   }, []);
 
-  console.log('locations are ', locations);
+  // console.log('locations are ', locations);
 
   return (
     <OneHealSafeArea statusBar='light'>
