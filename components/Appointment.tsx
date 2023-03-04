@@ -11,6 +11,7 @@ import { Feather } from '@expo/vector-icons';
 import { darkGreen } from '../sharedStyles';
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../i18n';
+import { useDeleteAppointment } from '../hooks/useDeleteAppointment';
 
 const Appointment = () => {
   const openGps = (lat: any, lng: any) => {
@@ -18,8 +19,14 @@ const Appointment = () => {
       `https://www.google.com/maps/search/?api=1&query=${lat}%2C${lng}`
     );
   };
-  const { t } = useTranslation();
-  return (
+  const { t } = useTranslation(); 
+
+
+
+
+ 
+  const deleteAppointment = useDeleteAppointment();
+  return ( 
     <View style={styles.appointment}>
       <View style={styles.appointmentTop}>
         <View>
