@@ -42,6 +42,48 @@ const slides = [
   },
   {
     id: '6',
+    image: require('../../assets/images/OnboardingPill.jpg'),
+
+
+  },
+  {
+    id: '7',
+    image: require('../../assets/images/Onboardingappointmentssearch.jpg'),
+
+
+  },
+  {
+    id: '8',
+    image: require('../../assets/images/Onboardingappointments.jpg'),
+
+
+  },
+  {
+    id: '9',
+    image: require('../../assets/images/OnboardingLocations.jpg'),
+
+
+  },
+  {
+    id: '10',
+    image: require('../../assets/images/infos1.jpg'),
+
+
+  },
+  {
+    id: '11',
+    image: require('../../assets/images/infos2.jpg'),
+
+
+  },
+  {
+    id: '12',
+    image: require('../../assets/images/infos3.jpg'),
+
+
+  },
+  {
+    id: '13',
 
   },
 ];
@@ -68,7 +110,7 @@ const OnboardingScreens = () => {
         <View key={slide.id} style={styles.slide}>
           <Image source={slide.image} style={styles.image} />
           
-          {slide.id === '6' && (
+          {slide.id === '13' && (
             <Text style={styles.finishButton} onPress={handleFinish}>
               Finish
             </Text>
