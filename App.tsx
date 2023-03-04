@@ -4,6 +4,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from './i18n';
 import {
   MD3LightTheme as DefaultTheme,
   Provider as PaperProvider,

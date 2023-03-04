@@ -4,6 +4,7 @@ import { Avatar, Button, Menu } from 'react-native-paper';
 import { darkGreen } from '../sharedStyles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import i18n from '../i18n';
 
 type Props = {
   showAvatar?: boolean;
@@ -44,8 +45,8 @@ const OneHealAppBar = (props: Props) => {
           </Button>
         }
       >
-        <Menu.Item onPress={() => {}} title='Item 1' />
-        <Menu.Item onPress={() => {}} title='Item 2' />
+        <Menu.Item onPress={() => i18n.changeLanguage('en')} title='EN' />
+        <Menu.Item onPress={() => i18n.changeLanguage('de')} title='DE' />
       </Menu>
     </View>
   );

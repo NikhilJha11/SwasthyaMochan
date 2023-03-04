@@ -7,6 +7,8 @@ import { lightGreen } from '../../sharedStyles';
 import { StatusBar } from 'expo-status-bar';
 import Swiper from 'react-native-swiper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../../i18n';
 
 
 
@@ -46,6 +48,7 @@ const slides = [
   },
 ];
 const OnboardingScreens = () => {
+  const { t } = useTranslation();
   const navigation = useNavigation();
   const handleFinish = async () => {
     await AsyncStorage.setItem('hasOnboarded', 'true');
@@ -70,7 +73,7 @@ const OnboardingScreens = () => {
           
           {slide.id === '6' && (
             <Text style={styles.finishButton} onPress={handleFinish}>
-              Finish
+              <I18nextProvider i18n={i18n}> <Text>{t('Finish')}</Text> </I18nextProvider>
             </Text>
           )}
         </View>

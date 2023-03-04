@@ -7,30 +7,10 @@ import Doctor from '../components/Doctor';
 import DateItem from '../components/DateItem';
 import CTABig from '../components/CTABig';
 import { Button, Dialog, Portal, Text } from 'react-native-paper';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
-const FULL_MONTHS = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
-const FULL_WEEK = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-];
+
 
 const AppointmentScreen = () => {
   const navigation = useNavigation();
@@ -41,6 +21,30 @@ const AppointmentScreen = () => {
   const [choosenDay, setChoosenDay] = useState('');
   const [choosenDate, setChoosenDate] = useState('');
   const [visible, setVisible] = React.useState(false);
+  const { t } = useTranslation();
+  const FULL_MONTHS = [
+    t('January'),
+    t('February'),
+    t('March'),
+    t('April'),
+    t('May'),
+    t('June'),
+    t('July'),
+    t('August'),
+    t('September'),
+    t('October'),
+    t('November'),
+    t('December'),
+  ];
+  const FULL_WEEK = [
+    t('Sunday'),
+    t('Monday'),
+    t('Tuesday'),
+    t('Wednesday'),
+    t('Thursday'),
+    t('Friday'),
+    t('Saturday'),
+  ];
 
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
@@ -135,7 +139,7 @@ const AppointmentScreen = () => {
           />
           <Portal>
             <Dialog visible={visible} onDismiss={hideDialog}>
-              <Dialog.Title>Confirm Appointment</Dialog.Title>
+              <Dialog.Title><I18nextProvider i18n={i18n}> <Text>{t('ConfirmAppointment')}</Text> </I18nextProvider></Dialog.Title>
               <Dialog.Content>
                 <Text variant='bodyLarge' style={{ fontWeight: '500' }}>
                   {params.name}
@@ -149,7 +153,7 @@ const AppointmentScreen = () => {
                 <Text variant='bodyMedium'>{time}</Text>
               </Dialog.Content>
               <Dialog.Actions>
-                <Button onPress={hideDialog}>Cancel</Button>
+                <Button onPress={hideDialog}><I18nextProvider i18n={i18n}> <Text>{t('Cancel')}</Text> </I18nextProvider></Button>
                 <Button
                   onPress={() =>
                     confirmAppointment({
@@ -159,7 +163,7 @@ const AppointmentScreen = () => {
                     })
                   }
                 >
-                  Confirm
+                  <I18nextProvider i18n={i18n}> <Text>{t('Confirm')}</Text> </I18nextProvider>
                 </Button>
               </Dialog.Actions>
             </Dialog>
