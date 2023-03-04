@@ -4,6 +4,7 @@ import { Avatar, Button, Menu } from 'react-native-paper';
 import { darkGreen } from '../sharedStyles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../i18n';
 
 type Props = {
@@ -14,6 +15,7 @@ type Props = {
 const OneHealAppBar = (props: Props) => {
   const [visible, setVisible] = useState(false);
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
 
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
@@ -41,12 +43,13 @@ const OneHealAppBar = (props: Props) => {
         onDismiss={closeMenu}
         anchor={
           <Button onPress={openMenu} textColor='#fff'>
-            <Ionicons name='earth' /> EN
+            <Ionicons name='earth' /> {t("language")}
           </Button>
         }
       >
         <Menu.Item onPress={() => i18n.changeLanguage('en')} title='EN' />
         <Menu.Item onPress={() => i18n.changeLanguage('de')} title='DE' />
+        <Menu.Item onPress={() => i18n.changeLanguage('ar')} title='AR' />
       </Menu>
     </View>
   );
