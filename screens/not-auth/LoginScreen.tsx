@@ -99,16 +99,16 @@ const LoginScreen = () => {
               onChangeText={(text) => setPassword(text)}
               textContentType='password'
             />
-
+        
             <Button
               mode='contained'
               style={styles.button}
               buttonColor={theme.colors.tertiary}
               onPress={() => login(email, password)}
               loading={loading}
-            >
-              LOGIN
-            </Button>
+            > 
+             
+            {/*  Hide the register page
             <View style={styles.register}>
               <Text variant='labelMedium'>Don't have an account? </Text>
               <Button
@@ -120,7 +120,10 @@ const LoginScreen = () => {
               >
                 Register here!
               </Button>
-            </View>
+            </View> */}
+              LOGIN
+            </Button>
+           
           </View>
         </TouchableWithoutFeedback>
       </OneHealSafeArea>

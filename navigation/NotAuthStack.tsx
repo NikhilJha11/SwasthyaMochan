@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from '../screens/not-auth/LoginScreen';
 import RegisterScreen from '../screens/not-auth/RegisterScreen';
 import WelcomeScreen from '../screens/not-auth/WelcomeScreen';
+import PrivacyStatmentScreen from '../screens/not-auth/PrivacyStatmentScreen';
 import { NotAuthStackParamList } from '../types';
 
 const Stack = createNativeStackNavigator<NotAuthStackParamList>();
@@ -12,6 +13,7 @@ export function NotAuthNavigator() {
       <Stack.Screen name='WelcomeScreen' component={WelcomeScreen} />
       <Stack.Screen name='LoginScreen' component={LoginScreen} />
       <Stack.Screen name='RegisterScreen' component={RegisterScreen} />
+      <Stack.Screen name='PrivacyStatmentScreen' component={PrivacyStatmentScreen} />
     </Stack.Navigator>
   );
 }

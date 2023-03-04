@@ -28,6 +28,7 @@ import {
 } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import { NotAuthNavigator } from './NotAuthStack';
+import { PatientProfileNavigator} from './ProfileStack';
 import { BottomTabNavigator } from './RootTabStack';
 import { useEffect, useState } from 'react';
 import AsyncStorage, {
@@ -76,6 +77,7 @@ function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name='NotAuth' component={NotAuthNavigator} />
+      <Stack.Screen name='Profile' component={PatientProfileNavigator} />
       <Stack.Screen
         name='Root'
         component={BottomTabNavigator}
