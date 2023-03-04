@@ -53,10 +53,11 @@ export type NotAuthStackParamList = {
   WelcomeScreen: undefined;
   LoginScreen: undefined;
   RegisterScreen: undefined;
-  PrivacyStatmentScreen: undefined;
+
 };
 export type ProfileStackParamList = {
   PatientProfileScreen: undefined;
+  PrivacyStatmentScreen: undefined;
 
 };
 export type RootTabParamList = {
