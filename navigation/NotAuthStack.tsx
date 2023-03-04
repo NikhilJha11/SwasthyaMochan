@@ -2,7 +2,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from '../screens/not-auth/LoginScreen';
 import RegisterScreen from '../screens/not-auth/RegisterScreen';
 import WelcomeScreen from '../screens/not-auth/WelcomeScreen';
-import PrivacyStatmentScreen from '../screens/profile-patient-stack/PrivacyStatmentScreen';
 import { NotAuthStackParamList } from '../types';
 
 const Stack = createNativeStackNavigator<NotAuthStackParamList>();
