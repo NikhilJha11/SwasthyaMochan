@@ -34,6 +34,8 @@ export type Doctor = {
   name: string;
   specialization: string;
   locationId: number;
+  chosenLocation?: string;
+  chosenLocationName?: string;
 };
 export type AppointmentConfirmationScreenParams = {
   doctor: string;
