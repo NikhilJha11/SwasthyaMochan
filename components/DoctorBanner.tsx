@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 15,
     paddingVertical: 15,
-    marginHorizontal: 10,
+    marginHorizontal: 20,
     marginTop: 10,
     position: 'relative',
     backgroundColor: darkGreen000,
