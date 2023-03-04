@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Dimensions, FlatList, ScrollView, StyleSheet } from 'react-native';
 import CTABig from '../components/CTABig';
 import DoctorBanner from '../components/DoctorBanner';
@@ -12,6 +12,7 @@ import { View } from '../components/Themed';
 import { darkGreen000 } from '../sharedStyles';
 import { useNavigation } from '@react-navigation/native';
 import { useLogin } from '../hooks/useLogin';
+import axios from 'axios';
 
 const DATA = [
   {
@@ -34,7 +35,7 @@ Notifications.setNotificationHandler({
 });
 export default function TabTwoScreen() {
   const navigation = useNavigation();
-  const { data, isLoading, error } = useLogin();
+  const [locations, setLocations] = useState<any>();
 
   useEffect(() => {
     (async () => {
@@ -48,6 +49,23 @@ export default function TabTwoScreen() {
       });
     })();
   }, []);
+  useEffect(() => {
+    (async () => {
+      console.log('run');
+
+      try {
+        const res = await axios.get('http://localhost:5000/');
+        const res2 = await res.data;
+        setLocations(res2);
+      } catch (error) {
+        console.log(error);
+      }
+
+      console.log('run2');
+    })();
+  }, []);
+
+  console.log('locations are ', locations);
 
   return (
     <OneHealSafeArea statusBar='light'>
@@ -114,11 +132,11 @@ const styles = StyleSheet.create({
   news: {
     height: 200,
     backgroundColor: darkGreen000,
-    marginLeft: 10,
+    marginLeft: 20,
     padding: 15,
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
     marginTop: 10,
   },
-  ctaBig: { marginHorizontal: 10 },
+  ctaBig: { marginHorizontal: 20 },
 });

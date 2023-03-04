@@ -28,6 +28,7 @@ import OneHealAppBar from '../components/OneHealAppBar';
 
 import OneHealSafeArea from '../components/OneHealSafeArea';
 import { CHIPS, DOCTORS, LOCATIONS } from '../helpers/statics';
+import { useLocations } from '../hooks/useLocations';
 import {
   darkGreen,
   darkGreen000,
@@ -39,6 +40,7 @@ import { RootTabScreenProps } from '../types';
 export default function TabOneScreen({
   navigation,
 }: RootTabScreenProps<'TabOne'>) {
+  // const { data, isLoading, error } = useLocations();
   const [chips, setChips] = useState(CHIPS);
   const [locations, setLocations] = useState(LOCATIONS);
   const [doctors, setDoctors] = useState<
@@ -55,6 +57,7 @@ export default function TabOneScreen({
   const [value, setValue] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(false);
+  const [lachs, setLachs] = useState();
 
   const onChangeSearch = (query: string) => setSearchQuery(query);
 
@@ -94,9 +97,6 @@ export default function TabOneScreen({
     } else {
       setDoctors(DOCTORS);
     }
-
-    console.log('chosenChip is ', chosenChip?.name);
-    console.log('filtered is ', filteredDoctors);
   };
   console.log(value);
 
@@ -104,7 +104,15 @@ export default function TabOneScreen({
     filterDoctors();
   }, [chips, value]);
 
-  console.log('doctors are ,', doctors);
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(
+        'https://lachs.informatik.tu-chemnitz.de/planspiel/v1/locations'
+      );
+
+      console.log(res);
+    })();
+  }, []);
 
   return (
     <OneHealSafeArea statusBar='light'>
