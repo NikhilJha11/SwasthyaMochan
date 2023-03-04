@@ -32,7 +32,7 @@ const AppointmentConfirmationScreen = () => {
       const res = await Notifications.scheduleNotificationAsync({
         content: {
           title: 'OneHeal',
-          subtitle: 'Upcoming appointment!',
+          subtitle: t("UpcomingAppointments"),
           body: `You have an appointment at ${params.day} ${params.date}, ${params.time}`,
         },
         trigger: {
