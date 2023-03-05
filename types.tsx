@@ -40,9 +40,8 @@ export type Doctor = {
 };
 export type AppointmentConfirmationScreenParams = {
   doctor: string;
-  date: string;
-  day: string;
-  time: string;
+  timeSlotId: number;
+  formattedTime: string;
 };
 
 export type AppointmentStackParamList = {
