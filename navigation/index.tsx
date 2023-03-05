@@ -18,6 +18,7 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
+import { PatientProfileNavigator} from './ProfileStack';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabThreeScreen from '../screens/TabThreeScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
@@ -98,6 +99,7 @@ function RootNavigator() {
             options={{ title: 'Oops!' }}
           />
           <Stack.Screen name='NewsStack' component={NewsStack} />
+          <Stack.Screen name='Profile' component={PatientProfileNavigator} />
           <Stack.Group screenOptions={{ presentation: 'modal' }}>
             <Stack.Screen name='Modal' component={ModalScreen} />
           </Stack.Group>
