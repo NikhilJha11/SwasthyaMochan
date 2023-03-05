@@ -20,15 +20,8 @@ const ProfileButtons = () => {
           })
         }
       />
-      <ProfileButton icon='clock' text='Recent Appointments' />
-      <ProfileButton icon='paperclip' text='Documents' />
-      <ProfileButton 
-      icon='clipboard' 
-      text='Patient Profile'
-      onPress={() =>
-        navigation.navigate('Profile', { screen: 'PrivacyStatmentScreen'})
-      }
-       /> 
+      <ProfileButton icon='clock' text={t('RecentAppointments')} />
+      <ProfileButton icon='paperclip' text={t ('Documents')} />
     </>
   );
 };

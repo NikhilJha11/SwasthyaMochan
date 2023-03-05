@@ -15,7 +15,7 @@ import { Button, TextInput, Text, useTheme } from 'react-native-paper';
 import OneHealSafeArea from '../../components/OneHealSafeArea';
 import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
-import { I18nextProvider, useTranslation } from 'react-i18next'; 
+import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../../i18n';
 
 const RegisterScreen = () => {
@@ -51,7 +51,7 @@ const RegisterScreen = () => {
               <I18nextProvider i18n={i18n}> <Text>{t('register')}</Text> </I18nextProvider>
             </Text>
             <TextInput
-              label='Name'
+            label='Name'
               placeholder='name'
               left={<TextInput.Icon icon={'account-circle'}/>}
               mode='outlined'
@@ -61,8 +61,8 @@ const RegisterScreen = () => {
               autoCapitalize='none'
             />
              <TextInput
-              label='Surname'
-              placeholder='surname'
+              label='Surename'
+              placeholder='surename'
               mode='outlined'
               left={<TextInput.Icon icon={'account-circle'}/>}
               secureTextEntry
@@ -111,10 +111,10 @@ const RegisterScreen = () => {
               activeOutlineColor={darkGreen}
               autoCapitalize='none'
             />
-            <TextInput 
-              left={<TextInput.Icon icon='email' color={darkGreen}/>}
+            <TextInput
               label= {<I18nextProvider i18n={i18n}> <Text>{t('email')}</Text> </I18nextProvider>}
-              placeholder='example@email.com' 
+              placeholder='example@email.com'
+              left={<TextInput.Icon icon='email'/>}
               mode='outlined'
               style={styles.input}
               outlineColor={darkGreen}
@@ -128,11 +128,6 @@ const RegisterScreen = () => {
               style={styles.input}
               outlineColor={darkGreen}
               activeOutlineColor={darkGreen}
-              left={<TextInput.Icon icon='account-lock' color={darkGreen}/>}
-              right={<TextInput.Icon icon='eye-off' />}
-              autoCapitalize='none'
-            />
-            <TextInput
               left={<TextInput.Icon icon='account-lock'/>}
               right={<TextInput.Icon icon='eye-off' />}
               autoCapitalize='none'
@@ -147,6 +142,7 @@ const RegisterScreen = () => {
               activeOutlineColor={darkGreen}
               autoCapitalize='none'
             />
+
             <Button
               mode='contained'
               style={styles.button}
@@ -190,7 +186,7 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: sharedStyles.viewStyles.backgroundColor,
     padding: 10,
-    marginBottom: 30,
+    marginBottom: 40,
   },
   keyboard: {
     flex: 1,
@@ -203,7 +199,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   button: {
-    paddingVertical: 10,
+    paddingVertical: 5,
   },
   title: {
     paddingBottom: 20,

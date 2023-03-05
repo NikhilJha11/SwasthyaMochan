@@ -26,7 +26,6 @@ export type NewsScreenParamList = {
 
 export type RootStackParamList = {
   NotAuth: NavigatorScreenParams<NotAuthStackParamList> | undefined;
-  Profile: NavigatorScreenParams<ProfileStackParamList> | undefined;
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
   AppointmentStack:
@@ -68,13 +67,6 @@ export type NotAuthStackParamList = {
   LoginScreen: undefined;
   RegisterScreen: undefined;
   OnboardingScreens: undefined;
-
-};
-export type ProfileStackParamList = {
-  PatientProfileScreen: undefined;
-  PrivacyStatmentScreen: undefined;
-
-  OnboardingScreens: undefined;
 };
 export type RootTabParamList = {
   TabOne: undefined;
@@ -92,10 +84,5 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
 export type NotAuthScreenProps<Screen extends keyof NotAuthStackParamList> =
   CompositeScreenProps<
     NativeStackScreenProps<NotAuthStackParamList, Screen>,
-    NativeStackScreenProps<RootStackParamList>
-  >;
-  export type ProfileScreenProps<Screen extends keyof ProfileStackParamList> =
-  CompositeScreenProps<
-    NativeStackScreenProps<ProfileStackParamList, Screen>,
     NativeStackScreenProps<RootStackParamList>
   >;
