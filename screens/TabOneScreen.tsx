@@ -119,15 +119,6 @@ export default function TabOneScreen({
       <ScrollView style={{ flex: 1 }}>
         <View style={styles.container}>
           <View style={styles.topSection}>
-            <Searchbar
-              placeholder='Search...'
-              onChangeText={onChangeSearch}
-              value={searchQuery}
-              style={styles.search}
-            />
-            <Text style={styles.or} variant='bodyMedium'>
-              OR
-            </Text>
             <LocationFilter
               locations={dataLocations}
               setLocation={setLocation}
