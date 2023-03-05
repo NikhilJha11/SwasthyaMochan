@@ -34,6 +34,7 @@ export type RootStackParamList = {
   NotFound: undefined;
   ChatStack: NavigatorScreenParams<ChatStackParamList> | undefined;
   NewsStack: NavigatorScreenParams<NewsStackParamList> | undefined;
+  LoadingScreen: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

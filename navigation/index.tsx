@@ -38,6 +38,10 @@ import { AppointmentNavigator } from './AppointmentStack';
 import { ChatStack } from './ChatStack';
 import NewsScreen from '../screens/NewsScreen';
 import { NewsStack } from './NewsStack';
+import { useLogin } from '../hooks/useLogin';
+import LoadingScreen from '../screens/LoadingScreen';
+import { useQuery } from '@tanstack/react-query';
+import { useHasOnboarded } from '../hooks/useHasOnboarded';
 
 export default function Navigation({
   colorScheme,
@@ -61,40 +65,48 @@ export default function Navigation({
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
-  const [credentials, setCredentials] = useState<string | null>();
-  const [loading, setLoading] = useState(false);
-  const { getItem, setItem, removeItem } = useAsyncStorage('credentials');
+  // const { getItem } = useAsyncStorage('credentials');
+  // const { getItem  } = useAsyncStorage('hasOnboarded');
+  const { data, isLoading } = useLogin();
+  const { data: dataHasOnboarded, isLoading: isLoadingHasOnboarded } =
+    useHasOnboarded();
 
-  const readFromAsyncStorage = async () => {
-    const item = await getItem();
-    setCredentials(item);
-  };
-
-  useEffect(() => {
-    readFromAsyncStorage();
-  }, []);
-
-  console.log('creds are ', credentials);
+  // console.log('root data is', data, isLoading);
+  // console.log('dataHasOnboarded is', dataHasOnboarded);
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name='NotAuth' component={NotAuthNavigator} />
-      <Stack.Screen
-        name='Root'
-        component={BottomTabNavigator}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen name='AppointmentStack' component={AppointmentNavigator} />
-      <Stack.Screen name='ChatStack' component={ChatStack} />
-      <Stack.Screen
-        name='NotFound'
-        component={NotFoundScreen}
-        options={{ title: 'Oops!' }}
-      />
-      <Stack.Screen name='NewsStack' component={NewsStack} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name='Modal' component={ModalScreen} />
-      </Stack.Group>
+      {isLoading ? (
+        <Stack.Group>
+          <Stack.Screen name='LoadingScreen' component={LoadingScreen} />
+        </Stack.Group>
+      ) : data && dataHasOnboarded ? (
+        <Stack.Group>
+          <Stack.Screen
+            name='Root'
+            component={BottomTabNavigator}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name='AppointmentStack'
+            component={AppointmentNavigator}
+          />
+          <Stack.Screen name='ChatStack' component={ChatStack} />
+          <Stack.Screen
+            name='NotFound'
+            component={NotFoundScreen}
+            options={{ title: 'Oops!' }}
+          />
+          <Stack.Screen name='NewsStack' component={NewsStack} />
+          <Stack.Group screenOptions={{ presentation: 'modal' }}>
+            <Stack.Screen name='Modal' component={ModalScreen} />
+          </Stack.Group>
+        </Stack.Group>
+      ) : (
+        <Stack.Group>
+          <Stack.Screen name='NotAuth' component={NotAuthNavigator} />
+        </Stack.Group>
+      )}
     </Stack.Navigator>
   );
 }
