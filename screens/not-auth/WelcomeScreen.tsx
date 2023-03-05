@@ -32,17 +32,20 @@ const WelcomeScreen = () => {
             style={styles.image}
           />
         </View>
-        <View style={styles.buttonContainer}>
+       
+        {/*  Hide the register button
           <Button
             mode='contained'
             buttonColor={theme.colors.tertiary}
             style={styles.button}
             onPress={() =>
-              navigation.navigate('NotAuth', { screen: 'RegisterScreen' })
+              navigation.navigate('NotAuth', { screen: 'PrivacyStatmentScreen'})
             }
           >
             {regester}
           </Button>
+        </View> */}
+        <View style={styles.buttonContainer}>
           <Button
             mode='outlined'
             style={styles.button}
@@ -52,7 +55,7 @@ const WelcomeScreen = () => {
           >
             <I18nextProvider i18n={i18n}> <Text>{t('login')}</Text> </I18nextProvider>
           </Button>
-        </View>
+          </View>
       </View>
     </ImageBackground>
   );
@@ -76,7 +79,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    paddingVertical: 5,
+    paddingVertical: 10,
     marginBottom: 30,
   },
 });
