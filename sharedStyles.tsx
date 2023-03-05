@@ -21,7 +21,7 @@ type SharedStylesTypes = {
 export const sharedStyles: SharedStylesTypes = {
   viewStyles: {
     backgroundColor: '#f6f6f6',
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
   },
   textStyles: {},
 };
