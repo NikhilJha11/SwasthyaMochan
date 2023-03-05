@@ -37,6 +37,8 @@ export default function TabTwoScreen() {
           allowAnnouncements: true,
         },
       });
+      // await AsyncStorage.removeItem('hasOnboarded');
+      // await AsyncStorage.removeItem('credentials');
     })();
   }, []);
 
