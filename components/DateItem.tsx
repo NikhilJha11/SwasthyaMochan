@@ -9,6 +9,30 @@ import {
 } from '../sharedStyles';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 import { Button, Chip, Dialog, Portal, Text } from 'react-native-paper';
+import moment from 'moment';
+const FULL_MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+const FULL_WEEK = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
 
 type Props = {
   day: string;
@@ -54,7 +78,10 @@ const DateItem = (props: Props) => {
         onPress={() => setShowTime(!showTime)}
       >
         <Text style={{ color: darkGreen, fontWeight: '500' }}>
-          {props.day} {props.date}
+          {new Date(props.date).getDate()}{' '}
+          {FULL_MONTHS[new Date(props.date).getMonth()]}
+          {', '}
+          {FULL_WEEK[new Date(props.date).getDay()]}
         </Text>
         <MaterialIcons
           name={`keyboard-arrow-${showTime ? 'up' : 'down'}`}
