@@ -9,93 +9,73 @@ import Swiper from 'react-native-swiper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../../i18n';
-
-
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const slides = [
   {
     id: '1',
     //image: require('../assets/images/Onboarding1.jpg'),
     image: require('../../assets/images/Onboarding1.jpg'),
-
   },
   {
     id: '2',
     image: require('../../assets/images/Onboarding1news.jpg'),
-   
-  
   },
   {
     id: '3',
     image: require('../../assets/images/Onboarding1_BookAppointment.jpg'),
-
   },
   {
     id: '4',
     image: require('../../assets/images/Onboarding1upcomming.jpg'),
-
-
   },
   {
     id: '5',
     image: require('../../assets/images/Onboarding1_recent_E.jpg'),
-
-
   },
   {
     id: '6',
     image: require('../../assets/images/OnboardingPill.jpg'),
-
-
   },
   {
     id: '7',
     image: require('../../assets/images/Onboardingappointmentssearch.jpg'),
-
-
   },
   {
     id: '8',
     image: require('../../assets/images/Onboardingappointments.jpg'),
-
-
   },
   {
     id: '9',
     image: require('../../assets/images/OnboardingLocations.jpg'),
-
-
   },
   {
     id: '10',
     image: require('../../assets/images/infos1.jpg'),
-
-
   },
   {
     id: '11',
     image: require('../../assets/images/infos2.jpg'),
-
-
   },
   {
     id: '12',
     image: require('../../assets/images/infos3.jpg'),
-
-
   },
   {
     id: '13',
-
   },
 ];
 const OnboardingScreens = () => {
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const handleFinish = async () => {
-    await AsyncStorage.setItem('hasOnboarded', 'true');
-    navigation.navigate('Root');
-  };
+  const qc = useQueryClient();
+  const handleFinish = useMutation({
+    mutationKey: ['hasOnboarded'],
+    mutationFn: async () => {
+      await AsyncStorage.setItem('hasOnboarded', 'true');
+    },
+    onSuccess: () => qc.invalidateQueries(['hasOnboarded']),
+  });
 
   const checkOnboardingStatus = async () => {
     const hasOnboarded = await AsyncStorage.getItem('hasOnboarded');
@@ -112,10 +92,16 @@ const OnboardingScreens = () => {
       {slides.map((slide) => (
         <View key={slide.id} style={styles.slide}>
           <Image source={slide.image} style={styles.image} />
-          
+
           {slide.id === '13' && (
-            <Text style={styles.finishButton} onPress={handleFinish}>
-              <I18nextProvider i18n={i18n}> <Text>{t('Finish')}</Text> </I18nextProvider>
+            <Text
+              style={styles.finishButton}
+              onPress={() => handleFinish.mutate()}
+            >
+              <I18nextProvider i18n={i18n}>
+                {' '}
+                <Text>{t('Finish')}</Text>{' '}
+              </I18nextProvider>
             </Text>
           )}
         </View>
