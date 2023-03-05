@@ -36,6 +36,8 @@ import AsyncStorage, {
 import AppointmentScreen from '../screens/AppointmentScreen';
 import { AppointmentNavigator } from './AppointmentStack';
 import { ChatStack } from './ChatStack';
+import NewsScreen from '../screens/NewsScreen';
+import { NewsStack } from './NewsStack';
 
 export default function Navigation({
   colorScheme,
@@ -89,6 +91,7 @@ function RootNavigator() {
         component={NotFoundScreen}
         options={{ title: 'Oops!' }}
       />
+      <Stack.Screen name='NewsStack' component={NewsStack} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name='Modal' component={ModalScreen} />
       </Stack.Group>
