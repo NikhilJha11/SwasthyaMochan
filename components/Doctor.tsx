@@ -11,12 +11,13 @@ import { darkGreen, darkGreen050 } from '../sharedStyles';
 import { useNavigation } from '@react-navigation/native';
 
 type Props = {
-  image: string;
+  doctorId: number;
   name: string;
-  department: string;
-  location: string;
-  id?: number;
+  specialization: string;
+  locationId: number;
   styles?: ViewStyle;
+  chosenLocation?: string;
+  chosenLocationName?: string;
 };
 
 const Doctor = (props: Props) => {
@@ -29,16 +30,16 @@ const Doctor = (props: Props) => {
         navigation.navigate('AppointmentStack', {
           screen: 'AppointmentScreen',
           params: {
-            department: props.department,
-            image: props.image,
-            location: props.location,
+            specialization: props.specialization,
+            locationId: props.locationId,
             name: props.name,
-            id: props.id,
+            doctorId: props.doctorId,
+            chosenLocation: props.chosenLocation,
+            chosenLocationName: props.chosenLocationName,
           },
         })
       }
     >
-      <Avatar.Image source={props.image as ImageSourcePropType} size={56} />
       <View style={styles.doctorTexts}>
         <Text
           variant='labelLarge'
@@ -47,10 +48,10 @@ const Doctor = (props: Props) => {
           {props.name}
         </Text>
         <Text variant='labelSmall' style={{ color: darkGreen, opacity: 0.8 }}>
-          {props.department}
+          {props.specialization}
         </Text>
         <Text variant='labelSmall' style={{ color: darkGreen, opacity: 0.8 }}>
-          {props.location}
+          {props.chosenLocationName}, {props.chosenLocation}
         </Text>
       </View>
     </TouchableOpacity>

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Dimensions, FlatList, ScrollView, StyleSheet } from 'react-native';
 import CTABig from '../components/CTABig';
 import DoctorBanner from '../components/DoctorBanner';
@@ -115,11 +115,11 @@ const styles = StyleSheet.create({
   news: {
     height: 200,
     backgroundColor: darkGreen000,
-    marginLeft: 10,
+    marginLeft: 20,
     padding: 15,
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
     marginTop: 10,
   },
-  ctaBig: { marginHorizontal: 10 },
+  ctaBig: { marginHorizontal: 20 },
 });

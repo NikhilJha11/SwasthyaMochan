@@ -11,11 +11,13 @@ import {
   Provider as PaperProvider,
 } from 'react-native-paper';
 import { colors } from './colors';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const theme = {
   ...DefaultTheme,
   colors: colors, // Copy it from the color codes scheme and then use it here
 };
+const queryClient = new QueryClient();
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -25,12 +27,14 @@ export default function App() {
     return null;
   } else {
     return (
-      <PaperProvider theme={theme}>
-        <SafeAreaProvider>
-          <Navigation colorScheme={colorScheme} />
-          <StatusBar />
-        </SafeAreaProvider>
-      </PaperProvider>
+      <QueryClientProvider client={queryClient}>
+        <PaperProvider theme={theme}>
+          <SafeAreaProvider>
+            <Navigation colorScheme={colorScheme} />
+            <StatusBar />
+          </SafeAreaProvider>
+        </PaperProvider>
+      </QueryClientProvider>
     );
   }
 }
