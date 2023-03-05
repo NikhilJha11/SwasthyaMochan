@@ -56,8 +56,7 @@ const LoginScreen = () => {
           if (hasOnboardedAlready) {
             navigation.navigate('Root');
           } else if (!hasOnboardedAlready) {
-            // navigation.navigate('NotAuth', { screen: 'OnboardingScreens' });
-            navigation.navigate('NotAuth',{screen:'OnboardingScreens'})
+            navigation.navigate('NotAuth', { screen: 'OnboardingScreens' });
           }
         }, 2000)
       );
@@ -115,7 +114,6 @@ const LoginScreen = () => {
               onChangeText={(text) => setPassword(text)}
               textContentType='password'
             />
-        
             <TouchableOpacity
               onPress={() => setVisible(true)}
               style={styles.idNumber}
@@ -175,9 +173,6 @@ const LoginScreen = () => {
               buttonColor={theme.colors.tertiary}
               onPress={() => login(email, password)}
               loading={loading}
-            > 
-             
-            {/*  Hide the register page
             >
               <I18nextProvider i18n={i18n}>
                 {' '}
@@ -203,10 +198,7 @@ const LoginScreen = () => {
                   <Text>{t('newregiseter')}</Text>{' '}
                 </I18nextProvider>
               </Button>
-            </View> */}
-              LOGIN
-            </Button>
-           
+            </View>
           </View>
         </TouchableWithoutFeedback>
       </OneHealSafeArea>
