@@ -10,7 +10,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { darkGreen, sharedStyles } from '../../sharedStyles';
 import {
   Button,
@@ -22,44 +22,42 @@ import {
 } from 'react-native-paper';
 import OneHealSafeArea from '../../components/OneHealSafeArea';
 import { useNavigation } from '@react-navigation/native';
-import AsyncStorage, {
-  useAsyncStorage,
-} from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../../i18n';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { LoginParams } from '../../hooks/useLogin';
 
 const LoginScreen = () => {
   const theme = useTheme();
   const navigation = useNavigation();
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
+  const qc = useQueryClient();
+  const loginUser = useMutation({
+    mutationFn: async (params: LoginParams) =>
+      await AsyncStorage.setItem('credentials', params.password),
+    onSuccess: () => qc.invalidateQueries(['user']),
+  });
 
-  const showDialog = () => setVisible(true);
-  const hideDialog = () => setVisible(false);
   const { t } = useTranslation();
 
-  const { getItem, setItem, removeItem } = useAsyncStorage('credentials');
-
-  const login = async (email = 'admin@example.com', password = '123123') => {
+  const login = async (password = '123123') => {
     try {
       setLoading(true);
-      await setItem(JSON.stringify({ email, password }));
       const hasOnboardedAlready = await AsyncStorage.getItem('hasOnboarded');
 
-      new Promise(() =>
-        setTimeout(() => {
-          setLoading(false);
+      loginUser.mutateAsync({ password });
 
-          if (hasOnboardedAlready) {
-            navigation.navigate('Root');
-          } else if (!hasOnboardedAlready) {
-            navigation.navigate('NotAuth', { screen: 'OnboardingScreens' });
-          }
-        }, 2000)
-      );
+      setLoading(false);
+
+      if (hasOnboardedAlready) {
+        navigation.navigate('Root');
+      } else if (!hasOnboardedAlready) {
+        navigation.navigate('NotAuth', { screen: 'OnboardingScreens' });
+      }
     } catch (e) {
       console.log('error is ,', e);
       setLoading(false);
@@ -171,7 +169,7 @@ const LoginScreen = () => {
               mode='contained'
               style={styles.button}
               buttonColor={theme.colors.tertiary}
-              onPress={() => login(email, password)}
+              onPress={() => login(password)}
               loading={loading}
             >
               <I18nextProvider i18n={i18n}>

@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 const setCredentials = async () => {
   await AsyncStorage.setItem(
@@ -7,22 +7,17 @@ const setCredentials = async () => {
     JSON.stringify({ email: 'suat', password: 'asdasdas' })
   );
 };
+export type LoginParams = {
+  password: string;
+};
 
 export const useLogin = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationKey: ['user'],
-    mutationFn: async () => {
-      await AsyncStorage.setItem(
-        'credentials',
-        JSON.stringify({ email: 'suat', password: 'asdasdas' })
-      );
-
+  return useQuery({
+    queryKey: ['user'],
+    queryFn: async () => {
       const credentials = await AsyncStorage.getItem('credentials');
-      console.log('credentials are ', credentials);
 
       return credentials;
     },
-    onSuccess: () => queryClient.invalidateQueries(['user']),
   });
 };
