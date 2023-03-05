@@ -45,38 +45,7 @@ const ChatScreen = () => {
           <View style={styles.chatRight}>
             <Text variant='titleMedium'>Davide Garofoli</Text>
             <Text variant='bodySmall' numberOfLines={4}>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore,
-              odio.
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.chat}>
-        <TouchableOpacity style={{ flexDirection: 'row' }}>
-          <Image
-            source={require('../assets/images/avatar5.png')}
-            style={styles.img}
-          />
-          <View style={styles.chatRight}>
-            <Text variant='titleMedium'>Davide Garofoli</Text>
-            <Text variant='bodySmall'>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore,
-              odio.
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.chat}>
-        <TouchableOpacity style={{ flexDirection: 'row' }}>
-          <Image
-            source={require('../assets/images/avatar5.png')}
-            style={styles.img}
-          />
-          <View style={styles.chatRight}>
-            <Text variant='titleMedium'>Davide Garofoli</Text>
-            <Text variant='bodySmall'>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore,
-              odio.
+              Hello, I am having this probl...
             </Text>
           </View>
         </TouchableOpacity>

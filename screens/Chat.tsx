@@ -148,7 +148,7 @@ const Chat = () => {
           }}
         >
           <TextInput
-            style={{ borderWidth: 1, borderColor: 'red', flex: 1 }}
+            style={{ flex: 1 }}
             value={textInput}
             onChangeText={(text) => setTextInput(text)}
           />
@@ -173,8 +173,6 @@ export default Chat;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderWidth: 2,
-    borderColor: 'red',
   },
   chatRight: {
     paddingLeft: 10,
@@ -186,8 +184,6 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   topSection: {
-    borderWidth: 2,
-    borderColor: 'red',
     flexDirection: 'row',
     backgroundColor: darkGreen600,
     paddingVertical: 5,
@@ -199,8 +195,6 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   chats: {
-    borderWidth: 2,
-    borderColor: 'yellow',
     paddingHorizontal: 20,
     paddingVertical: 15,
   },
