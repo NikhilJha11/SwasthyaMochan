@@ -1,17 +1,7 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React, { useEffect, useState } from 'react';
-import {
-  Dimensions,
-  Image,
-  ScrollView,
-  StyleSheet,
-  View, 
-} from 'react-native';
-import {
-  ActivityIndicator, 
-  FAB, 
-  Text, 
-} from 'react-native-paper'; 
+import { Dimensions, Image, ScrollView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, FAB, Text } from 'react-native-paper';
 import Doctor from '../components/Doctor';
 import LocationFilter from '../components/LocationFilter';
 import NotFound from '../components/NotFound';
@@ -24,7 +14,7 @@ import { useLocations } from '../hooks/useLocations';
 import { darkGreen, darkGreen100 } from '../sharedStyles';
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../i18n';
- 
+
 import { RootTabScreenProps } from '../types';
 
 export default function TabOneScreen({
@@ -44,8 +34,6 @@ export default function TabOneScreen({
   >();
   const [visible, setVisible] = useState(false);
   const [value, setValue] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [loading, setLoading] = useState(false);
   const { data: dataLocations, isLoading: isLoadingLocations } = useLocations();
   const { data: dataDoctors, isLoading: isLoadingDoctors } = useDoctors({
     locationId: location,
@@ -61,19 +49,6 @@ export default function TabOneScreen({
       (el: { locationId: number }) => el.locationId === location
     ).locationName;
   }
-
-  const onChangeSearch = (query: string) => setSearchQuery(query);
-
-  useEffect(() => {
-    setLoading(true);
-
-    new Promise(() =>
-      setTimeout(() => {
-        setLoading(false);
-        setDoctors(DOCTORS);
-      }, 2000)
-    );
-  }, []);
 
   const filterDoctors = () => {
     let chosenChip = chips.find((chip) => chip.choosen);
@@ -106,7 +81,6 @@ export default function TabOneScreen({
     filterDoctors();
   }, [chips, value]);
 
-  console.log('doctors are ,', doctors);
   const { t } = useTranslation();
 
   return (
@@ -115,8 +89,6 @@ export default function TabOneScreen({
       <ScrollView style={{ flex: 1 }}>
         <View style={styles.container}>
           <View style={styles.topSection}>
-          
- 
             <LocationFilter
               locations={dataLocations}
               setLocation={setLocation}
