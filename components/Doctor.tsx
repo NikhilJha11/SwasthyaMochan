@@ -34,6 +34,8 @@ const Doctor = (props: Props) => {
             locationId: props.locationId,
             name: props.name,
             doctorId: props.doctorId,
+            chosenLocation: props.chosenLocation,
+            chosenLocationName: props.chosenLocationName,
           },
         })
       }
