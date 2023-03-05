@@ -1,19 +1,15 @@
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import React, { useState } from 'react';
-import {
-  darkGreen,
-  darkGreen000,
-  darkGreen200,
-  darkGreen300,
-  darkGreen400,
-} from '../sharedStyles';
+import { darkGreen, darkGreen400 } from '../sharedStyles';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 import { Button, Chip, Dialog, Portal, Text } from 'react-native-paper';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+  
 
 type Props = {
   day: string;
   date: string;
-  time: string;
+  time: string[];
   setTime: React.Dispatch<React.SetStateAction<string>>;
   doctor: string;
   confirmAppointment: (data: {
@@ -31,6 +27,31 @@ type Props = {
 
 const DateItem = (props: Props) => {
   const [showTime, setShowTime] = useState(false);
+  const { t } = useTranslation();
+
+  const FULL_MONTHS = [
+    t('January'),
+    t('February'),
+    t('March'),
+    t('April'),
+    t('May'),
+    t('June'),
+    t('July'),
+    t('August'),
+    t('September'),
+    t('October'),
+    t('November'),
+    t('December'),
+  ];
+  const FULL_WEEK = [
+    t('Sunday'),
+    t('Monday'),
+    t('Tuesday'),
+    t('Wednesday'),
+    t('Thursday'),
+    t('Friday'),
+    t('Saturday'),
+  ];
 
   const setDateAndAppointment = ({
     time,
@@ -54,7 +75,10 @@ const DateItem = (props: Props) => {
         onPress={() => setShowTime(!showTime)}
       >
         <Text style={{ color: darkGreen, fontWeight: '500' }}>
-          {props.day} {props.date}
+          {new Date(props.date).getDate()}{' '}
+          {FULL_MONTHS[new Date(props.date).getMonth()]}
+          {', '}
+          {FULL_WEEK[new Date(props.date).getDay()]}
         </Text>
         <MaterialIcons
           name={`keyboard-arrow-${showTime ? 'up' : 'down'}`}
@@ -63,78 +87,29 @@ const DateItem = (props: Props) => {
       </TouchableOpacity>
       {showTime ? (
         <View style={styles.chipContainer}>
-          <Chip
-            style={styles.chip}
-            textStyle={{ color: '#fff' }}
-            onPress={() =>
-              setDateAndAppointment({
-                time: '08:00',
-                day: props.day,
-                date: props.date,
-              })
-            }
-            selected={
-              props.time === '08:00' &&
-              props.date === props.choosenDate &&
-              props.visible
-            }
-          >
-            08:00
-          </Chip>
-          <Chip
-            style={styles.chip}
-            textStyle={{ color: '#fff' }}
-            onPress={() =>
-              setDateAndAppointment({
-                time: '10:30',
-                day: props.day,
-                date: props.date,
-              })
-            }
-            selected={
-              props.time === '10:30' &&
-              props.date === props.choosenDate &&
-              props.visible
-            }
-          >
-            10:30
-          </Chip>
-          <Chip
-            style={styles.chip}
-            textStyle={{ color: '#fff' }}
-            onPress={() =>
-              setDateAndAppointment({
-                time: '10:45',
-                day: props.day,
-                date: props.date,
-              })
-            }
-            selected={
-              props.time === '10:45' &&
-              props.date === props.choosenDate &&
-              props.visible
-            }
-          >
-            10:45
-          </Chip>
-          <Chip
-            style={styles.chip}
-            textStyle={{ color: '#fff' }}
-            onPress={() =>
-              setDateAndAppointment({
-                time: '13:15',
-                day: props.day,
-                date: props.date,
-              })
-            }
-            selected={
-              props.time === '13:15' &&
-              props.date === props.choosenDate &&
-              props.visible
-            }
-          >
-            13:15
-          </Chip>
+          {props.time
+            ? props.time.map((t, index) => (
+                <Chip
+                  style={styles.chip}
+                  textStyle={{ color: '#fff' }}
+                  key={index}
+                  // onPress={() =>
+                  //   setDateAndAppointment({
+                  //     time: '08:00',
+                  //     day: props.day,
+                  //     date: props.date,
+                  //   })
+                  // }
+                  // selected={
+                  //   props.time === '08:00' &&
+                  //   props.date === props.choosenDate &&
+                  //   props.visible
+                  // }
+                >
+                  {t}
+                </Chip>
+              ))
+            : null}
         </View>
       ) : null}
     </View>

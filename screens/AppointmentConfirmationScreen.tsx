@@ -1,21 +1,46 @@
 import { Image, StyleSheet, View } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import {
-  darkGreen,
-  darkGreen200,
-  darkGreen500,
-  darkGreen600,
-} from '../sharedStyles';
+import { darkGreen } from '../sharedStyles';
 import { Text } from 'react-native-paper';
 import CTABigWhite from '../components/CTABigWhite';
 import { AppointmentConfirmationScreenParams } from '../types';
+import * as Notifications from 'expo-notifications';
+import ReactDOMServer from 'react-dom/server';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../i18n';
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
 
 const AppointmentConfirmationScreen = () => {
   const params = useRoute().params as AppointmentConfirmationScreenParams;
   const navigation = useNavigation();
+  const { t } = useTranslation();
+  //const upcommingString = ReactDOMServer.renderToString(<I18nextProvider i18n={i18n}> <Text>{t('UpcomingAppointments')}</Text> </I18nextProvider>);
 
   console.log(params);
+
+  useEffect(() => {
+    (async () => {
+      await Notifications.setBadgeCountAsync(1);
+      const res = await Notifications.scheduleNotificationAsync({
+        content: {
+          title: 'OneHeal',
+          subtitle: t("UpcomingAppointments"),
+          body: `You have an appointment at ${params.day} ${params.date}, ${params.time}`,
+        },
+        trigger: {
+          seconds: 5,
+        },
+      });
+    })();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -29,13 +54,13 @@ const AppointmentConfirmationScreen = () => {
           variant='displayMedium'
           style={{ color: '#fff', fontWeight: '700', marginBottom: 5 }}
         >
-          Success!
+          <I18nextProvider i18n={i18n}> <Text>{t('Success')}</Text> </I18nextProvider>
         </Text>
         <Text
           variant='bodyLarge'
           style={{ color: '#fff', fontWeight: '700', marginBottom: 40 }}
         >
-          Your appointment is set.
+          <I18nextProvider i18n={i18n}> <Text>{t('appointmentisset')}</Text> </I18nextProvider>
         </Text>
         <Text
           variant='bodyLarge'

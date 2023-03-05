@@ -2,6 +2,9 @@ import { StyleSheet, View, ViewStyle } from 'react-native';
 import React from 'react';
 import { Chip, Text } from 'react-native-paper';
 import { darkGreen, darkGreen100, darkGreen200 } from '../sharedStyles';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../i18n';
+
 
 type Chips = {
   id: number;
@@ -27,6 +30,7 @@ type Props = {
 
 const DepartmentChips = (props: Props) => {
   const { chips, setChips } = props;
+  const { t } = useTranslation();
 
   const chooseLocation = (id: number) => {
     let resetChips = chips.map((chip) => {
@@ -46,7 +50,7 @@ const DepartmentChips = (props: Props) => {
   return (
     <View style={[styles.container, props.style]}>
       <Text variant='headlineSmall' style={styles.chipTitle}>
-        Departments
+      {t('Departments')}
       </Text>
       <View style={styles.chips}>
         {chips.map((chip) => (

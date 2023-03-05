@@ -1,26 +1,7 @@
-import { useEffect, useState } from 'react';
-import {
-  Dimensions,
-  Image,
-  ScrollView,
-  StyleSheet,
-  View,
-  ViewStyle,
-} from 'react-native';
-import {
-  ActivityIndicator,
-  Avatar,
-  Button,
-  Dialog,
-  FAB,
-  Portal,
-  RadioButton,
-  Searchbar,
-  Text,
-  TextInput,
-} from 'react-native-paper';
-import CTABig from '../components/CTABig';
-import DepartmentChips from '../components/DepartmentChips';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import React, { useEffect, useState } from 'react';
+import { Dimensions, Image, ScrollView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, FAB, Text } from 'react-native-paper';
 import Doctor from '../components/Doctor';
 import LocationFilter from '../components/LocationFilter';
 import NotFound from '../components/NotFound';
@@ -28,19 +9,19 @@ import OneHealAppBar from '../components/OneHealAppBar';
 
 import OneHealSafeArea from '../components/OneHealSafeArea';
 import { CHIPS, DOCTORS, LOCATIONS } from '../helpers/statics';
-import {
-  darkGreen,
-  darkGreen000,
-  darkGreen050,
-  darkGreen100,
-} from '../sharedStyles';
+import { useDoctors } from '../hooks/useDoctors';
+import { useLocations } from '../hooks/useLocations';
+import { darkGreen, darkGreen100 } from '../sharedStyles';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../i18n';
+
 import { RootTabScreenProps } from '../types';
 
 export default function TabOneScreen({
   navigation,
 }: RootTabScreenProps<'TabOne'>) {
   const [chips, setChips] = useState(CHIPS);
-  const [locations, setLocations] = useState(LOCATIONS);
+  const [location, setLocation] = useState(0);
   const [doctors, setDoctors] = useState<
     | {
         id: number;
@@ -53,21 +34,21 @@ export default function TabOneScreen({
   >();
   const [visible, setVisible] = useState(false);
   const [value, setValue] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const onChangeSearch = (query: string) => setSearchQuery(query);
-
-  useEffect(() => {
-    setLoading(true);
-
-    new Promise(() =>
-      setTimeout(() => {
-        setLoading(false);
-        setDoctors(DOCTORS);
-      }, 2000)
-    );
-  }, []);
+  const { data: dataLocations, isLoading: isLoadingLocations } = useLocations();
+  const { data: dataDoctors, isLoading: isLoadingDoctors } = useDoctors({
+    locationId: location,
+    enabled: Boolean(location),
+  });
+  let chosenLocation: string | undefined;
+  let chosenLocationName: string | undefined;
+  if (location) {
+    chosenLocation = dataLocations.find(
+      (el: { locationId: number }) => el.locationId === location
+    ).city;
+    chosenLocationName = dataLocations.find(
+      (el: { locationId: number }) => el.locationId === location
+    ).locationName;
+  }
 
   const filterDoctors = () => {
     let chosenChip = chips.find((chip) => chip.choosen);
@@ -94,17 +75,13 @@ export default function TabOneScreen({
     } else {
       setDoctors(DOCTORS);
     }
-
-    console.log('chosenChip is ', chosenChip?.name);
-    console.log('filtered is ', filteredDoctors);
   };
-  console.log(value);
 
   useEffect(() => {
     filterDoctors();
   }, [chips, value]);
 
-  console.log('doctors are ,', doctors);
+  const { t } = useTranslation();
 
   return (
     <OneHealSafeArea statusBar='light'>
@@ -112,43 +89,43 @@ export default function TabOneScreen({
       <ScrollView style={{ flex: 1 }}>
         <View style={styles.container}>
           <View style={styles.topSection}>
-            <Searchbar
-              placeholder='Search...'
-              onChangeText={onChangeSearch}
-              value={searchQuery}
-              style={styles.search}
-            />
-            <Text style={styles.or} variant='bodyMedium'>
-              OR
-            </Text>
-
-            <DepartmentChips chips={chips} setChips={setChips} />
             <LocationFilter
-              locations={locations}
-              setLocations={setLocations}
-              setValue={setValue}
-              value={value}
+              locations={dataLocations}
+              setLocation={setLocation}
+              location={location}
               visible={visible}
               setVisible={setVisible}
             />
+            {!location ? (
+              <Text variant='bodyLarge' style={{ fontStyle: 'italic' }}>
+                <MaterialCommunityIcons
+                  name='information'
+                  size={24}
+                  color={darkGreen}
+                />{' '}
+                Please choose a location to see doctors.
+              </Text>
+            ) : null}
+            {/* <DepartmentChips chips={chips} setChips={setChips} /> */}
 
             <View style={styles.doctorContainer}>
-              {loading ? (
+              {!location ? null : isLoadingDoctors ? (
                 <ActivityIndicator animating color={darkGreen} size='large' />
-              ) : !doctors ? (
+              ) : !dataDoctors ? (
                 <Text>No doctors found</Text>
-              ) : doctors.length === 0 ? (
+              ) : dataDoctors.length === 0 ? (
                 <NotFound />
               ) : (
-                doctors.map((doctor) => {
+                dataDoctors.map((doctor) => {
                   return (
                     <Doctor
-                      department={doctor.department}
+                      specialization={doctor.specialization}
                       name={doctor.name}
-                      image={doctor.image}
-                      key={doctor.id}
-                      location={doctor.location}
-                      id={doctor.id}
+                      key={doctor.doctorId}
+                      locationId={doctor.locationId}
+                      doctorId={doctor.doctorId}
+                      chosenLocation={chosenLocation}
+                      chosenLocationName={chosenLocationName}
                     />
                   );
                 })

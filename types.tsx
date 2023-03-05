@@ -31,11 +31,12 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, Screen>;
 
 export type Doctor = {
-  image: string;
+  doctorId: number;
   name: string;
-  department: string;
-  location: string;
-  id?: number;
+  specialization: string;
+  locationId: number;
+  chosenLocation?: string;
+  chosenLocationName?: string;
 };
 export type AppointmentConfirmationScreenParams = {
   doctor: string;
@@ -59,6 +60,7 @@ export type ProfileStackParamList = {
   PatientProfileScreen: undefined;
   PrivacyStatmentScreen: undefined;
 
+  OnboardingScreens: undefined;
 };
 export type RootTabParamList = {
   TabOne: undefined;

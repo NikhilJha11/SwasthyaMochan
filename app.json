@@ -4,20 +4,18 @@
     "slug": "planspiel-pm1",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/logo-2x.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#214f4f"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -29,6 +27,18 @@
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
-    }
+    },
+    "notification": {
+      "icon": "./assets/images/logo-2x.png"
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/logo-2x.png",
+          "color": "#ffffff"
+        }
+      ]
+    ]
   }
 }

@@ -1,36 +1,24 @@
-import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
 import OneHealSafeArea from '../components/OneHealSafeArea';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Doctor as DoctorType } from '../types';
 import Doctor from '../components/Doctor';
 import DateItem from '../components/DateItem';
 import CTABig from '../components/CTABig';
-import { Button, Dialog, Portal, Text } from 'react-native-paper';
+import {
+  ActivityIndicator,
+  Button,
+  Dialog,
+  Portal,
+  Text,
+} from 'react-native-paper';
+import { useAppointments } from '../hooks/useAppointments';
+import { darkGreen } from '../sharedStyles'; 
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
-const FULL_MONTHS = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
-const FULL_WEEK = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-];
+
 
 const AppointmentScreen = () => {
   const navigation = useNavigation();
@@ -41,6 +29,10 @@ const AppointmentScreen = () => {
   const [choosenDay, setChoosenDay] = useState('');
   const [choosenDate, setChoosenDate] = useState('');
   const [visible, setVisible] = React.useState(false);
+  const { data: dataAppointments, isLoading: isLoadingAppointments } =
+    useAppointments({ doctorId: params.doctorId, enabled: true });
+  const { t } = useTranslation();
+
 
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
@@ -61,72 +53,67 @@ const AppointmentScreen = () => {
     });
   };
 
-  const generateDays = () => {
-    const nextWeek = new Date();
-    let dates = [];
+  // console.log(
+  //   'apps are ',
+  //   moment('2023-03-05T08:00:00.000Z').format('DD-MM-YYYY HH:mm'),
+  //   FULL_WEEK[date.getDay()]
+  //   // date.getFullYear() + '-' + date.getMonth()+1 + '-'
+  // );
 
-    for (let i = 0; i < showMoreDays; i++) {
-      let date = nextWeek.setDate(new Date().getDate() + i);
-      // console.log(nextWeek.getDate()); 15, 16, 17, 18
-      console.log();
-      dates.push({
-        day: FULL_WEEK[nextWeek.getDay()],
-        fullDate: `, ${nextWeek.getDate()}. ${
-          FULL_MONTHS[nextWeek.getMonth()]
-        }`,
+  const map = dataAppointments?.reduce((acc, curr) => {
+    const { startDate } = curr;
+    const [date, time] = startDate.split('T');
+    const [hh, mm, ss] = time.split(':');
+    const formattedTime = `${hh}:${mm}`;
+    if (!acc.has(date)) {
+      acc.set(date, {
+        startDate: date,
+        time: [formattedTime],
       });
-    }
-    setDays(dates);
-  };
-
-  useEffect(() => {
-    generateDays();
-  }, [showMoreDays]);
-
-  useEffect(() => {
-    generateDays();
-  }, []);
-
-  console.log('days are , ', days);
+    } else acc.get(date).time.push(formattedTime);
+    return acc;
+  }, new Map());
+  let result;
+  if (map) result = [...map.values()];
 
   return (
     <OneHealSafeArea statusBar='light'>
       <View style={styles.container}>
         <Doctor
-          department={params.department}
+          specialization={params.specialization}
           name={params.name}
-          image={params.image}
-          key={params.id}
-          location={params.location}
-          id={params.id}
+          key={params.doctorId}
+          doctorId={params.doctorId}
+          locationId={params.locationId}
           styles={{ marginTop: 20, backgroundColor: '#fff' }}
+          chosenLocation={params.chosenLocation}
+          chosenLocationName={params.chosenLocationName}
         />
 
         <ScrollView style={{ flex: 1 }}>
-          {days
-            ? days.map(
-                (
-                  day: { day: string; fullDate: string },
-                  index: React.Key | null | undefined
-                ) => (
-                  <DateItem
-                    key={index}
-                    day={day.day}
-                    date={day.fullDate}
-                    time={time}
-                    setTime={setTime}
-                    doctor={`${params.name}`}
-                    confirmAppointment={confirmAppointment}
-                    choosenDate={choosenDate}
-                    setChoosenDate={setChoosenDate}
-                    choosenDay={choosenDay}
-                    setChoosenDay={setChoosenDay}
-                    setVisible={setVisible}
-                    visible={visible}
-                  />
-                )
-              )
-            : null}
+          {!dataAppointments || isLoadingAppointments ? (
+            <ActivityIndicator animating color={darkGreen} size='large' />
+          ) : isLoadingAppointments ? (
+            <ActivityIndicator animating color={darkGreen} size='large' />
+          ) : result ? (
+            result.map((data, index: React.Key | null | undefined) => (
+              <DateItem
+                key={index}
+                day={data.startDate}
+                date={data.startDate}
+                time={data.time}
+                setTime={setTime}
+                doctor={`${params.name}`}
+                confirmAppointment={confirmAppointment}
+                choosenDate={choosenDate}
+                setChoosenDate={setChoosenDate}
+                choosenDay={choosenDay}
+                setChoosenDay={setChoosenDay}
+                setVisible={setVisible}
+                visible={visible}
+              />
+            ))
+          ) : null}
           <CTABig
             icon={'arrow-drop-down-circle'}
             text='Show More'
@@ -135,7 +122,7 @@ const AppointmentScreen = () => {
           />
           <Portal>
             <Dialog visible={visible} onDismiss={hideDialog}>
-              <Dialog.Title>Confirm Appointment</Dialog.Title>
+              <Dialog.Title><I18nextProvider i18n={i18n}> <Text>{t('ConfirmAppointment')}</Text> </I18nextProvider></Dialog.Title>
               <Dialog.Content>
                 <Text variant='bodyLarge' style={{ fontWeight: '500' }}>
                   {params.name}
@@ -149,7 +136,7 @@ const AppointmentScreen = () => {
                 <Text variant='bodyMedium'>{time}</Text>
               </Dialog.Content>
               <Dialog.Actions>
-                <Button onPress={hideDialog}>Cancel</Button>
+                <Button onPress={hideDialog}><I18nextProvider i18n={i18n}> <Text>{t('Cancel')}</Text> </I18nextProvider></Button>
                 <Button
                   onPress={() =>
                     confirmAppointment({
@@ -159,7 +146,7 @@ const AppointmentScreen = () => {
                     })
                   }
                 >
-                  Confirm
+                  <I18nextProvider i18n={i18n}> <Text>{t('Confirm')}</Text> </I18nextProvider>
                 </Button>
               </Dialog.Actions>
             </Dialog>

@@ -1,39 +1,18 @@
-import { Feather, Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { FlashList } from '@shopify/flash-list';
-import { LinearGradient } from 'expo-linear-gradient';
-import { useState } from 'react';
-import {
-  Dimensions,
-  FlatList,
-  Image,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-} from 'react-native';
-import {
-  Avatar,
-  Button,
-  Divider,
-  Menu,
-  Text,
-  useTheme,
-} from 'react-native-paper';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useEffect, useState } from 'react';
+import { Dimensions, FlatList, ScrollView, StyleSheet } from 'react-native';
 import CTABig from '../components/CTABig';
 import DoctorBanner from '../components/DoctorBanner';
 import NewsItem from '../components/NewsItem';
 import OneHealAppBar from '../components/OneHealAppBar';
 import OneHealSafeArea from '../components/OneHealSafeArea';
+import { PillReminder } from '../components/PillReminder';
+import * as Notifications from 'expo-notifications';
 
 import { View } from '../components/Themed';
-import {
-  darkGreen,
-  darkGreen000,
-  darkGreen400,
-  darkGreen500,
-  darkGreen600,
-} from '../sharedStyles';
+import { darkGreen000 } from '../sharedStyles';
+import { useNavigation } from '@react-navigation/native';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
 const DATA = [
   {
@@ -46,13 +25,30 @@ const DATA = [
     title: 'Second Item',
   },
 ];
-export default function TabTwoScreen() {
-  const theme = useTheme();
-  const [visible, setVisible] = useState(false);
-  const insets = useSafeAreaInsets();
 
-  const openMenu = () => setVisible(true);
-  const closeMenu = () => setVisible(false);
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
+export default function TabTwoScreen() {
+  const navigation = useNavigation();
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    (async () => {
+      const askForPermission = await Notifications.requestPermissionsAsync({
+        ios: {
+          allowAlert: true,
+          allowBadge: true,
+          allowSound: true,
+          allowAnnouncements: true,
+        },
+      });
+    })();
+  }, []);
 
   return (
     <OneHealSafeArea statusBar='light'>
@@ -72,8 +68,9 @@ export default function TabTwoScreen() {
           </View>
           <CTABig
             icon={'calendar'}
-            text='Book Appointment'
+            text=  {t('Bookappointment')} 
             style={styles.ctaBig}
+            onPress={() => navigation.navigate('Root', { screen: 'TabOne' })}
           />
           <DoctorBanner
             doctor={{
@@ -82,11 +79,13 @@ export default function TabTwoScreen() {
               image: require('../assets/images/doctor.png'),
               location: 'Home Visit',
             }}
-            buttonLeft={{ button: 'Reschedule' }}
-            topText='Upcoming Appointments'
-            buttonRight={{ button: 'Cancel' }}
+            buttonLeft={{ button: t('Maps') }}
+            topText={t('UpcomingAppointments')} 
+            buttonRight={{ button: t('Cancel')  }}
             key={1}
           />
+
+          <PillReminder />
 
           <DoctorBanner
             doctor={{
@@ -95,9 +94,9 @@ export default function TabTwoScreen() {
               image: require('../assets/images/doctor2.png'),
               location: 'Home Visit',
             }}
-            buttonLeft={{ button: 'Reschedule' }}
-            topText='Recent Appointments'
-            buttonRight={{ button: 'See Detail' }}
+            buttonLeft={{ button: t('Maps')  }}
+            topText={t('RecentAppointments')}
+            buttonRight={{ button: t('SeeDetail')}}
             key={2}
           />
         </ScrollView>
@@ -116,11 +115,11 @@ const styles = StyleSheet.create({
   news: {
     height: 200,
     backgroundColor: darkGreen000,
-    marginLeft: 10,
+    marginLeft: 20,
     padding: 15,
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
     marginTop: 10,
   },
-  ctaBig: { marginHorizontal: 10 },
+  ctaBig: { marginHorizontal: 20 },
 });

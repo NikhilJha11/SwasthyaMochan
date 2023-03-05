@@ -4,8 +4,11 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { darkGreen, darkGreen500 } from '../sharedStyles';
 import { Text } from 'react-native-paper';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
 const CTASmall = () => {
+  const { t } = useTranslation();
   return (
     <TouchableOpacity
       style={{
@@ -23,7 +26,7 @@ const CTASmall = () => {
         style={{ color: darkGreen, opacity: 0.7, marginRight: 5 }}
         variant='labelSmall'
       >
-        See All
+        {t('SeeALL')}
       </Text>
       <MaterialIcons name='keyboard-arrow-right' />
     </TouchableOpacity>

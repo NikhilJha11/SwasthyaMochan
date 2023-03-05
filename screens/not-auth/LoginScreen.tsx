@@ -3,17 +3,30 @@ import {
   Image,
   Keyboard,
   KeyboardAvoidingView,
+  Linking,
   Platform,
   StyleSheet,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import React, { useState } from 'react';
 import { darkGreen, sharedStyles } from '../../sharedStyles';
-import { Button, TextInput, Text, useTheme } from 'react-native-paper';
+import {
+  Button,
+  TextInput,
+  Text,
+  useTheme,
+  Portal,
+  Dialog,
+} from 'react-native-paper';
 import OneHealSafeArea from '../../components/OneHealSafeArea';
 import { useNavigation } from '@react-navigation/native';
-import { useAsyncStorage } from '@react-native-async-storage/async-storage';
+import AsyncStorage, {
+  useAsyncStorage,
+} from '@react-native-async-storage/async-storage';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../../i18n';
 
 const LoginScreen = () => {
   const theme = useTheme();
@@ -22,6 +35,11 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
+
+  const showDialog = () => setVisible(true);
+  const hideDialog = () => setVisible(false);
+  const { t } = useTranslation();
 
   const { getItem, setItem, removeItem } = useAsyncStorage('credentials');
 
@@ -29,11 +47,18 @@ const LoginScreen = () => {
     try {
       setLoading(true);
       await setItem(JSON.stringify({ email, password }));
+      const hasOnboardedAlready = await AsyncStorage.getItem('hasOnboarded');
 
       new Promise(() =>
         setTimeout(() => {
           setLoading(false);
-          navigation.navigate('Root');
+
+          if (hasOnboardedAlready) {
+            navigation.navigate('Root');
+          } else if (!hasOnboardedAlready) {
+            // navigation.navigate('NotAuth', { screen: 'OnboardingScreens' });
+            navigation.navigate('NotAuth',{screen:'OnboardingScreens'})
+          }
         }, 2000)
       );
     } catch (e) {
@@ -65,24 +90,12 @@ const LoginScreen = () => {
                 variant='headlineLarge'
                 style={[styles.title, { color: theme.colors.tertiary }]}
               >
-                LOGIN
+                <I18nextProvider i18n={i18n}> <Text>{t('login')}</Text> </I18nextProvider>
               </Text>
             </View>
 
             <TextInput
-              label='Email'
-              placeholder='example@email.com'
-              mode='outlined'
-              style={styles.input}
-              outlineColor={darkGreen}
-              activeOutlineColor={darkGreen}
-              autoCapitalize='none'
-              value={email}
-              onChangeText={(text) => setEmail(text)}
-              textContentType='emailAddress'
-            />
-            <TextInput
-              label='Password'
+              label='Kielstein ID'
               mode='outlined'
               secureTextEntry={!showPassword}
               style={styles.input}
@@ -100,6 +113,47 @@ const LoginScreen = () => {
               textContentType='password'
             />
         
+            <TouchableOpacity
+              onPress={() => setVisible(true)}
+              style={styles.idNumber}
+            >
+              <Text variant='bodySmall' style={styles.idNumberText}>
+              <I18nextProvider i18n={i18n}> <Text>{t('obtainid')}</Text> </I18nextProvider>
+              </Text>
+            </TouchableOpacity>
+
+            <Portal>
+              <Dialog visible={visible} onDismiss={() => setVisible(false)}>
+                <Dialog.Title>What is Kielstein ID ?</Dialog.Title>
+                <Dialog.Content>
+                  <Text variant='bodyMedium'>
+                  <I18nextProvider i18n={i18n}> <Text>{t('whtisID')}</Text> </I18nextProvider>
+                  </Text>
+                </Dialog.Content>
+                <Dialog.Content>
+                  <Text variant='bodyMedium'>
+                  <I18nextProvider i18n={i18n}> <Text>{t('obtainidhow')}</Text> </I18nextProvider>
+                  </Text>
+                </Dialog.Content>
+                <Dialog.Content>
+                  <Text
+                    variant='bodySmall'
+                    style={styles.kielstein}
+                    onPress={() =>
+                      Linking.openURL(
+                        'https://www.kielstein.de/standorte-uebersicht-2/'
+                      )
+                    }
+                  >
+                     <I18nextProvider i18n={i18n}> <Text>{t('nearestKielstein')}</Text> </I18nextProvider>
+                  </Text>
+                </Dialog.Content>
+                <Dialog.Actions>
+                  <Button onPress={() => setVisible(false)}>OK</Button>
+                </Dialog.Actions>
+              </Dialog>
+            </Portal>
+
             <Button
               mode='contained'
               style={styles.button}
@@ -109,8 +163,11 @@ const LoginScreen = () => {
             > 
              
             {/*  Hide the register page
+            >
+              <I18nextProvider i18n={i18n}> <Text>{t('login')}</Text> </I18nextProvider>
+            </Button>
             <View style={styles.register}>
-              <Text variant='labelMedium'>Don't have an account? </Text>
+              <Text variant='labelMedium'><I18nextProvider i18n={i18n}> <Text>{t('noaccount')}</Text> </I18nextProvider> </Text>
               <Button
                 mode='text'
                 textColor={theme.colors.tertiary}
@@ -118,7 +175,7 @@ const LoginScreen = () => {
                   navigation.navigate('NotAuth', { screen: 'RegisterScreen' })
                 }
               >
-                Register here!
+                <I18nextProvider i18n={i18n}> <Text>{t('newregiseter')}</Text> </I18nextProvider>
               </Button>
             </View> */}
               LOGIN
@@ -152,7 +209,6 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: sharedStyles.viewStyles.backgroundColor,
     padding: 10,
-    marginBottom: 40,
   },
   keyboard: {
     flex: 1,
@@ -170,5 +226,18 @@ const styles = StyleSheet.create({
   title: {
     paddingBottom: 20,
     fontWeight: '600',
+  },
+  idNumber: {
+    marginBottom: 50,
+    marginVertical: 20,
+  },
+  idNumberText: {
+    textAlign: 'right',
+    opacity: 0.7,
+  },
+  kielstein: {
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+    textDecorationLine: 'underline',
   },
 });

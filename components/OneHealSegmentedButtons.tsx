@@ -8,6 +8,8 @@ import {
 import React from 'react';
 import { Text } from 'react-native-paper';
 import { darkGreen100, darkGreen500 } from '../sharedStyles';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
 type Props = {
   segment: string;
@@ -29,6 +31,7 @@ const OneHealSegmentedButtons = (props: Props) => {
     };
     return segmentTextStyle;
   };
+  const {t} = useTranslation();
   return (
     <View style={styles.buttons}>
       <TouchableOpacity
@@ -36,7 +39,7 @@ const OneHealSegmentedButtons = (props: Props) => {
         onPress={() => props.setSegment('Upcoming')}
       >
         <Text style={[styles.buttonText, segmentTextStyles('Upcoming')]}>
-          Upcoming
+         { t("Upcoming")}
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
@@ -44,7 +47,7 @@ const OneHealSegmentedButtons = (props: Props) => {
         onPress={() => props.setSegment('Recent')}
       >
         <Text style={[styles.buttonText, segmentTextStyles('Recent')]}>
-          Recent
+          {t("Recent")}
         </Text>
       </TouchableOpacity>
     </View>
