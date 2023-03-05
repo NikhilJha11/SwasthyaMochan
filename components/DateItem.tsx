@@ -1,15 +1,8 @@
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import React, { useState } from 'react';
-import {
-  darkGreen,
-  darkGreen000,
-  darkGreen200,
-  darkGreen300,
-  darkGreen400,
-} from '../sharedStyles';
+import { darkGreen, darkGreen400 } from '../sharedStyles';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 import { Button, Chip, Dialog, Portal, Text } from 'react-native-paper';
-import moment from 'moment';
 const FULL_MONTHS = [
   'January',
   'February',
