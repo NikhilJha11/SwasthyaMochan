@@ -16,6 +16,14 @@ declare global {
   }
 }
 
+export type NewsStackParamList = {
+  NewsScreen: NewsScreenParamList;
+};
+export type NewsScreenParamList = {
+  title: string;
+  content: string;
+};
+
 export type RootStackParamList = {
   NotAuth: NavigatorScreenParams<NotAuthStackParamList> | undefined;
   Profile: NavigatorScreenParams<ProfileStackParamList> | undefined;
@@ -25,6 +33,8 @@ export type RootStackParamList = {
     | NavigatorScreenParams<AppointmentStackParamList>
     | undefined;
   NotFound: undefined;
+  ChatStack: NavigatorScreenParams<ChatStackParamList> | undefined;
+  NewsStack: NavigatorScreenParams<NewsStackParamList> | undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -40,15 +50,18 @@ export type Doctor = {
 };
 export type AppointmentConfirmationScreenParams = {
   doctor: string;
-  date: string;
-  day: string;
-  time: string;
+  timeSlotId: number;
+  formattedTime: string;
 };
 
 export type AppointmentStackParamList = {
   AppointmentScreen: Doctor;
   AppointmentConfirmationScreen: AppointmentConfirmationScreenParams;
   AppointmentsScreen: undefined;
+};
+export type ChatStackParamList = {
+  ChatScreen: undefined;
+  Chat: undefined;
 };
 export type NotAuthStackParamList = {
   WelcomeScreen: undefined;
@@ -66,7 +79,7 @@ export type ProfileStackParamList = {
 export type RootTabParamList = {
   TabOne: undefined;
   TabTwo: undefined;
-  ChatScreen: undefined;
+  ChatStack: undefined;
   TabThree: undefined;
 };
 

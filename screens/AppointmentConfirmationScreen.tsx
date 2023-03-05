@@ -32,8 +32,8 @@ const AppointmentConfirmationScreen = () => {
       const res = await Notifications.scheduleNotificationAsync({
         content: {
           title: 'OneHeal',
-          subtitle: t("UpcomingAppointments"),
-          body: `You have an appointment at ${params.day} ${params.date}, ${params.time}`,
+          subtitle: 'UpcomingAppointments',
+          body: `You have an appointment at ${params.formattedTime}`,
         },
         trigger: {
           seconds: 5,
@@ -54,13 +54,13 @@ const AppointmentConfirmationScreen = () => {
           variant='displayMedium'
           style={{ color: '#fff', fontWeight: '700', marginBottom: 5 }}
         >
-          <I18nextProvider i18n={i18n}> <Text>{t('Success')}</Text> </I18nextProvider>
+          <I18nextProvider i18n={i18n}>{t('Success')}</I18nextProvider>
         </Text>
         <Text
           variant='bodyLarge'
           style={{ color: '#fff', fontWeight: '700', marginBottom: 40 }}
         >
-          <I18nextProvider i18n={i18n}> <Text>{t('appointmentisset')}</Text> </I18nextProvider>
+          <I18nextProvider i18n={i18n}>{t('appointmentisset')}</I18nextProvider>
         </Text>
         <Text
           variant='bodyLarge'
@@ -72,8 +72,7 @@ const AppointmentConfirmationScreen = () => {
           variant='bodyLarge'
           style={{ color: '#fff', fontWeight: '700', marginBottom: 20 }}
         >
-          {params.day}
-          {params.date}, {params.time}
+          {params.formattedTime}
         </Text>
         <CTABigWhite
           icon='calendar'

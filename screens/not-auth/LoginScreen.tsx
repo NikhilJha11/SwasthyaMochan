@@ -90,7 +90,10 @@ const LoginScreen = () => {
                 variant='headlineLarge'
                 style={[styles.title, { color: theme.colors.tertiary }]}
               >
-                <I18nextProvider i18n={i18n}> <Text>{t('login')}</Text> </I18nextProvider>
+                <I18nextProvider i18n={i18n}>
+                  {' '}
+                  <Text>{t('login')}</Text>{' '}
+                </I18nextProvider>
               </Text>
             </View>
 
@@ -118,7 +121,10 @@ const LoginScreen = () => {
               style={styles.idNumber}
             >
               <Text variant='bodySmall' style={styles.idNumberText}>
-              <I18nextProvider i18n={i18n}> <Text>{t('obtainid')}</Text> </I18nextProvider>
+                <I18nextProvider i18n={i18n}>
+                  {' '}
+                  <Text>{t('obtainid')}</Text>{' '}
+                </I18nextProvider>
               </Text>
             </TouchableOpacity>
 
@@ -127,12 +133,18 @@ const LoginScreen = () => {
                 <Dialog.Title>What is Kielstein ID ?</Dialog.Title>
                 <Dialog.Content>
                   <Text variant='bodyMedium'>
-                  <I18nextProvider i18n={i18n}> <Text>{t('whtisID')}</Text> </I18nextProvider>
+                    <I18nextProvider i18n={i18n}>
+                      {' '}
+                      <Text>{t('whtisID')}</Text>{' '}
+                    </I18nextProvider>
                   </Text>
                 </Dialog.Content>
                 <Dialog.Content>
                   <Text variant='bodyMedium'>
-                  <I18nextProvider i18n={i18n}> <Text>{t('obtainidhow')}</Text> </I18nextProvider>
+                    <I18nextProvider i18n={i18n}>
+                      {' '}
+                      <Text>{t('obtainidhow')}</Text>{' '}
+                    </I18nextProvider>
                   </Text>
                 </Dialog.Content>
                 <Dialog.Content>
@@ -145,7 +157,10 @@ const LoginScreen = () => {
                       )
                     }
                   >
-                     <I18nextProvider i18n={i18n}> <Text>{t('nearestKielstein')}</Text> </I18nextProvider>
+                    <I18nextProvider i18n={i18n}>
+                      {' '}
+                      <Text>{t('nearestKielstein')}</Text>{' '}
+                    </I18nextProvider>
                   </Text>
                 </Dialog.Content>
                 <Dialog.Actions>
@@ -164,10 +179,18 @@ const LoginScreen = () => {
              
             {/*  Hide the register page
             >
-              <I18nextProvider i18n={i18n}> <Text>{t('login')}</Text> </I18nextProvider>
+              <I18nextProvider i18n={i18n}>
+                {' '}
+                <Text style={{ color: '#fff' }}>{t('login')}</Text>{' '}
+              </I18nextProvider>
             </Button>
             <View style={styles.register}>
-              <Text variant='labelMedium'><I18nextProvider i18n={i18n}> <Text>{t('noaccount')}</Text> </I18nextProvider> </Text>
+              <Text variant='labelMedium'>
+                <I18nextProvider i18n={i18n}>
+                  {' '}
+                  <Text>{t('noaccount')}</Text>{' '}
+                </I18nextProvider>{' '}
+              </Text>
               <Button
                 mode='text'
                 textColor={theme.colors.tertiary}
@@ -175,7 +198,10 @@ const LoginScreen = () => {
                   navigation.navigate('NotAuth', { screen: 'RegisterScreen' })
                 }
               >
-                <I18nextProvider i18n={i18n}> <Text>{t('newregiseter')}</Text> </I18nextProvider>
+                <I18nextProvider i18n={i18n}>
+                  {' '}
+                  <Text>{t('newregiseter')}</Text>{' '}
+                </I18nextProvider>
               </Button>
             </View> */}
               LOGIN

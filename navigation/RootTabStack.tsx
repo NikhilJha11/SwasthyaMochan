@@ -9,6 +9,7 @@ import TabThreeScreen from '../screens/TabThreeScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { darkGreen } from '../sharedStyles';
 import { RootTabParamList, RootTabScreenProps } from '../types';
+import { ChatStack } from './ChatStack';
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
@@ -66,8 +67,8 @@ export function BottomTabNavigator() {
       />
 
       <BottomTab.Screen
-        name='ChatScreen'
-        component={ChatScreen}
+        name='ChatStack'
+        component={ChatStack}
         options={{
           title: 'Chat',
           tabBarIcon: ({ color }) => (
