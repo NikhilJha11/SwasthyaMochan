@@ -51,7 +51,7 @@
     "react-native-screens": "~3.18.0",
     "react-native-svg": "13.4.0",
     "react-native-swiper": "^1.6.0",
-    "react-native-web": "~0.18.9",
+    "react-native-web": "~0.18.9" ,
     "text-encoder-lite": "^2.0.0",
     "text-encoding": "^0.7.0"
   },
