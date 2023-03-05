@@ -89,13 +89,17 @@ export default function TabOneScreen({
       <ScrollView style={{ flex: 1 }}>
         <View style={styles.container}>
           <View style={styles.topSection}>
-            <LocationFilter
-              locations={dataLocations}
-              setLocation={setLocation}
-              location={location}
-              visible={visible}
-              setVisible={setVisible}
-            />
+            {!dataLocations ? (
+              <ActivityIndicator animating color={darkGreen} size='large' />
+            ) : (
+              <LocationFilter
+                locations={dataLocations}
+                setLocation={setLocation}
+                location={location}
+                visible={visible}
+                setVisible={setVisible}
+              />
+            )}
             {!location ? (
               <Text variant='bodyLarge' style={{ fontStyle: 'italic' }}>
                 <MaterialCommunityIcons
