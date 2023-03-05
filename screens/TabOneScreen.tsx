@@ -1,3 +1,4 @@
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
 import {
   Dimensions,
@@ -28,21 +29,16 @@ import OneHealAppBar from '../components/OneHealAppBar';
 
 import OneHealSafeArea from '../components/OneHealSafeArea';
 import { CHIPS, DOCTORS, LOCATIONS } from '../helpers/statics';
+import { useDoctors } from '../hooks/useDoctors';
 import { useLocations } from '../hooks/useLocations';
-import {
-  darkGreen,
-  darkGreen000,
-  darkGreen050,
-  darkGreen100,
-} from '../sharedStyles';
+import { darkGreen, darkGreen100 } from '../sharedStyles';
 import { RootTabScreenProps } from '../types';
 
 export default function TabOneScreen({
   navigation,
 }: RootTabScreenProps<'TabOne'>) {
-  // const { data, isLoading, error } = useLocations();
   const [chips, setChips] = useState(CHIPS);
-  const [locations, setLocations] = useState(LOCATIONS);
+  const [location, setLocation] = useState(0);
   const [doctors, setDoctors] = useState<
     | {
         id: number;
@@ -57,7 +53,21 @@ export default function TabOneScreen({
   const [value, setValue] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(false);
-  const [lachs, setLachs] = useState();
+  const { data: dataLocations, isLoading: isLoadingLocations } = useLocations();
+  const { data: dataDoctors, isLoading: isLoadingDoctors } = useDoctors({
+    locationId: location,
+    enabled: Boolean(location),
+  });
+  let chosenLocation: string | undefined;
+  let chosenLocationName: string | undefined;
+  if (location) {
+    chosenLocation = dataLocations.find(
+      (el: { locationId: number }) => el.locationId === location
+    ).city;
+    chosenLocationName = dataLocations.find(
+      (el: { locationId: number }) => el.locationId === location
+    ).locationName;
+  }
 
   const onChangeSearch = (query: string) => setSearchQuery(query);
 
@@ -98,21 +108,10 @@ export default function TabOneScreen({
       setDoctors(DOCTORS);
     }
   };
-  console.log(value);
 
   useEffect(() => {
     filterDoctors();
   }, [chips, value]);
-
-  useEffect(() => {
-    (async () => {
-      const res = await fetch(
-        'https://lachs.informatik.tu-chemnitz.de/planspiel/v1/locations'
-      );
-
-      console.log(res);
-    })();
-  }, []);
 
   return (
     <OneHealSafeArea statusBar='light'>
@@ -129,34 +128,43 @@ export default function TabOneScreen({
             <Text style={styles.or} variant='bodyMedium'>
               OR
             </Text>
-
-            <DepartmentChips chips={chips} setChips={setChips} />
             <LocationFilter
-              locations={locations}
-              setLocations={setLocations}
-              setValue={setValue}
-              value={value}
+              locations={dataLocations}
+              setLocation={setLocation}
+              location={location}
               visible={visible}
               setVisible={setVisible}
             />
+            {!location ? (
+              <Text variant='bodyLarge' style={{ fontStyle: 'italic' }}>
+                <MaterialCommunityIcons
+                  name='information'
+                  size={24}
+                  color={darkGreen}
+                />{' '}
+                Please choose a location to see doctors.
+              </Text>
+            ) : null}
+            {/* <DepartmentChips chips={chips} setChips={setChips} /> */}
 
             <View style={styles.doctorContainer}>
-              {loading ? (
+              {!location ? null : isLoadingDoctors ? (
                 <ActivityIndicator animating color={darkGreen} size='large' />
-              ) : !doctors ? (
+              ) : !dataDoctors ? (
                 <Text>No doctors found</Text>
-              ) : doctors.length === 0 ? (
+              ) : dataDoctors.length === 0 ? (
                 <NotFound />
               ) : (
-                doctors.map((doctor) => {
+                dataDoctors.map((doctor) => {
                   return (
                     <Doctor
-                      department={doctor.department}
+                      specialization={doctor.specialization}
                       name={doctor.name}
-                      image={doctor.image}
-                      key={doctor.id}
-                      location={doctor.location}
-                      id={doctor.id}
+                      key={doctor.doctorId}
+                      locationId={doctor.locationId}
+                      doctorId={doctor.doctorId}
+                      chosenLocation={chosenLocation}
+                      chosenLocationName={chosenLocationName}
                     />
                   );
                 })
