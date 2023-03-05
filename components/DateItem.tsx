@@ -3,29 +3,8 @@ import React, { useState } from 'react';
 import { darkGreen, darkGreen400 } from '../sharedStyles';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 import { Button, Chip, Dialog, Portal, Text } from 'react-native-paper';
-const FULL_MONTHS = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
-const FULL_WEEK = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-];
+import { I18nextProvider, useTranslation } from 'react-i18next';
+  
 
 type Props = {
   day: string;
@@ -48,6 +27,31 @@ type Props = {
 
 const DateItem = (props: Props) => {
   const [showTime, setShowTime] = useState(false);
+  const { t } = useTranslation();
+
+  const FULL_MONTHS = [
+    t('January'),
+    t('February'),
+    t('March'),
+    t('April'),
+    t('May'),
+    t('June'),
+    t('July'),
+    t('August'),
+    t('September'),
+    t('October'),
+    t('November'),
+    t('December'),
+  ];
+  const FULL_WEEK = [
+    t('Sunday'),
+    t('Monday'),
+    t('Tuesday'),
+    t('Wednesday'),
+    t('Thursday'),
+    t('Friday'),
+    t('Saturday'),
+  ];
 
   const setDateAndAppointment = ({
     time,
