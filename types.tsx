@@ -16,6 +16,14 @@ declare global {
   }
 }
 
+export type NewsStackParamList = {
+  NewsScreen: NewsScreenParamList;
+};
+export type NewsScreenParamList = {
+  title: string;
+  content: string;
+};
+
 export type RootStackParamList = {
   NotAuth: NavigatorScreenParams<NotAuthStackParamList> | undefined;
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
@@ -25,6 +33,7 @@ export type RootStackParamList = {
     | undefined;
   NotFound: undefined;
   ChatStack: NavigatorScreenParams<ChatStackParamList> | undefined;
+  NewsStack: NavigatorScreenParams<NewsStackParamList> | undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
