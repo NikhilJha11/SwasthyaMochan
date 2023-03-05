@@ -7,7 +7,8 @@ import {
   darkGreen100,
   darkGreen600,
 } from '../sharedStyles';
-
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 type Pill = { id: number; checked: 'unchecked' | 'checked' | 'indeterminate' };
 
 export const PillReminder = () => {
@@ -30,10 +31,11 @@ export const PillReminder = () => {
       ...copy.slice(index + 1),
     ]);
   };
+  const { t } = useTranslation();
 
   return (
     <View style={styles.root}>
-      <Text style={styles.mainTitle}>Pill Reminders</Text>
+      <Text style={styles.mainTitle}> {t('PillReminders')}</Text>
 
       <View style={styles.container}>
         <Image

@@ -12,6 +12,8 @@ import { Text } from 'react-native-paper';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ImageProps } from 'react-native';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
 type Button = {
   button: string;
@@ -32,6 +34,7 @@ type Props = {
 };
 
 const DoctorBanner = (props: Props) => {
+  const { t } = useTranslation();
   return (
     <View style={styles.appointments}>
       <View style={styles.appointmentsTopSection}>
@@ -52,7 +55,7 @@ const DoctorBanner = (props: Props) => {
             style={{ color: darkGreen, opacity: 0.7, marginRight: 5 }}
             variant='labelSmall'
           >
-            See All
+            {t('SeeALL')}
           </Text>
           <MaterialIcons name='keyboard-arrow-right' />
         </TouchableOpacity>

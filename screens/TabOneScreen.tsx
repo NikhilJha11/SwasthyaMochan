@@ -1,27 +1,17 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Dimensions,
   Image,
   ScrollView,
   StyleSheet,
-  View,
-  ViewStyle,
+  View, 
 } from 'react-native';
 import {
-  ActivityIndicator,
-  Avatar,
-  Button,
-  Dialog,
-  FAB,
-  Portal,
-  RadioButton,
-  Searchbar,
-  Text,
-  TextInput,
-} from 'react-native-paper';
-import CTABig from '../components/CTABig';
-import DepartmentChips from '../components/DepartmentChips';
+  ActivityIndicator, 
+  FAB, 
+  Text, 
+} from 'react-native-paper'; 
 import Doctor from '../components/Doctor';
 import LocationFilter from '../components/LocationFilter';
 import NotFound from '../components/NotFound';
@@ -32,6 +22,9 @@ import { CHIPS, DOCTORS, LOCATIONS } from '../helpers/statics';
 import { useDoctors } from '../hooks/useDoctors';
 import { useLocations } from '../hooks/useLocations';
 import { darkGreen, darkGreen100 } from '../sharedStyles';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../i18n';
+ 
 import { RootTabScreenProps } from '../types';
 
 export default function TabOneScreen({
@@ -113,12 +106,17 @@ export default function TabOneScreen({
     filterDoctors();
   }, [chips, value]);
 
+  console.log('doctors are ,', doctors);
+  const { t } = useTranslation();
+
   return (
     <OneHealSafeArea statusBar='light'>
       <OneHealAppBar />
       <ScrollView style={{ flex: 1 }}>
         <View style={styles.container}>
           <View style={styles.topSection}>
+          
+ 
             <LocationFilter
               locations={dataLocations}
               setLocation={setLocation}

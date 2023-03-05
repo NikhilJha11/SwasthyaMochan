@@ -8,7 +8,9 @@ import {
   Portal,
   RadioButton,
   Text,
-} from 'react-native-paper';
+} from 'react-native-paper'; 
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
 export type Location = {
   address: string;
@@ -37,11 +39,12 @@ const LocationFilter = (props: Props) => {
   const loc1 = useMemo(() => locations?.filter((l) => l.city === 'Jena'), []);
   const loc2 = useMemo(() => locations?.filter((l) => l.city === 'Erfurt'), []);
 
+  const { t } = useTranslation();
   return (
     <>
       <CTABig
         icon={'location-on'}
-        text='Locations'
+        text={t('Locations')}
         onPress={() => showDialog()}
       />
       <Portal>
