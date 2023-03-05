@@ -4,25 +4,25 @@ import { darkGreen, darkGreen400 } from '../sharedStyles';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 import { Button, Chip, Dialog, Portal, Text } from 'react-native-paper';
 import { I18nextProvider, useTranslation } from 'react-i18next';
-  
 
+type Time = {
+  formattedTime: string;
+  timeSlotId: number;
+};
 type Props = {
   day: string;
   date: string;
-  time: string[];
+  time: Time[];
   setTime: React.Dispatch<React.SetStateAction<string>>;
   doctor: string;
-  confirmAppointment: (data: {
-    time: string;
-    day: string;
-    date: string;
-  }) => void;
   choosenDay: string;
   choosenDate: string;
   setChoosenDay: React.Dispatch<React.SetStateAction<string>>;
   setChoosenDate: React.Dispatch<React.SetStateAction<string>>;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
   visible: boolean;
+  chosenTimeSlotId: number;
+  setChosenTimeSlotId: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const DateItem = (props: Props) => {
@@ -54,18 +54,20 @@ const DateItem = (props: Props) => {
   ];
 
   const setDateAndAppointment = ({
-    time,
-    day,
-    date,
+    timeSlotId,
+    formattedTime,
   }: {
-    time: string;
-    day: string;
-    date: string;
+    timeSlotId: number;
+    formattedTime: string;
   }) => {
     props.setVisible(true);
-    props.setChoosenDate(date);
-    props.setChoosenDay(day);
-    props.setTime(time);
+    props.setChosenTimeSlotId(timeSlotId);
+    props.setChoosenDay(
+      `${new Date(props.date).getDate()} ${
+        FULL_MONTHS[new Date(props.date).getMonth()]
+      }, ${FULL_WEEK[new Date(props.date).getDay()]} at ${formattedTime}`
+    );
+    props.setChoosenDate(`${formattedTime}`);
   };
 
   return (
@@ -93,20 +95,17 @@ const DateItem = (props: Props) => {
                   style={styles.chip}
                   textStyle={{ color: '#fff' }}
                   key={index}
-                  // onPress={() =>
-                  //   setDateAndAppointment({
-                  //     time: '08:00',
-                  //     day: props.day,
-                  //     date: props.date,
-                  //   })
-                  // }
-                  // selected={
-                  //   props.time === '08:00' &&
-                  //   props.date === props.choosenDate &&
-                  //   props.visible
-                  // }
+                  onPress={() =>
+                    setDateAndAppointment({
+                      timeSlotId: t.timeSlotId,
+                      formattedTime: t.formattedTime,
+                    })
+                  }
+                  selected={
+                    props.chosenTimeSlotId === t.timeSlotId && props.visible
+                  }
                 >
-                  {t}
+                  {t.formattedTime}
                 </Chip>
               ))
             : null}
