@@ -1,24 +1,24 @@
-import { StyleSheet, View } from 'react-native';
+import {  Image,StyleSheet, View } from 'react-native';
 import React from 'react';
-import { Avatar, Text } from 'react-native-paper';
+import {  Text } from 'react-native-paper';
 import { darkGreen } from '../sharedStyles';
 
 const ProfileTop = () => {
   return (
     <View style={styles.topSection}>
-      <Text
-        variant='titleMedium'
-        style={{ fontWeight: '700', marginBottom: 30 }}
-      >
+      
+      <Image source={require('../assets/images/logo-full-1.png')}style={{ marginBottom: 0,marginVertical:40}}/>
+      <Text style={{ fontWeight: '700', marginBottom: 10, fontSize:25 }}>
+
         PROFILE
       </Text>
-      <Avatar.Image source={require('../assets/images/avatar.jpg')} />
-      <Text variant='titleMedium' style={styles.textName}>
+ 
+        {/*  <Text variant='titleMedium' style={styles.textName}>
         Suat Bayrak
       </Text>
       <Text variant='bodySmall' style={styles.textEmail}>
         suatbayrak@oneheal.com
-      </Text>
+      </Text>*/}
     </View>
   );
 };
