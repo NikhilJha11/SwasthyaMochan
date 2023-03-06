@@ -50,6 +50,7 @@ const OneHealAppBar = (props: Props) => {
         <Menu.Item onPress={() => i18n.changeLanguage('en')} title='EN' />
         <Menu.Item onPress={() => i18n.changeLanguage('de')} title='DE' />
         <Menu.Item onPress={() => i18n.changeLanguage('ar')} title='AR' />
+        <Menu.Item onPress={() => i18n.changeLanguage('es')} title='ES' />
       </Menu>
     </View>
   );
