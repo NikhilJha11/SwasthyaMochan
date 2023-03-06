@@ -178,7 +178,7 @@ const LoginScreen = () => {
               </I18nextProvider>
             </Button>
             <View style={styles.register}>
-              <Text variant='labelMedium'>
+               {/*<Text variant='labelMedium'>
                 <I18nextProvider i18n={i18n}>
                   {' '}
                   <Text>{t('noaccount')}</Text>{' '}
@@ -195,7 +195,7 @@ const LoginScreen = () => {
                   {' '}
                   <Text>{t('newregiseter')}</Text>{' '}
                 </I18nextProvider>
-              </Button>
+              </Button>*/}
             </View>
           </View>
         </TouchableWithoutFeedback>

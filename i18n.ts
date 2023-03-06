@@ -5,11 +5,13 @@ import { initReactI18next } from 'react-i18next';
 import en from './locales/en.json';
 import de from './locales/de.json';
 import ar from './locales/ar.json';
+import es from './locales/es.json';
 
 const resources = {
   en: { translation: en },
   de: { translation: de },
   ar: { translation: ar },
+  es: { translation: es },
 };
 
 i18n.use(initReactI18next).init({
