@@ -24,18 +24,19 @@ const Appointment = () => {
   const { data: patientsAppointments, isLoading: isLoadingDoctors } = usePatientsAppointments({
     patientid: patientid,
   }); 
-  const upcomingAppointments = patientsAppointments.filter((appointment) => {
+  const recentAppointments = patientsAppointments.filter((appointment) => {
     const appointmentDate = new Date(appointment.startDate);
-    return appointmentDate >= new Date();
+    return appointmentDate < new Date();
   }).sort((a, b) => {
     const aDate = new Date(a.startDate);
     const bDate = new Date(b.startDate);
-    return aDate - bDate;
+    return bDate - aDate;
   });
-  const firstUpcomingAppointment = upcomingAppointments[0];
-  console.log (firstUpcomingAppointment)
+  
+  const lastAppointment = recentAppointments[0];
+  console.log (lastAppointment)
 
-  console.log (upcomingAppointments)
+  console.log (recentAppointments)
   return (
     <View style={styles.appointment}>
       <View style={styles.appointmentTop}>
@@ -58,7 +59,7 @@ const Appointment = () => {
       <Divider />
       <View style={styles.appointmentBottomUp}>
         <Text style={{ marginRight: 15 }}>
-          <Feather name='calendar' size={16} /> {moment(firstUpcomingAppointment?.startDate).format('DD-MM-YYYY HH:mm')}
+          <Feather name='calendar' size={16} /> {moment(lastAppointment?.startDate).format('DD-MM-YYYY HH:mm')}
         </Text>
 
         <Text>

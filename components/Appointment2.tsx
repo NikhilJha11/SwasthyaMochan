@@ -13,6 +13,7 @@ import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../i18n';
 import { usePatientsAppointments } from '../hooks/usePatient';
 import moment from 'moment';
+
 const Appointment = () => {
   const openGps = (lat: any, lng: any) => {
     Linking.openURL(
@@ -20,6 +21,7 @@ const Appointment = () => {
     );
   };
   const { t } = useTranslation();
+
   const patientid = 1
   const { data: patientsAppointments, isLoading: isLoadingDoctors } = usePatientsAppointments({
     patientid: patientid,
@@ -32,8 +34,8 @@ const Appointment = () => {
     const bDate = new Date(b.startDate);
     return aDate - bDate;
   });
-  const firstUpcomingAppointment = upcomingAppointments[0];
-  console.log (firstUpcomingAppointment)
+  const secondUpcomingAppointment = upcomingAppointments[1];
+  console.log (secondUpcomingAppointment)
 
   console.log (upcomingAppointments)
   return (
@@ -58,11 +60,11 @@ const Appointment = () => {
       <Divider />
       <View style={styles.appointmentBottomUp}>
         <Text style={{ marginRight: 15 }}>
-          <Feather name='calendar' size={16} /> {moment(firstUpcomingAppointment?.startDate).format('DD-MM-YYYY HH:mm')}
+          <Feather name='calendar' size={16} />  {moment(secondUpcomingAppointment?.startDate).format('DD-MM-YYYY HH:mm')}
         </Text>
 
         <Text>
-          <Feather name='clock' size={16} /> 
+          <Feather name='clock' size={16} />
         </Text>
       </View>
       <View style={styles.appointmentBottomDown}>
