@@ -11,6 +11,7 @@ import { Feather } from '@expo/vector-icons';
 import { darkGreen } from '../sharedStyles';
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../i18n';
+import { useDeleteAppointment } from '../hooks/useDeleteAppointment';
 import { usePatientsAppointments } from '../hooks/usePatient';
 import moment from 'moment';
 const Appointment = () => {
@@ -19,7 +20,13 @@ const Appointment = () => {
       `https://www.google.com/maps/search/?api=1&query=${lat}%2C${lng}`
     );
   };
-  const { t } = useTranslation();
+  const { t } = useTranslation(); 
+
+
+
+
+ 
+  const deleteAppointment = useDeleteAppointment();
   const patientid = 1
   const { data: patientsAppointments, isLoading: isLoadingDoctors } = usePatientsAppointments({
     patientid: patientid,
@@ -36,7 +43,7 @@ const Appointment = () => {
   console.log (firstUpcomingAppointment)
 
   console.log (upcomingAppointments)
-  return (
+  return ( 
     <View style={styles.appointment}>
       <View style={styles.appointmentTop}>
         <View>

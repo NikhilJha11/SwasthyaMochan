@@ -8,7 +8,7 @@ import {
   Portal,
   RadioButton,
   Text,
-} from 'react-native-paper'; 
+} from 'react-native-paper';
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../i18n';
 

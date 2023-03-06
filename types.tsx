@@ -16,14 +16,26 @@ declare global {
   }
 }
 
+export type NewsStackParamList = {
+  NewsScreen: NewsScreenParamList;
+};
+export type NewsScreenParamList = {
+  title: string;
+  content: string;
+};
+
 export type RootStackParamList = {
   NotAuth: NavigatorScreenParams<NotAuthStackParamList> | undefined;
+  Profile: NavigatorScreenParams<ProfileStackParamList> | undefined;
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
   AppointmentStack:
     | NavigatorScreenParams<AppointmentStackParamList>
     | undefined;
   NotFound: undefined;
+  ChatStack: NavigatorScreenParams<ChatStackParamList> | undefined;
+  NewsStack: NavigatorScreenParams<NewsStackParamList> | undefined;
+  LoadingScreen: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -39,9 +51,8 @@ export type Doctor = {
 };
 export type AppointmentConfirmationScreenParams = {
   doctor: string;
-  date: string;
-  day: string;
-  time: string;
+  timeSlotId: number;
+  formattedTime: string;
 };
 
 export type AppointmentStackParamList = {
@@ -49,16 +60,25 @@ export type AppointmentStackParamList = {
   AppointmentConfirmationScreen: AppointmentConfirmationScreenParams;
   AppointmentsScreen: undefined;
 };
+export type ChatStackParamList = {
+  ChatScreen: undefined;
+  Chat: undefined;
+};
 export type NotAuthStackParamList = {
   WelcomeScreen: undefined;
   LoginScreen: undefined;
   RegisterScreen: undefined;
   OnboardingScreens: undefined;
 };
+export type ProfileStackParamList = {
+  PatientProfileScreen: undefined;
+  PrivacyStatmentScreen: undefined;
+};
+
 export type RootTabParamList = {
   TabOne: undefined;
   TabTwo: undefined;
-  ChatScreen: undefined;
+  ChatStack: undefined;
   TabThree: undefined;
 };
 
@@ -67,6 +87,13 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
     BottomTabScreenProps<RootTabParamList, Screen>,
     NativeStackScreenProps<RootStackParamList>
   >;
+
+  export type ProfileScreenProps<Screen extends keyof ProfileStackParamList> =
+  CompositeScreenProps<
+    NativeStackScreenProps<ProfileStackParamList, Screen>,
+    NativeStackScreenProps<RootStackParamList>
+  >;
+
 
 export type NotAuthScreenProps<Screen extends keyof NotAuthStackParamList> =
   CompositeScreenProps<

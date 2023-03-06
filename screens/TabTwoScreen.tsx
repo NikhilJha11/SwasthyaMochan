@@ -11,26 +11,15 @@ import { usePatientsAppointments } from '../hooks/usePatient';
 import {useAppointments} from '../hooks/useAppointments';
 
 import { View } from '../components/Themed';
-import { darkGreen000 } from '../sharedStyles';
+import { darkGreen, darkGreen000 } from '../sharedStyles';
 import { useNavigation } from '@react-navigation/native';
 import { I18nextProvider, useTranslation } from 'react-i18next';
-import i18n from '../i18n';
+import { useNews } from '../hooks/useNews';
 import moment from 'moment';
 import { useLocations } from '../hooks/useLocations';
 import { useDoctors } from '../hooks/useDoctors';
 import { useDoctorsByLocation } from '../hooks/useDoctorsbyLocation';
-
-const DATA = [
-  {
-    title: 'First Item',
-  },
-  {
-    title: 'Second Item',
-  },
-  {
-    title: 'Second Item',
-  },
-];
+import { ActivityIndicator } from 'react-native-paper';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -41,6 +30,7 @@ Notifications.setNotificationHandler({
 });
 export default function TabTwoScreen() {
   const navigation = useNavigation();
+  const { data: dataNews } = useNews();
   const { t } = useTranslation();
   const patientid = 1
   let nearestAppointment = null;
@@ -158,6 +148,8 @@ export default function TabTwoScreen() {
           allowAnnouncements: true,
         },
       });
+      // await AsyncStorage.removeItem('hasOnboarded');
+      // await AsyncStorage.removeItem('credentials');
     })();
   }, []);
 
@@ -168,18 +160,23 @@ export default function TabTwoScreen() {
         <ScrollView style={{ flex: 1 }}>
           <View style={styles.news}>
             <FlatList
-              data={DATA}
-              renderItem={({ item }) => <NewsItem title={item.title} />}
+              data={dataNews}
+              renderItem={({ item }) => (
+                <NewsItem title={item.title} content={item.content} />
+              )}
               horizontal
               showsHorizontalScrollIndicator={false}
               snapToAlignment='start'
               decelerationRate={'fast'}
               snapToInterval={Dimensions.get('window').width - 100}
+              ListEmptyComponent={
+                <ActivityIndicator animating color={darkGreen} size='large' />
+              }
             />
           </View>
           <CTABig
             icon={'calendar'}
-            text=  {t('Bookappointment')} 
+            text={t('Bookappointment')}
             style={styles.ctaBig}
             onPress={() => navigation.navigate('Root', { screen: 'TabOne' })}
           />
@@ -191,8 +188,8 @@ export default function TabTwoScreen() {
               location: 'Home Visit',
             }}
             buttonLeft={{ button: t('Maps') }}
-            topText={t('UpcomingAppointments')} 
-            buttonRight={{ button: t('Cancel')  }}
+            topText={t('UpcomingAppointments')}
+            buttonRight={{ button: t('Cancel') }}
             key={1}
           />
 
@@ -205,9 +202,9 @@ export default function TabTwoScreen() {
               image: require('../assets/images/doctor2.png'),
               location: 'Home Visit',
             }}
-            buttonLeft={{ button: t('Maps')  }}
+            buttonLeft={{ button: t('Maps') }}
             topText={t('RecentAppointments')}
-            buttonRight={{ button: t('SeeDetail')}}
+            buttonRight={{ button: t('SeeDetail') }}
             key={2}
           />
         </ScrollView>
