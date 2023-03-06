@@ -3,8 +3,10 @@ import axios from 'axios';
 
 export const usePatientsAppointments = ({
     patientid = 1,
+    enabled = false
   }: {
-    patientid?: number;
+    patientid?: number,
+    enabled:boolean
   }) =>{
     //console.log(`https://lachs.informatik.tu-chemnitz.de/planspiel/v1/patients/${patientid}/appointments`) ;
   return useQuery({
@@ -18,7 +20,8 @@ export const usePatientsAppointments = ({
 
       return res2;
     },
-  });
+    enabled
+  },    );
 };
 
 export const usePatientsLabreports = (patientid : number) => {

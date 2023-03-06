@@ -13,6 +13,9 @@ import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../i18n';
 import { usePatientsAppointments } from '../hooks/usePatient';
 import moment from 'moment';
+import { useLocations } from '../hooks/useLocations';
+import { useDoctorsByLocation } from '../hooks/useDoctorsbyLocation';
+
 const Appointment = () => {
   const openGps = (lat: any, lng: any) => {
     Linking.openURL(
@@ -20,6 +23,10 @@ const Appointment = () => {
     );
   };
   const { t } = useTranslation();
+
+  let DoctorNameUpcoming;
+  let DoctorSpecialization;
+
   const patientid = 1
   const { data: patientsAppointments, isLoading: isLoadingDoctors } = usePatientsAppointments({
     patientid: patientid,
@@ -37,6 +44,56 @@ const Appointment = () => {
   console.log (lastAppointment)
 
   console.log (recentAppointments)
+
+
+
+
+  const doctorIdToFindUpcoming = lastAppointment?.doctorId;
+
+
+  const { data: locations } = useLocations();
+
+  const doctorsByLocation = {};
+  
+  locations?.forEach((location) => {
+    try {
+      const { doctors } = useDoctorsByLocation(location.locationId);
+      if (doctors) {
+        doctorsByLocation[location.locationId] = doctors;
+      }
+    } catch (error) {
+      console.error(`Error fetching doctors for location ${location.locationId}:`, error);
+    }
+  });
+
+  const filteredDoctors = Object.values(doctorsByLocation).reduce((acc, doctors) => {
+    try {
+      const matchingDoctors = doctors.filter((doctor) => doctor.doctorId === doctorIdToFindUpcoming);
+      return [...acc, ...matchingDoctors];
+    } catch (error) {
+      console.error(`Error filtering doctors:`, error);
+      return acc;
+    }
+  }, []);
+  DoctorNameUpcoming = filteredDoctors[0]?.name
+  DoctorSpecialization = filteredDoctors[0]?.specialization
+
+  console.log(filteredDoctors[0]?.name)
+  console.log(filteredDoctors[0]?.specialization)
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   return (
     <View style={styles.appointment}>
       <View style={styles.appointmentTop}>
@@ -45,16 +102,13 @@ const Appointment = () => {
             variant='labelLarge'
             style={{ fontWeight: '500', marginBottom: 5 }}
           >
-            Dr. Kyle Bush
+            {DoctorNameUpcoming}
           </Text>
           <Text variant='labelSmall' style={{ opacity: 0.6 }}>
-            Cardiology
+          {DoctorSpecialization}
           </Text>
-          <Text variant='labelSmall' style={{ opacity: 0.6 }}>
-            Polyklinik - Erfurt
-          </Text>
+
         </View>
-        <Avatar.Image source={require('../assets/images/avatar1.png')} />
       </View>
       <Divider />
       <View style={styles.appointmentBottomUp}>
