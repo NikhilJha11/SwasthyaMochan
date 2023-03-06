@@ -10,7 +10,7 @@ const ProfileButtons = () => {
   const { t } = useTranslation();
   return (
     <>
-      <ProfileButton icon='user' text='Personal Data' />
+     {/* <ProfileButton icon='user' text='Personal Data' />*/}
       <ProfileButton
         icon='calendar'
         text={t("UpcomingAppointments")}

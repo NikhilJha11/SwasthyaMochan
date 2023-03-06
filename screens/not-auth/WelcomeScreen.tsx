@@ -36,7 +36,7 @@ const WelcomeScreen = () => {
           />
         </View>
         <View style={styles.buttonContainer}>
-          <Button
+         {/* <Button
             mode='contained'
             buttonColor={theme.colors.tertiary}
             style={styles.button}
@@ -45,7 +45,7 @@ const WelcomeScreen = () => {
             }
           >
             {regester}
-          </Button>
+          </Button> */}
           <Button
             mode='outlined'
             style={styles.button}
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    paddingVertical: 5,
-    marginBottom: 30,
+    paddingVertical: 10,
+    marginBottom: 10,
   },
 });
