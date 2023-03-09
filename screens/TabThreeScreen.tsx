@@ -1,5 +1,5 @@
 import { Feather } from '@expo/vector-icons';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Avatar, Text } from 'react-native-paper';
 
 import OneHealSafeArea from '../components/OneHealSafeArea';
@@ -16,8 +16,10 @@ export default function TabThreeScreen({
   return (
     <OneHealSafeArea statusBar='dark'>
       <View style={styles.container}>
-        <ProfileTop />
-        <ProfileButtons />
+        <ScrollView style={{ flex: 1 }}>
+          <ProfileTop />
+          <ProfileButtons />
+        </ScrollView>
       </View>
     </OneHealSafeArea>
   );
