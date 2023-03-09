@@ -18,7 +18,7 @@ const NewsScreen = () => {
         {params.title}
       </Text>
       <Text variant='labelLarge' style={styles.textTop}>
-        {params.content}
+        {params.content} 2
       </Text>
     </View>
   );
