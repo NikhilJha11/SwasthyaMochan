@@ -11,37 +11,44 @@ import { Feather } from '@expo/vector-icons';
 import { darkGreen } from '../sharedStyles';
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../i18n';
-import { useDeleteAppointment } from '../hooks/useDeleteAppointment';
 import { usePatientsAppointments } from '../hooks/usePatient';
 import moment from 'moment';
 import { useLocations } from '../hooks/useLocations';
 import { useDoctorsByLocation } from '../hooks/useDoctorsbyLocation';
+
 const Appointment = () => {
   const openGps = (lat: any, lng: any) => {
     Linking.openURL(
       `https://www.google.com/maps/search/?api=1&query=${lat}%2C${lng}`
     );
   };
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
 
-let DoctorNameUpcoming;
-let DoctorSpecialization;
-  const deleteAppointment = useDeleteAppointment();
+  let DoctorNameUpcoming;
+  let DoctorSpecialization;
+
   const patientid = 1
-  const { data: patientsAppointments } = usePatientsAppointments({
+  const { data: patientsAppointments, isLoading: isLoadingDoctors } = usePatientsAppointments({
     patientid: patientid,
   }); 
-  const upcomingAppointments = patientsAppointments.filter((appointment) => {
+  const recentAppointments = patientsAppointments.filter((appointment) => {
     const appointmentDate = new Date(appointment.startDate);
-    return appointmentDate >= new Date();
+    return appointmentDate < new Date();
   }).sort((a, b) => {
     const aDate = new Date(a.startDate);
     const bDate = new Date(b.startDate);
-    return aDate - bDate;
+    return bDate - aDate;
   });
-  const firstUpcomingAppointment = upcomingAppointments[0];
-  console.log (firstUpcomingAppointment)
-  const doctorIdToFindUpcoming = firstUpcomingAppointment?.doctorId;
+  
+  const lastAppointment = recentAppointments[0];
+  console.log (lastAppointment)
+
+  console.log (recentAppointments)
+
+
+
+
+  const doctorIdToFindUpcoming = lastAppointment?.doctorId;
 
 
   const { data: locations } = useLocations();
@@ -70,10 +77,24 @@ let DoctorSpecialization;
   }, []);
   DoctorNameUpcoming = filteredDoctors[0]?.name
   DoctorSpecialization = filteredDoctors[0]?.specialization
+
+  console.log(filteredDoctors[0]?.name)
   console.log(filteredDoctors[0]?.specialization)
 
 
-  return ( 
+
+
+
+
+
+
+
+
+
+
+
+  
+  return (
     <View style={styles.appointment}>
       <View style={styles.appointmentTop}>
         <View>
@@ -86,12 +107,13 @@ let DoctorSpecialization;
           <Text variant='labelSmall' style={{ opacity: 0.6 }}>
           {DoctorSpecialization}
           </Text>
+
         </View>
       </View>
       <Divider />
       <View style={styles.appointmentBottomUp}>
         <Text style={{ marginRight: 15 }}>
-          <Feather name='calendar' size={16} /> {moment(firstUpcomingAppointment?.startDate).format('DD-MM-YYYY HH:mm')}
+          <Feather name='calendar' size={16} /> {moment(lastAppointment?.startDate).format('DD-MM-YYYY HH:mm')}
         </Text>
 
         <Text>

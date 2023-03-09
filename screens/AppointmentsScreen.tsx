@@ -26,12 +26,32 @@ import {
 import OneHealSegmentedButtons from '../components/OneHealSegmentedButtons';
 import { Feather } from '@expo/vector-icons';
 import Appointment from '../components/Appointment';
+import Appointment2 from '../components/Appointment2';
+import Appointment3 from '../components/Appointment3';
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../i18n';
+import { usePatientsAppointments } from '../hooks/usePatient';
 
 const AppointmentsScreen = () => {
   const [segment, setSegment] = useState('Upcoming');
   const { t } = useTranslation();
+  const patientid = 1
+  const { data: patientsAppointments, isLoading: isLoadingDoctors } = usePatientsAppointments({
+    patientid: patientid,
+  }); 
+
+  const upcomingAppointments = patientsAppointments.filter((appointment) => {
+    const appointmentDate = new Date(appointment.startDate);
+    return appointmentDate >= new Date();
+  }).sort((a, b) => {
+    const aDate = new Date(a.startDate);
+    const bDate = new Date(b.startDate);
+    return aDate - bDate;
+  });
+  const firstUpcomingAppointment = upcomingAppointments[0];
+  console.log (firstUpcomingAppointment)
+
+  console.log (upcomingAppointments)
 
   return (
     <OneHealSafeArea statusBar='dark'>
@@ -49,16 +69,14 @@ const AppointmentsScreen = () => {
               <I18nextProvider i18n={i18n}> <Text>{t('Closestvisits')}</Text> </I18nextProvider>
               </Text>
               <Appointment />
-              <Appointment />
-              <Appointment />
-              <Appointment />
+              <Appointment2 />
             </>
           ) : (
             <>
               <Text variant='headlineSmall' style={styles.visit}>
               <I18nextProvider i18n={i18n}> <Text>{t('Recentvisits')}</Text> </I18nextProvider>
               </Text>
-              <Appointment />
+              <Appointment3 />
             </>
           )}
         </ScrollView>

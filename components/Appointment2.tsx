@@ -11,24 +11,23 @@ import { Feather } from '@expo/vector-icons';
 import { darkGreen } from '../sharedStyles';
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../i18n';
-import { useDeleteAppointment } from '../hooks/useDeleteAppointment';
 import { usePatientsAppointments } from '../hooks/usePatient';
 import moment from 'moment';
 import { useLocations } from '../hooks/useLocations';
 import { useDoctorsByLocation } from '../hooks/useDoctorsbyLocation';
+
 const Appointment = () => {
   const openGps = (lat: any, lng: any) => {
     Linking.openURL(
       `https://www.google.com/maps/search/?api=1&query=${lat}%2C${lng}`
     );
   };
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
+  let DoctorNameUpcoming;
+  let DoctorSpecialization; 
 
-let DoctorNameUpcoming;
-let DoctorSpecialization;
-  const deleteAppointment = useDeleteAppointment();
   const patientid = 1
-  const { data: patientsAppointments } = usePatientsAppointments({
+  const { data: patientsAppointments, isLoading: isLoadingDoctors } = usePatientsAppointments({
     patientid: patientid,
   }); 
   const upcomingAppointments = patientsAppointments.filter((appointment) => {
@@ -39,9 +38,20 @@ let DoctorSpecialization;
     const bDate = new Date(b.startDate);
     return aDate - bDate;
   });
-  const firstUpcomingAppointment = upcomingAppointments[0];
-  console.log (firstUpcomingAppointment)
-  const doctorIdToFindUpcoming = firstUpcomingAppointment?.doctorId;
+  const secondUpcomingAppointment = upcomingAppointments[1];
+  console.log (secondUpcomingAppointment)
+
+  console.log (upcomingAppointments)
+
+
+
+
+
+
+
+
+
+  const doctorIdToFindUpcoming = secondUpcomingAppointment?.doctorId;
 
 
   const { data: locations } = useLocations();
@@ -73,7 +83,7 @@ let DoctorSpecialization;
   console.log(filteredDoctors[0]?.specialization)
 
 
-  return ( 
+  return (
     <View style={styles.appointment}>
       <View style={styles.appointmentTop}>
         <View>
@@ -86,16 +96,17 @@ let DoctorSpecialization;
           <Text variant='labelSmall' style={{ opacity: 0.6 }}>
           {DoctorSpecialization}
           </Text>
+        
         </View>
       </View>
       <Divider />
       <View style={styles.appointmentBottomUp}>
         <Text style={{ marginRight: 15 }}>
-          <Feather name='calendar' size={16} /> {moment(firstUpcomingAppointment?.startDate).format('DD-MM-YYYY HH:mm')}
+          <Feather name='calendar' size={16} />  {moment(secondUpcomingAppointment?.startDate).format('DD-MM-YYYY HH:mm')}
         </Text>
 
         <Text>
-          <Feather name='clock' size={16} /> 
+          <Feather name='clock' size={16} />
         </Text>
       </View>
       <View style={styles.appointmentBottomDown}>
