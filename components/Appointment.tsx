@@ -16,64 +16,20 @@ import { usePatientsAppointments } from '../hooks/usePatient';
 import moment from 'moment';
 import { useLocations } from '../hooks/useLocations';
 import { useDoctorsByLocation } from '../hooks/useDoctorsbyLocation';
-const Appointment = () => {
+
+type Props = {
+  name: string;
+  spec: string;
+};
+const Appointment = (props: Props) => {
   const openGps = (lat: any, lng: any) => {
     Linking.openURL(
       `https://www.google.com/maps/search/?api=1&query=${lat}%2C${lng}`
     );
   };
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
 
-let DoctorNameUpcoming;
-let DoctorSpecialization;
-  const deleteAppointment = useDeleteAppointment();
-  const patientid = 1
-  const { data: patientsAppointments } = usePatientsAppointments({
-    patientid: patientid,
-  }); 
-  const upcomingAppointments = patientsAppointments.filter((appointment) => {
-    const appointmentDate = new Date(appointment.startDate);
-    return appointmentDate >= new Date();
-  }).sort((a, b) => {
-    const aDate = new Date(a.startDate);
-    const bDate = new Date(b.startDate);
-    return aDate - bDate;
-  });
-  const firstUpcomingAppointment = upcomingAppointments[0];
-  console.log (firstUpcomingAppointment)
-  const doctorIdToFindUpcoming = firstUpcomingAppointment?.doctorId;
-
-
-  const { data: locations } = useLocations();
-
-  const doctorsByLocation = {};
-  
-  locations?.forEach((location) => {
-    try {
-      const { doctors } = useDoctorsByLocation(location.locationId);
-      if (doctors) {
-        doctorsByLocation[location.locationId] = doctors;
-      }
-    } catch (error) {
-      console.error(`Error fetching doctors for location ${location.locationId}:`, error);
-    }
-  });
-
-  const filteredDoctors = Object.values(doctorsByLocation).reduce((acc, doctors) => {
-    try {
-      const matchingDoctors = doctors.filter((doctor) => doctor.doctorId === doctorIdToFindUpcoming);
-      return [...acc, ...matchingDoctors];
-    } catch (error) {
-      console.error(`Error filtering doctors:`, error);
-      return acc;
-    }
-  }, []);
-  DoctorNameUpcoming = filteredDoctors[0]?.name
-  DoctorSpecialization = filteredDoctors[0]?.specialization
-  console.log(filteredDoctors[0]?.specialization)
-
-
-  return ( 
+  return (
     <View style={styles.appointment}>
       <View style={styles.appointmentTop}>
         <View>
@@ -81,21 +37,21 @@ let DoctorSpecialization;
             variant='labelLarge'
             style={{ fontWeight: '500', marginBottom: 5 }}
           >
-            {DoctorNameUpcoming}
+            {props.name}
           </Text>
           <Text variant='labelSmall' style={{ opacity: 0.6 }}>
-          {DoctorSpecialization}
+            {props.spec}
           </Text>
         </View>
       </View>
       <Divider />
       <View style={styles.appointmentBottomUp}>
         <Text style={{ marginRight: 15 }}>
-          <Feather name='calendar' size={16} /> {moment(firstUpcomingAppointment?.startDate).format('DD-MM-YYYY HH:mm')}
+          <Feather name='calendar' size={16} /> {new Date().toISOString()}
         </Text>
 
         <Text>
-          <Feather name='clock' size={16} /> 
+          <Feather name='clock' size={16} />
         </Text>
       </View>
       <View style={styles.appointmentBottomDown}>
@@ -103,10 +59,10 @@ let DoctorSpecialization;
           style={styles.buttonReschedule}
           onPress={() => openGps('50.964265277365115', '11.042652780566502')}
         >
-          <Text style={{ color: '#fff' }}>{t("Maps")}</Text>
+          <Text style={{ color: '#fff' }}>{t('Maps')}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonCancel}>
-          <Text>{t("Cancel")}</Text>
+          <Text>{t('Cancel')}</Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -26,38 +26,15 @@ import {
 import OneHealSegmentedButtons from '../components/OneHealSegmentedButtons';
 import { Feather } from '@expo/vector-icons';
 import Appointment from '../components/Appointment';
-import Appointment2 from '../components/Appointment2';
-import Appointment3 from '../components/Appointment3';
-import { I18nextProvider, useTranslation } from 'react-i18next';
-import i18n from '../i18n';
-import { usePatientsAppointments } from '../hooks/usePatient';
 
 const AppointmentsScreen = () => {
   const [segment, setSegment] = useState('Upcoming');
-  const { t } = useTranslation();
-  const patientid = 1
-  const { data: patientsAppointments, isLoading: isLoadingDoctors } = usePatientsAppointments({
-    patientid: patientid,
-  }); 
-
-  const upcomingAppointments = patientsAppointments.filter((appointment) => {
-    const appointmentDate = new Date(appointment.startDate);
-    return appointmentDate >= new Date();
-  }).sort((a, b) => {
-    const aDate = new Date(a.startDate);
-    const bDate = new Date(b.startDate);
-    return aDate - bDate;
-  });
-  const firstUpcomingAppointment = upcomingAppointments[0];
-  console.log (firstUpcomingAppointment)
-
-  console.log (upcomingAppointments)
 
   return (
     <OneHealSafeArea statusBar='dark'>
       <View style={styles.container}>
         <Text variant='headlineLarge' style={styles.topText}>
-        <I18nextProvider i18n={i18n}> <Text>{t('Appointments')}</Text> </I18nextProvider>
+          Appointments
         </Text>
 
         <OneHealSegmentedButtons segment={segment} setSegment={setSegment} />
@@ -66,17 +43,17 @@ const AppointmentsScreen = () => {
           {segment === 'Upcoming' ? (
             <>
               <Text variant='headlineSmall' style={styles.visit}>
-              <I18nextProvider i18n={i18n}> <Text>{t('Closestvisits')}</Text> </I18nextProvider>
+                Closest visits
               </Text>
-              <Appointment />
-              <Appointment2 />
+              <Appointment name='Dr. Hans Müller' spec='Allgemeinmedizin' />
+              <Appointment name='Dr. Martina Muster' spec='Neurologie' />
             </>
           ) : (
             <>
               <Text variant='headlineSmall' style={styles.visit}>
-              <I18nextProvider i18n={i18n}> <Text>{t('Recentvisits')}</Text> </I18nextProvider>
+                Recent visits
               </Text>
-              <Appointment3 />
+              <Appointment name='Dr. Martina Muster' spec='Neurologie' />
             </>
           )}
         </ScrollView>
