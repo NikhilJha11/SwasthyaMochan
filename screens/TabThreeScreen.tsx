@@ -14,17 +14,31 @@ import { RootTabScreenProps } from '../types';
 export default function TabThreeScreen({
   navigation,
 }: RootTabScreenProps<'TabThree'>) {
+  const promptLogout = () =>
+    Alert.alert(
+      'Do you want to logout ?',
+      undefined,
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('hi'),
+          style: 'cancel',
+        },
+        {
+          text: 'Logout',
+          style: 'destructive',
+          onPress: () => console.log('hi2'),
+        },
+      ],
+      { cancelable: true }
+    );
   return (
     <OneHealSafeArea statusBar='dark'>
       <View style={styles.container}>
         <ScrollView style={{ flex: 1 }}>
           <ProfileTop />
           <ProfileButtons />
-          <CTABig
-            text='LOGOUT'
-            icon='logout'
-            onPress={() => console.log('hi')}
-          />
+          <CTABig text='LOGOUT' icon='logout' onPress={() => promptLogout()} />
         </ScrollView>
       </View>
     </OneHealSafeArea>
