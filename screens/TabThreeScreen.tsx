@@ -1,14 +1,10 @@
-import { Feather } from '@expo/vector-icons';
 import { StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
-import { Avatar, Text } from 'react-native-paper';
 import CTABig from '../components/CTABig';
 
 import OneHealSafeArea from '../components/OneHealSafeArea';
-import ProfileButton from '../components/ProfileButton';
 import ProfileButtons from '../components/ProfileButtons';
 import ProfileTop from '../components/ProfileTop';
 import { View } from '../components/Themed';
-import { darkGreen, darkGreen000 } from '../sharedStyles';
 import { RootTabScreenProps } from '../types';
 
 export default function TabThreeScreen({
