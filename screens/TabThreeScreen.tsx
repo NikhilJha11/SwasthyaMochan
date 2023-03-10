@@ -1,6 +1,7 @@
 import { Feather } from '@expo/vector-icons';
-import { StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { Avatar, Text } from 'react-native-paper';
+import CTABig from '../components/CTABig';
 
 import OneHealSafeArea from '../components/OneHealSafeArea';
 import ProfileButton from '../components/ProfileButton';
@@ -19,6 +20,11 @@ export default function TabThreeScreen({
         <ScrollView style={{ flex: 1 }}>
           <ProfileTop />
           <ProfileButtons />
+          <CTABig
+            text='LOGOUT'
+            icon='logout'
+            onPress={() => console.log('hi')}
+          />
         </ScrollView>
       </View>
     </OneHealSafeArea>
