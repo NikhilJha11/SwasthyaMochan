@@ -19,23 +19,23 @@ const slides = [
   },
   {
     id: '2',
-    image: require('../../assets/images/Onboarding1news.jpg'),
+    image: require('../../assets/images/news.png'),
   },
   {
     id: '3',
-    image: require('../../assets/images/Onboarding1_BookAppointment.jpg'),
+    image: require('../../assets/images/design proposal.png'),
   },
   {
     id: '4',
-    image: require('../../assets/images/Onboarding1upcomming.jpg'),
+    image: require('../../assets/images/upcom.png'),
   },
   {
     id: '5',
-    image: require('../../assets/images/Onboarding1_recent_E.jpg'),
+    image: require('../../assets/images/recent.png'),
   },
   {
     id: '6',
-    image: require('../../assets/images/OnboardingPill.jpg'),
+    image: require('../../assets/images/pill.png'),
   },
   {
     id: '7',
@@ -43,7 +43,7 @@ const slides = [
   },
   {
     id: '8',
-    image: require('../../assets/images/Onboardingappointments.jpg'),
+    image: require('../../assets/images/filter.png'),
   },
   {
     id: '9',
@@ -51,15 +51,15 @@ const slides = [
   },
   {
     id: '10',
-    image: require('../../assets/images/infos1.jpg'),
+    image: require('../../assets/images/upcombut.png'),
   },
   {
     id: '11',
-    image: require('../../assets/images/infos2.jpg'),
+    image: require('../../assets/images/recentbut.png'),
   },
   {
     id: '12',
-    image: require('../../assets/images/infos3.jpg'),
+    image: require('../../assets/images/docbut.png'),
   },
   {
     id: '13',
