@@ -1,15 +1,23 @@
-import { StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import { StyleSheet, ScrollView, Alert } from 'react-native';
 import CTABig from '../components/CTABig';
 
 import OneHealSafeArea from '../components/OneHealSafeArea';
 import ProfileButtons from '../components/ProfileButtons';
 import ProfileTop from '../components/ProfileTop';
 import { View } from '../components/Themed';
+import { useHasOnboarded } from '../hooks/useHasOnboarded';
+import { useLogin } from '../hooks/useLogin';
+import { useLogout } from '../hooks/useLogout';
 import { RootTabScreenProps } from '../types';
 
 export default function TabThreeScreen({
   navigation,
 }: RootTabScreenProps<'TabThree'>) {
+  const { mutate: logout } = useLogout();
+  const { data: dataLogin } = useLogin();
+  const { data: dataHasOnboarded } = useHasOnboarded();
+  console.log(dataLogin, dataHasOnboarded);
+
   const promptLogout = () =>
     Alert.alert(
       'Do you want to logout ?',
@@ -17,13 +25,12 @@ export default function TabThreeScreen({
       [
         {
           text: 'Cancel',
-          onPress: () => console.log('hi'),
           style: 'cancel',
         },
         {
           text: 'Logout',
           style: 'destructive',
-          onPress: () => console.log('hi2'),
+          onPress: () => logout(),
         },
       ],
       { cancelable: true }
