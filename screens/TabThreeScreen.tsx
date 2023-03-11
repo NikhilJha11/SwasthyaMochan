@@ -5,8 +5,6 @@ import OneHealSafeArea from '../components/OneHealSafeArea';
 import ProfileButtons from '../components/ProfileButtons';
 import ProfileTop from '../components/ProfileTop';
 import { View } from '../components/Themed';
-import { useHasOnboarded } from '../hooks/useHasOnboarded';
-import { useLogin } from '../hooks/useLogin';
 import { useLogout } from '../hooks/useLogout';
 import { RootTabScreenProps } from '../types';
 
