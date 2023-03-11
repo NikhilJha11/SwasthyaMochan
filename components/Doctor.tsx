@@ -4,11 +4,11 @@ import {
   TouchableOpacity,
   View,
   ViewStyle,
-} from 'react-native';
-import React from 'react';
-import { Avatar, Text } from 'react-native-paper';
-import { darkGreen, darkGreen050 } from '../sharedStyles';
-import { useNavigation } from '@react-navigation/native';
+} from "react-native";
+import React from "react";
+import { Avatar, Text } from "react-native-paper";
+import { darkGreen, darkGreen050 } from "../sharedStyles";
+import { useNavigation } from "@react-navigation/native";
 
 type Props = {
   doctorId: number;
@@ -27,8 +27,8 @@ const Doctor = (props: Props) => {
     <TouchableOpacity
       style={[styles.doctor, props.styles]}
       onPress={() =>
-        navigation.navigate('AppointmentStack', {
-          screen: 'AppointmentScreen',
+        navigation.navigate("AppointmentStack", {
+          screen: "AppointmentScreen",
           params: {
             specialization: props.specialization,
             locationId: props.locationId,
@@ -42,16 +42,19 @@ const Doctor = (props: Props) => {
     >
       <View style={styles.doctorTexts}>
         <Text
-          variant='labelLarge'
-          style={{ color: darkGreen, fontWeight: '600' }}
+          variant="labelLarge"
+          style={{ color: darkGreen, fontWeight: "600" }}
         >
           {props.name}
         </Text>
-        <Text variant='labelSmall' style={{ color: darkGreen, opacity: 0.8 }}>
+        <Text variant="labelSmall" style={{ color: darkGreen, opacity: 0.8 }}>
           {props.specialization}
         </Text>
-        <Text variant='labelSmall' style={{ color: darkGreen, opacity: 0.8 }}>
+        <Text variant="labelSmall" style={{ color: darkGreen, opacity: 0.8 }}>
           {props.chosenLocationName}, {props.chosenLocation}
+        </Text>
+        <Text variant="labelSmall" style={{ color: darkGreen, opacity: 0.8 }}>
+          Languages: English, German
         </Text>
       </View>
     </TouchableOpacity>
@@ -62,8 +65,8 @@ export default Doctor;
 
 const styles = StyleSheet.create({
   doctor: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 24,
     backgroundColor: darkGreen050,
     paddingVertical: 7,
