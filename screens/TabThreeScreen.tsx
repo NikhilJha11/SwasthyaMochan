@@ -14,9 +14,6 @@ export default function TabThreeScreen({
   navigation,
 }: RootTabScreenProps<'TabThree'>) {
   const { mutate: logout } = useLogout();
-  const { data: dataLogin } = useLogin();
-  const { data: dataHasOnboarded } = useHasOnboarded();
-  console.log(dataLogin, dataHasOnboarded);
 
   const promptLogout = () =>
     Alert.alert(
