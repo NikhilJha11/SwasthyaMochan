@@ -115,6 +115,7 @@ export default OnboardingScreens;
 const styles = StyleSheet.create({
   imageBackground: { flex: 1 },
   container: {
+    
     flex: 1,
     paddingHorizontal: 20,
   },
@@ -122,6 +123,7 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
+    resizeMode: 'contain',
   },
   button: {
     paddingVertical: 5,
@@ -137,6 +139,7 @@ const styles = StyleSheet.create({
     height: 820,
     alignItems: 'flex-start',
     marginBottom: 16,
+    resizeMode: 'contain',
   },
   title: {
     fontSize: 24,
