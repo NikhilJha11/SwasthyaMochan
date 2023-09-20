@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <!--Meta Data-->
+    <%- include('partial/title.ejs'); %>  
+
+    <% if (data.NODE_ENV == 'production') { %>
+      <!-- Production Stylesheets -->
+      <link rel="stylesheet" href="assets/production/css/home.min.css">
+
+    <% }else { %>
+      <!-- Development Stylesheets -->
+      <link rel="stylesheet" href="assets/lib/css/bootstrap.min.css">
+      <link rel="stylesheet" href="assets/lib/css/fontawesome.min.css">
+      <link rel="stylesheet" href="assets/lib/css/responsive.css">
+      <link rel="stylesheet" href="assets/lib/css/select2.min.css">
+      <link rel="stylesheet" href="assets/lib/css/spacing.css">
+      <link rel="stylesheet" href="assets/lib/css/style.css">
+      <link rel="stylesheet" href="assets/lib/css/owl.carousel.min.css">
+      <link rel="stylesheet" href="assets/lib/css/owl.theme.default.min.css">
+      <link rel="stylesheet" href="assets/lib/css/bootstrap-datepicker.min.css">
+      <link rel="stylesheet" href="assets/lib/css/magnific-popup.css">
+      <link rel="stylesheet" href="assets/css/home.css">
+      <link rel="stylesheet" href="assets/css/header.css">
+      
+    <% } %>
+  </head>
+
+  <body onLoad="typeWriter()">
+
+    <!--Header-->
+    <%- include('partial/header.ejs', {data: data }); %>
+
+    <!--About Start-->
+    <div class="about-area pt_60 pb_90">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 mt_30">
+            <div class="about-content">
+              <div class="headline-left">
+                <h2>
+                  <span>Streamlining Care</span> Empowering Health
+                </h2>
+              </div>
+              <p>
+                Fostering Health, Empowering Care: Our Hospital Management System Revolutionizes Healthcare Delivery. Through Innovative Excellence, We Enhance Operations, Prioritize Patients, and Enrich Lives with Streamlined Services.Our excellence in numbers are<br>
+              </p>
+              <div class="progress-gallery main-prog">
+                <div class="bar-container">
+                  <p>Primary Care</p>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-success progress-bar-custom" role="progressbar"
+                      aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%">
+                    </div>
+                  </div>
+                  <div class="percentage-show">95%</div>
+                </div>
+                <div class="bar-container">
+                  <p>Specialty Care</p>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-success progress-bar-custom" role="progressbar"
+                      aria-valuenow="96" aria-valuemin="0" aria-valuemax="100" style="width: 96%">
+                    </div>
+                  </div>
+                  <div class="percentage-show">96%</div>
+                </div>
+                <div class="bar-container">
+                  <p>Emergency Care</p>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-success progress-bar-custom" role="progressbar"
+                      aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" style="width: 88%">
+                    </div>
+                  </div>
+                  <div class="percentage-show">88%</div>
+                </div>
+                <div class="bar-container">
+                  <p>Diagnostic Services</p>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-success progress-bar-custom" role="progressbar"
+                      aria-valuenow="94" aria-valuemin="0" aria-valuemax="100" style="width: 94%">
+                    </div>
+                  </div>
+                  <div class="percentage-show">94%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="m-auto">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/pc1jlelzmPY" title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--About End-->
+
+    <!--Choose-Area Start-->
+    <div class="choose-area pb_90">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="headline">
+              <h2>AROGYA SEVA</h2>
+              <h3>WHY US ?? </h3>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="choose-item flex" style="background-image: url(assets/images/cloak.JPEG)">
+              <div class="choose-icon">
+                <i class="fas fa-clock fa-3x" aria-hidden="true"></i>
+              </div>
+              <div class="choose-text">
+                <h4>EVERY SECOND MATTERS</h4>
+                <p>
+                  We know the importance of every second.Saving life is our utmost priority
+
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="choose-item flex" style="background-image: url(assets/images/satisfication.JPEG)">
+              <div class="choose-icon">
+                <i class="fa fa-thumbs-up fa-3x" aria-hidden="true"></i>
+              </div>
+              <div class="choose-text">
+                <h4>100% ASSURANCE </h4>
+                <p>
+                  With our cutting edge technology and advance testing and analysing protocols .
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="choose-item flex" style="background-image: url(assets/images/qualityservice.JPEG)">
+              <div class="choose-icon">
+                <i class="fa fa-globe fa-3x" aria-hidden="true"></i>
+              </div>
+              <div class="choose-text">
+                <h4>QUALITY SERVICE</h4>
+                <p>
+                  Quality service at very affordable rates .SOo everybody stay healthy .
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Choose-Area End-->
+
+
+    <!--Feature-Area Start-->
+    <div class="feature-area feature-two bg-area pt_90 pb_90">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="headline">
+              <h2>SPECIAL FEATURES</h2>
+              <h3>of our Hospital Management System</h3>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-6">
+            <div class="feature-item">
+              <div class="feature-icon">
+                <br>
+                <i class="fas fa-hospital-alt fa-3x" aria-hidden="true"></i>
+              </div>
+              <div class="feature-text">
+                <h4>Interlinked hospitals</h4>
+                <p>
+                 Every hospital, doctors, patients and ambulnace can connect with each other with ease.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="feature-item">
+              <div class="feature-icon">
+                <br>
+                <i class="fas fa-procedures fa-3x" aria-hidden="true"></i>
+              </div>
+              <div class="feature-text">
+                <h4>Good Medical Facilities</h4>
+                <p>
+                  Top-notch medical facilities provide state-of-the-art equipment, highly skilled healthcare professionals.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="feature-item">
+              <div class="feature-icon">
+                <br>
+                <i class="fas fa-ambulance fa-3x" aria-hidden="true"></i>
+              </div>
+              <div class="feature-text">
+                <h4>Best Ambulance Service</h4>
+                <p>
+                  The best ambulance service operates with swift response times, well-trained paramedics.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="feature-item">
+              <div class="feature-icon">
+                <br>
+                <i class="fas fa-laptop-medical fa-3x" aria-hidden="true"></i>
+              </div>
+              <div class="feature-text">
+                <h4>Computerized Platform</h4>
+                <p>
+                  A computerized platform healthcare system streamlines medical processes through digital solutions, allowing for efficient patient record management.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="feature-item">
+              <div class="feature-icon">
+                <br>
+                <i class="fas fa-stethoscope fa-3x" aria-hidden="true"></i>
+              </div>
+              <div class="feature-text">
+                <h4>Reduced Supervision</h4>
+                <p>
+                  A reduced supervision health monitoring system employs advanced sensors and remote technology to continuously track and analyze.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="feature-item">
+              <div class="feature-icon">
+                <br>
+                <i class="fas fa-robot fa-3x" aria-hidden="true"></i>
+              </div>
+              <div class="feature-text">
+                <h4>Modern Technology</h4>
+                <p>
+                  A modern technology health system leverages cutting-edge advancements such as telemedicine, electronic health records.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Feature-Area End-->
+
+
+    <!--Services Start-->
+    <div class="services-area pt_90 pb_90">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="headline">
+              <h2>OUR SERVICES</h2>
+              <h3>We are always here to assist you with our cutting edge technology</h3>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-6">
+            <div class="services-item effect-item">
+              <a href="/view2" class="image-effect">
+                <div class="services-photo" style="background-image: url(assets/images/services1.png)"></div>
+              </a>
+              <div class="services-text">
+                <h3><a href="/view2">Integrated  System</a></h3>
+                <p>
+                  Unified technology links diverse hospital components for streamlined operations and management.
+                </p>
+                <div class="button-bn">
+                  <a href="/view2">Read More <i class="fa fa-chevron-circle-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="services-item effect-item">
+              <a href="/view2" class="image-effect">
+                <div class="services-photo" style="background-image: url(assets/images/services2.png)"></div>
+              </a>
+              <div class="services-text">
+                <h3><a href="/view2">AI health chatbot</a></h3>
+                <p>
+                  Virtual assistant offering medical guidance, insights, and support through AI technology and systems.
+                </p>
+                <div class="button-bn">
+                  <a href="/view2">Read More <i class="fa fa-chevron-circle-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="services-item effect-item">
+              <a href="/view2" class="image-effect">
+                <div class="services-photo" style="background-image: url(assets/images/services3.png)"></div>
+              </a>
+              <div class="services-text">
+                <h3><a href="/view2">Ambulance System</a></h3>
+                <p>
+                  Rapid-response medical transport for emergencies, saving lives through efficient services.
+                </p>
+                <div class="button-bn">
+                  <a href="/view2">Read More <i class="fa fa-chevron-circle-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="services-item effect-item">
+              <a href="/view2" class="image-effect">
+                <div class="services-photo" style="background-image: url(assets/images/services4.png)"></div>
+              </a>
+              <div class="services-text">
+                <h3><a href="/view2">AI Report Generation</a></h3>
+                <p>
+                  AI automates concise, accurate, and efficient generation of comprehensive reports.
+                </p>
+                <div class="button-bn">
+                  <a href="/view2">Read More <i class="fa fa-chevron-circle-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="services-item effect-item">
+              <a href="/view2" class="image-effect">
+                <div class="services-photo" style="background-image: url(assets/images/services5.png)"></div>
+              </a>
+              <div class="services-text">
+                <h3><a href="/view2">IOT Smart Testing </a></h3>
+                <p>
+                  IoT enables intelligent health testing: remote, efficient, and data-driven diagnostics.
+                </p>
+                <div class="button-bn">
+                  <a href="/view2">Read More <i class="fa fa-chevron-circle-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="services-item effect-item">
+              <a href="/view2" class="image-effect">
+                <div class="services-photo" style="background-image: url(assets/images/services6.png)"></div>
+              </a>
+              <div class="services-text">
+                <h3><a href="/view2">Hospital Assistance</a></h3>
+                <p>
+                  Support services ensuring seamless hospital experience for patients, families, and staff.
+                </p>
+                <div class="button-bn">
+                  <a href="/view2">Read More <i class="fa fa-chevron-circle-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Services End-->
+
+    <!-- TESTIMONIALS Start-->
+    <section class="testimonials">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div id="customers-testimonials" class="owl-carousel">
+              <!--TESTIMONIAL 1 -->
+              <div class="item">
+                <div class="shadow-effect">
+                  <img class="img-circle" src="assets/images/issue1.png" alt="uesr1">
+                  <p>Recognize symptoms: chest pain, shortness of breath, nausea. Act fast; call emergency services. Timely intervention can save lives from heart attacks.
+                  </p>
+                </div>
+                <div class="testimonial-name">Heart Attack</div>
+              </div>
+              <!--TESTIMONIAL 1 END-->
+
+              <!--TESTIMONIAL 2 -->
+              <div class="item">
+                <div class="shadow-effect">
+                  <img class="img-circle" src="assets/images/issue2.png" alt="user2">
+                  <p>Symptoms: Increased thirst, frequent urination, fatigue, blurred vision.What to Do: Consult a doctor, get blood sugar tested. Maintain healthy diet, exercise regularly, follow medical advice for effective management.
+                  </p>
+                </div>
+                <div class="testimonial-name">Diabetes</div>
+              </div>
+              <!--TESTIMONIAL 2 END-->
+
+              <!--TESTIMONIAL 3 -->
+              <div class="item">
+                <div class="shadow-effect">
+                  <img class="img-circle" src="assets/images/issue3.png" alt="user3">
+                  <p>Stay vigilant: cancer varies widely. Detect early through screenings, adopt a healthy lifestyle to reduce risks. Knowledge empowers; educate, spread awareness about cancer. Conquer it together.
+                  </p>
+                </div>
+                <div class="testimonial-name">Cancer</div>
+              </div>
+              <!--TESTIMONIAL 3 END-->
+
+              <!--TESTIMONIAL 4 -->
+              <div class="item">
+                <div class="shadow-effect">
+                  <img class="img-circle" src="assets/images/issue4.png" alt="user4">
+                  <p>Stay alert for rabies: usually from bites. Seek prompt medical aid, obtain post-exposure shots. Ensure pet vaccinations, practice outdoor caution. Shield lives, prioritize health, prevent rabies spread.
+                  </p>
+                </div>
+                <div class="testimonial-name">rabies</div>
+              </div>
+              <!--TESTIMONIAL 4 END-->
+
+              <!--TESTIMONIAL 5 -->
+              <div class="item">
+                <div class="shadow-effect">
+                  <img class="img-circle" src="assets/images/issue5.png" alt="user4">
+                  <p>Remember FAST: Face drooping, Arm weakness, Speech difficulty, Time to call emergency. Prompt action crucial; recognizing symptoms and seeking immediate help can prevent fatal brain strokes.
+                  </p>
+                </div>
+                <div class="testimonial-name">Brain stroke</div>
+              </div>
+              <!--TESTIMONIAL 5 END-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--TESTIMONIALS END-->
+
+    <!--Footer-->
+    <%- include('partial/footer.ejs'); %>
+    
+    <script>
+      var i = 0;
+      var txt = 'WELCOME TO MEDBUDDY';
+      var speed = 60;
+      function typeWriter() {
+        if (i < txt.length) {
+          document.getElementById("typeit").innerHTML += txt.charAt(i);
+          i++;
+          setTimeout(typeWriter, speed);
+        }
+      }
+    </script>
+
+    <!-- JavaScript -->
+    <script defer src="assets/lib/js/jquery-3.4.1.min.js"></script>
+    <script defer src="/assets/lib/js/popper.min.js"></script>
+    <script defer src="assets/lib/js/owl.carousel.min.js"></script>
+    <script defer src="assets/lib/js/bootstrap.bundle.js"></script>
+    <script defer src="assets/lib/js/all.min.js"></script>
+    <script defer src="assets/lib/js/select2.full.min.js"></script>
+    <script defer src="assets/js/home.js"></script>
+    
+  </body>
+</html>
