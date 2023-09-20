@@ -4,9 +4,9 @@
 LiquidCrystal lcd(12, 6, 5, 4, 3, 2); // LCD pins (RS, E, D4, D5, D6, D7)
 SoftwareSerial gsm(10, 11); // GSM module pins (RX, TX)
 
-String user_data = "Nikhil | Phone Number:+919175913123 | Age:20 | Address:Mumbai | Allergies:No | Blood Group:O+ve";
-int pulseValue = 87; // Pulse rate value
-int spoValue = 92; //spo2 value
+String user_data = "Nikhil | Phone Number: +919175913123 | Age: 20 | Address: Mumbai | Allergies: No | Blood Group: O+ve | Adhaar:3244 5282 9829";
+int pulseValue = 87; // Pulse rate value, you can replace this with the actual pulse value
+int spoValue = 92;
 
 bool helpSent = false; // Flag to track if help message has been sent
 bool ambulanceAssistanceDisplayed = false; // Flag to track if ambulance assistance has been displayed
@@ -16,9 +16,9 @@ void setup() {
   gsm.begin(9600);
   Serial.begin(9600);
 
-  lcd.setCursor(2, 0);
+  lcd.setCursor(0, 0);
   lcd.print("Fingerprint");
-  lcd.setCursor(3, 1);
+  lcd.setCursor(0, 1);
   lcd.print("Have a Scan");
   delay(5000);
   lcd.clear();
@@ -51,9 +51,8 @@ void setup() {
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("Medical");
-  lcd.setCursor(0, 1);
+  lcd.setCursor(1, 0);
   lcd.print("Assisted:");
-  delay(2000);
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("Blood Test");
@@ -110,15 +109,15 @@ void loop() {
       // Set the flag to indicate that the help message has been sent
       helpSent = true;
 
-      // Display "Thank you for choosing ambulance live assistance" till the end
+      // Display "Thank you for choosing ambulance live assistance"
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("Thank you for");
       lcd.setCursor(0, 1);
       lcd.print("choosing ambulance");
-      while (true) {
-        // You can add any additional logic here if needed.
-      }
+      delay(3000);
+      lcd.clear();
+      ambulanceAssistanceDisplayed = true;
     }
 
     // Check if a message is received from Doctor Parth
@@ -133,6 +132,7 @@ void loop() {
 
       // Send the doctor's message to Harshul without the phone number and date
       sendDoctorMessage(doctorMessage);
+
     }
   }
 }
