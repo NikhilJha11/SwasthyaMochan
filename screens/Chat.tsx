@@ -25,27 +25,30 @@ import {
 const chats2 = [
   {
     chatId: 0,
-    messageFrom: 'davide',
-    messageTo: 'suat',
-    message: 'hello!',
+    messageFrom: 'Dr. Harshul',  //mine, harshul, parth bansal
+    messageTo: 'Shreyansh',
+    message: 'Hello! \nഹലോ',
+    message2: 'ഹലോ'
   },
   {
     chatId: 0,
-    messageFrom: 'davide',
-    messageTo: 'suat',
-    message: 'are you there ?',
+    messageFrom: 'Dr. Harshul',
+    messageTo: 'Shreyansh',
+    message: 'Are you there ? \nനിങ്ങൾ അവിടെയുണ്ടോ ?',
+    //message2: ''
   },
   {
     chatId: 0,
-    messageFrom: 'suat',
-    messageTo: 'davide',
-    message: 'im here, whats up ?',
+    messageFrom: 'Shreyansh',
+    messageTo: 'Dr. Harshul',
+    message: 'Im here, whats up? \nഞാൻ ഇവിടെയുണ്ട്, എന്ത് പറ്റി?',
+    //message2: 'ഞാൻ ഇവിടെയുണ്ട്, എന്ത് പറ്റി?'
   },
   {
     chatId: 0,
-    messageFrom: 'davide',
-    messageTo: 'suat',
-    message: 'this is a great app',
+    messageFrom: 'Dr. Harshul',
+    messageTo: 'Shreyansh',
+    message: 'This is a great app \nഇതൊരു മികച്ച ആപ്ലിക്കേഷനാണ്',
   },
 ];
 
@@ -58,21 +61,36 @@ const Chat = () => {
   console.log('textInput is ', textInput);
   const scrollViewRef = useRef<any>(null);
 
-  const chatFromOtherPerson = (text: string, key: number, date?: string) => (
-    <View style={styles.chat} key={key}>
-      <Text style={styles.text}>{text}</Text>
-      <Text style={[styles.date, { textAlign: 'right' }]}>
-        23.02.2023, 17:00
-      </Text>
-    </View>
-  );
+  // const chatFromOtherPerson = (text: string, key: number, date: string) => (
+  //   <View style={styles.chat} key={key}>
+  //     <Text style={styles.text}>{text}</Text>
+  //     <Text style={[styles.date, { textAlign: 'right' }]}>
+  //     21 Sept
+  //     </Text>
+  //   </View>
+  // );
+
+  const chatFromOtherPerson = (text: string, key: number) => {
+    const currentDate = new Date();
+    const formattedDate = `${currentDate.getDate()} ${
+      currentDate.toLocaleString('default', { month: 'short' })
+    }`;
+  
+    return (
+      <View style={styles.chat} key={key}>
+        <Text style={styles.text}>{text}</Text>
+        <Text style={[styles.date, { textAlign: 'right' }]}>{formattedDate}</Text>
+      </View>
+    );
+  };
+  
 
   const chatFromMe = (text: string, key: number, date?: string) => (
     <View
       style={[
         styles.chat,
         {
-          backgroundColor: darkGreen050,
+          backgroundColor: '#ff9933', //for the messages sent from the patient
           borderBottomLeftRadius: 10,
           borderBottomRightRadius: 0,
         },
@@ -81,9 +99,9 @@ const Chat = () => {
     >
       <Text style={[styles.text, { color: '#000', textAlign: 'right' }]}>
         {text}
-      </Text>
+       </Text> {/*this is for the text netered by the user shown in the chat screen (black) */}
       <Text style={[styles.date, { color: '#000', textAlign: 'left' }]}>
-        23.02.2023, 19:00
+        23.02.2023, 19:00  {/*and its time in black*/}
       </Text>
     </View>
   );
@@ -114,12 +132,12 @@ const Chat = () => {
             </TouchableOpacity>
             <View style={styles.person}>
               <Image
-                source={require('../assets/images/avatar5.png')}
+                source={require('../assets/images/Dr.-Harshul.png')}
                 style={styles.img}
               />
               <View>
                 <Text variant='titleMedium' style={{ color: '#fff' }}>
-                  Davide Garofoli
+                  Dr. Harshul
                 </Text>
               </View>
             </View>
@@ -152,11 +170,11 @@ const Chat = () => {
             value={textInput}
             onChangeText={(text) => setTextInput(text)}
           />
-          <TouchableOpacity
+          <TouchableOpacity  //container for message send icon on chat screen
             style={{
               borderRadius: 50,
               padding: 5,
-              backgroundColor: darkGreen,
+              backgroundColor: '#1a6169',
             }}
             onPress={() => sendMessage(textInput)}
           >

@@ -72,7 +72,7 @@ export default function TabTwoScreen() {
               decelerationRate={"fast"}
               snapToInterval={Dimensions.get("window").width - 100}
               ListEmptyComponent={
-                <ActivityIndicator animating color={darkGreen} size="large" />
+                <ActivityIndicator animating color={'#2f95dc'} size="large" />
               }
             />
           </View>
@@ -84,11 +84,14 @@ export default function TabTwoScreen() {
           />
           <DoctorBanner
             doctor={{
-              doctorName: "Dr. Hans Müller",
-              date: `08 March, 10:00`,
-              image: require("../assets/images/doctor.png"),
+              doctorName: "Dr. Deepanshu",
+              date: new Date().toDateString(),
+              image: require("../assets/images/homeCardDoc.png"),
               location: "",
             }}
+
+            
+
             buttonLeft={{ button: t("Maps") }}
             topText={t("UpcomingAppointments")}
             buttonRight={{ button: t("Cancel") }}
@@ -126,7 +129,7 @@ const styles = StyleSheet.create({
   text: { paddingLeft: 10 },
   news: {
     height: 200,
-    backgroundColor: darkGreen000,
+    backgroundColor: '#eee',
     marginLeft: 20,
     padding: 15,
     borderTopLeftRadius: 10,

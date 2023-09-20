@@ -22,7 +22,7 @@ export function BottomTabNavigator() {
         tabBarActiveTintColor: Colors[colorScheme].tint,
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: darkGreen,
+          backgroundColor: '#34bccc',
           height: 90,
         },
         tabBarInactiveTintColor: 'rgba(255,255,255,0.5)',

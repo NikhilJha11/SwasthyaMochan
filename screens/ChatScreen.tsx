@@ -39,13 +39,13 @@ const ChatScreen = () => {
           onPress={() => navigation.navigate('ChatStack', { screen: 'Chat' })}
         >
           <Image
-            source={require('../assets/images/avatar5.png')}
+            source={require('../assets/images/Dr.-Harshul.png')}
             style={styles.img}
           />
           <View style={styles.chatRight}>
-            <Text variant='titleMedium'>Davide Garofoli</Text>
+            <Text variant='titleMedium'>Dr. Harshul</Text>
             <Text variant='bodySmall' numberOfLines={4}>
-              Hello, I am having this probl...
+              Click to consult an experienced doctor
             </Text>
           </View>
         </TouchableOpacity>

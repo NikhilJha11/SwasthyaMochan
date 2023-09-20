@@ -6,7 +6,7 @@ const LoadingScreen = () => {
   return (
     <View style={{ flex: 1 }}>
       <ImageBackground
-        source={require('../assets/images/splash.png')}
+        source={require('../assets/images/eSanjevani_small.png')}
         style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
       >
         <Text

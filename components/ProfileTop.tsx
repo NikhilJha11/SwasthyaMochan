@@ -7,7 +7,7 @@ const ProfileTop = () => {
   return (
     <View style={styles.topSection}>
       
-      <Image source={require('../assets/images/logo-full-1.png')}style={{ marginBottom: 0,marginVertical:40}}/>
+      <Image source={require('../assets/images/eSanjevani_small.png')}style={{ marginBottom: 0,marginVertical:40}}/>
       <Text style={{ fontWeight: '700', marginBottom: 10, fontSize:25 }}>
 
         PROFILE

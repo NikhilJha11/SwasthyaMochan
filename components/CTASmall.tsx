@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { darkGreen, darkGreen500 } from '../sharedStyles';
+//import { darkGreen, darkGreen500 } from '../sharedStyles';
 import { Text } from 'react-native-paper';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 import { I18nextProvider, useTranslation } from 'react-i18next';
@@ -19,11 +19,11 @@ const CTASmall = () => {
         flexDirection: 'row',
         alignItems: 'center',
         borderWidth: 1,
-        borderColor: darkGreen500,
+        borderColor: '#34bccc',
       }}
     >
       <Text
-        style={{ color: darkGreen, opacity: 0.7, marginRight: 5 }}
+        style={{ color: '#7bb3b8', opacity: 0.7, marginRight: 5 }}
         variant='labelSmall'
       >
         {t('SeeALL')}

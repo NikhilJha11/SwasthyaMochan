@@ -48,7 +48,7 @@ const DoctorBanner = (props: Props) => {
             flexDirection: 'row',
             alignItems: 'center',
             borderWidth: 1,
-            borderColor: darkGreen500,
+            borderColor: '#34bccc',
           }}
         >
           <Text
@@ -72,7 +72,7 @@ const DoctorBanner = (props: Props) => {
           }}
         >
           <LinearGradient
-            colors={[darkGreen, darkGreen500]}
+            colors={['#34bccc', '#7bb3b8']}
             start={{ x: 0, y: 0 }}
             end={{ x: 0.7, y: 0 }}
             style={styles.appointmentsBottomSectionContainer}
@@ -162,16 +162,16 @@ const styles = StyleSheet.create({
   },
   appointmentsTopSectionText: {
     fontWeight: '800',
-    color: darkGreen,
+    color:'34bccc',
     opacity: 0.8,
   },
   appointmentsBottomSection: {
-    backgroundColor: darkGreen000,
+    backgroundColor: '34bccc',
     position: 'relative',
     zIndex: 2,
   },
   appointmentsBottomSectionContainer: {
-    backgroundColor: darkGreen,
+    backgroundColor: '#34bccc',
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 15,

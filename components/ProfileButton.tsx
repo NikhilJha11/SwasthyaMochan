@@ -10,10 +10,10 @@ type Props = {
   onPress?: () => void;
 };
 
-const ProfileButton = (props: Props) => {
+const ProfileButton = (props: Props) => {  //container for the icons of the textsa used in the Profile screen
   return (
     <TouchableOpacity style={styles.button} onPress={props.onPress}>
-      <Feather name={props.icon} color={darkGreen} size={24} />
+      <Feather name={props.icon} color={'#fcb36a'} size={24} />
       <Text variant='titleMedium' style={styles.buttonText}>
         {props.text}
       </Text>
@@ -41,5 +41,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
   },
-  buttonText: { color: darkGreen, fontWeight: '700', marginLeft: 30 },
+  buttonText: { color: '#24869e', fontWeight: '700', marginLeft: 30 },
 });

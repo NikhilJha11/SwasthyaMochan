@@ -31,7 +31,7 @@ const AppointmentConfirmationScreen = () => {
       await Notifications.setBadgeCountAsync(1);
       const res = await Notifications.scheduleNotificationAsync({
         content: {
-          title: 'OneHeal',
+          title: 'eSanjeevani',
           subtitle: 'UpcomingAppointments',
           body: `You have an appointment at ${params.formattedTime}`,
         },

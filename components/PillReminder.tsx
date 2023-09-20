@@ -45,7 +45,7 @@ export const PillReminder = () => {
         />
         <View style={styles.texts}>
           <Text variant='labelSmall' style={styles.label}>
-            3 pills a day, until 8th March 2023
+            As recommended by doctor.
           </Text>
           <Text variant='titleLarge' style={styles.title}>
             Aspirine
@@ -56,7 +56,7 @@ export const PillReminder = () => {
                 <Checkbox
                   status={pill.checked}
                   key={pill.id}
-                  color={darkGreen600}
+                  color='#ffa64d'
                   uncheckedColor={darkGreen000}
                   onPress={() => updateCheckboxes(pill)}
                 />
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   mainTitle: {
     fontWeight: '800',
-    color: darkGreen,
+    color: '#24869e',
     opacity: 0.8,
     marginBottom: 30,
   },
@@ -101,12 +101,12 @@ const styles = StyleSheet.create({
   img: {
     marginRight: 20,
   },
-  label: { color: 'rgba(0,0,0,0.6)' },
-  title: { color: 'rgba(0,0,0,0.8)', fontWeight: '700' },
+  label: { color: '#24869e' },
+  title: { color: '#24869e', fontWeight: '700' },
   checkboxContainer: { flexDirection: 'row', justifyContent: 'space-between' },
   checkboxItem: {
     borderWidth: 1,
-    borderColor: darkGreen600,
+    borderColor: '#fcb36a',
     borderRadius: 50,
     marginTop: 20,
   },

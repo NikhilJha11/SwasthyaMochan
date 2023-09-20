@@ -8,15 +8,15 @@ import {
 import React, { PropsWithChildren } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
-import {
-  darkGreen,
-  darkGreen000,
-  darkGreen100,
-  darkGreen200,
-  darkGreen300,
-  lightGreen,
-  sharedStyles,
-} from '../sharedStyles';
+// import {
+//   darkGreen,
+//   darkGreen000,
+//   darkGreen100,
+//   darkGreen200,
+//   darkGreen300,
+//   lightGreen,
+//   sharedStyles,
+// } from '../sharedStyles';
 import { useTheme } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -29,8 +29,8 @@ const OneHealSafeArea = (props: PropsWithChildren<Props>) => {
   const propStyles = props?.styles;
   const theme = useTheme();
   return (
-    <LinearGradient
-      colors={[darkGreen000, darkGreen100]}
+    <LinearGradient  //enhances the color of the background of the home page from ligth to dark 
+      colors={['#a4f4fc', '#bdf7fc']}
       start={{ x: 0.5, y: 0.5 }}
       end={{ x: 0, y: 0 }}
       style={{ height: '100%', width: '100%' }}

@@ -23,7 +23,7 @@ import {
     const [textInputValue2, setTextInputValue2] = useState('');
     const [textInputValue3, setTextInputValue3] = useState('');
     const navigation = useNavigation();
-   
+  
   
     return (
       <KeyboardAvoidingView
@@ -39,7 +39,7 @@ import {
           >
             <ScrollView style={styles.container}>
               <Image
-                source={require('../../assets/images/logo-full-1.png')}
+                source={require('../../assets/images/eSanjevani_small.png')}
                 resizeMode='contain'
                 style={styles.image}
               />
@@ -53,17 +53,17 @@ import {
                 placeholder='Gender'
                 mode='outlined'
                 style={styles.input}
-                outlineColor={darkGreen}
+                outlineColor={'#ff9933'}
                 activeOutlineColor={darkGreen}
                 autoCapitalize='none'
               />
-               <TextInput
+              <TextInput
                 label='Weight'
                 placeholder='Weight'
                 mode='outlined'
                 secureTextEntry
                 style={styles.input}
-                outlineColor={darkGreen}
+                outlineColor={'#ff9933'}
                 activeOutlineColor={darkGreen}
                 autoCapitalize='none'
               />
@@ -72,7 +72,7 @@ import {
                 mode='outlined'
                 placeholder='Known Diseases'
                 style={styles.input}
-                outlineColor={darkGreen}
+                outlineColor={'#ff9933'}
                 activeOutlineColor={darkGreen}
                 autoCapitalize='none'
               />
@@ -80,24 +80,24 @@ import {
                 label='Allergy'
                 mode='outlined'
                 style={styles.input}
-                outlineColor={darkGreen}
+                outlineColor={'#ff9933'}
                 activeOutlineColor={darkGreen}
                 autoCapitalize='none'
               />
               
-               <TextInput
+              <TextInput
                 label='Permanent Medicine'
                 mode='outlined'
                 style={styles.input}
-                outlineColor={darkGreen}
+                outlineColor={'#ff9933'}
                 activeOutlineColor={darkGreen}
                 autoCapitalize='none'
               />
-               <TextInput
+              <TextInput
                 label='Family Diseases'
                 mode='outlined'
                 style={styles.input}
-                outlineColor={darkGreen}
+                outlineColor={'#ff9933'}
                 activeOutlineColor={darkGreen}
                 autoCapitalize='none'
               />
@@ -106,19 +106,19 @@ import {
               Is the patient underage? </Text>
               <Checkbox.Android 
               style={[styles.cheakbox]}
-              color={darkGreen}
+              color={'#ff9933'}
               status={isChecked ? 'checked' : 'unchecked'}
-               onPress={() => setIsChecked(!isChecked)}
+              onPress={() => setIsChecked(!isChecked)}
               /> 
-               {isChecked && (
-               <>
+              {isChecked && (
+              <>
               <TextInput
-              label="Legal guardian name "
+              label="Legal guardian name: "
               value={textInputValue1}
               style={styles.input}
               onChangeText={setTextInputValue1}
-         
-               />
+        
+              />
               <TextInput
               label="Legal guardian surname"
               style={styles.input}
@@ -131,7 +131,7 @@ import {
               style={styles.input}
               onChangeText={setTextInputValue3}
       
-               />
+              />
               </>
               )}
               
@@ -143,7 +143,7 @@ import {
                 placeholder='Name'
                 mode='outlined'
                 style={styles.input}
-                outlineColor={darkGreen}
+                outlineColor={'#ff9933'}
                 activeOutlineColor={darkGreen}
                 autoCapitalize='none'
               />
@@ -152,7 +152,7 @@ import {
                 mode='outlined'
                 secureTextEntry
                 style={styles.input}
-                outlineColor={darkGreen}
+                outlineColor={'#ff9933'}
                 activeOutlineColor={darkGreen}
                 autoCapitalize='none'
               />
@@ -161,14 +161,14 @@ import {
                 mode='outlined'
                 secureTextEntry
                 style={styles.input}
-                outlineColor={darkGreen}
+                outlineColor={'#ff9933'}
                 activeOutlineColor={darkGreen}
                 autoCapitalize='none'
               />
               <Button
                 mode='contained'
                 style={styles.button}
-                buttonColor={theme.colors.tertiary}
+                buttonColor={'#34bccc'}
               >
                 Save
               </Button>
@@ -194,7 +194,7 @@ import {
       flex: 1,
     },
     input: {
-      backgroundColor: sharedStyles.viewStyles.backgroundColor,
+      backgroundColor: 'white',
       padding: 10,
       marginBottom: 30,
     },

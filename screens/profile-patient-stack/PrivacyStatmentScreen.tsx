@@ -55,7 +55,7 @@ const PrivacyStatmentScreen = () => {
         >
           <ScrollView style={styles.container}>
             <Image
-              source={require("../../assets/images/logo-full-1.png")}
+              source={require("../../assets/images/eSanjevani_small.png")}
               resizeMode="contain"
               style={styles.image}
             />
@@ -71,7 +71,7 @@ const PrivacyStatmentScreen = () => {
               your personal information. If you choose to use the profile
               feature in our application, we may collect and use your personal
               data to manage and customize your user experience. Additionally,
-              we may share your data with "OneHeal" who will assist us in
+              we may share your data with "eSanjeevani" which will assist us in
               providing our services to you. We will only share your data with
               these third-party providers to the extent necessary for them to
               perform their services for us, and we will take appropriate
@@ -92,7 +92,7 @@ const PrivacyStatmentScreen = () => {
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Checkbox.Android
                 style={[styles.cheakbox]}
-                color={darkGreen}
+                color={'#ff9933'}
                 status={isChecked ? "checked" : "unchecked"}
                 onPress={() => setIsChecked(!isChecked)}
               />
@@ -102,7 +102,7 @@ const PrivacyStatmentScreen = () => {
               <Button
                 mode="contained"
                 style={styles.button}
-                buttonColor={theme.colors.tertiary}
+                buttonColor={'#34bccc'}
                 onPress={() =>
                   navigation.navigate("Profile", {
                     screen: "PatientProfileScreen",
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     color: sharedStyles.viewStyles.borderColor,
   },
   link: {
-    color: "darkGreen",
+    color: "#ff9933",
     textDecorationLine: "underline",
   },
 });

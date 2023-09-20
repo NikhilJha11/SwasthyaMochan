@@ -20,7 +20,7 @@ const OneHealSegmentedButtons = (props: Props) => {
   const segmentBgStyles = (selectedSegment: string) => {
     const segmentBgStyle: ViewStyle = {
       backgroundColor:
-        props.segment === selectedSegment ? darkGreen500 : 'rgba(0,0,0,0.1)',
+        props.segment === selectedSegment ? '34bccc' : 'rgba(0,0,0,0.1)',
     };
     return segmentBgStyle;
   };
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     width: '50%',
-    backgroundColor: 'rgba(0,0,0,0.1)',
+    backgroundColor: '#34bccc',
   },
   buttonLeft: {
     borderTopLeftRadius: 50,

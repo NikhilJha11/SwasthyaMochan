@@ -10,7 +10,7 @@ import { Avatar, Divider, Text } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
 import { darkGreen } from '../sharedStyles';
 import { I18nextProvider, useTranslation } from 'react-i18next';
-import i18n from '../i18n';
+import i18n from '../i18n';   //used for internalization
 import { useDeleteAppointment } from '../hooks/useDeleteAppointment';
 import { usePatientsAppointments } from '../hooks/usePatient';
 import moment from 'moment';
@@ -22,16 +22,22 @@ type Props = {
   spec: string;
 };
 const Appointment = (props: Props) => {
+  //The Appointment component takes two props: name and spec, which presumably represent the 
+  //name and specialization of a medical appointment.
   const openGps = (lat: any, lng: any) => {
     Linking.openURL(
       `https://www.google.com/maps/search/?api=1&query=${lat}%2C${lng}`
     );
+    //The openGps function uses the Linking.openURL method to open a map URL with latitude and 
+    //longitude coordinates when called. This is typically used to show the location of an appointment on a map application.
+//It uses the useTranslation hook from react-i18next to access 
   };
   const { t } = useTranslation();
+  //It uses the useTranslation hook from react-i18next to access translation functions (t) for internationalization.
 
   return (
     <View style={styles.appointment}>
-      <View style={styles.appointmentTop}>
+      <View style={styles.appointmentTop}> {/* It displays the name and specialization of the appointment. */}
         <View>
           <Text
             variant='labelLarge'
@@ -45,7 +51,7 @@ const Appointment = (props: Props) => {
         </View>
       </View>
       <Divider />
-      <View style={styles.appointmentBottomUp}>
+       <View style={styles.appointmentBottomUp}>  {/*It shows the current date and time (though it currently always displays the current date). */}
         <Text style={{ marginRight: 15 }}>
           <Feather name='calendar' size={16} /> {new Date().toISOString()}
         </Text>
@@ -54,7 +60,7 @@ const Appointment = (props: Props) => {
           <Feather name='clock' size={16} />
         </Text>
       </View>
-      <View style={styles.appointmentBottomDown}>
+      <View style={styles.appointmentBottomDown}>  {/* It provides buttons for actions like opening maps and canceling the appointment. */}
         <TouchableOpacity
           style={styles.buttonReschedule}
           onPress={() => openGps('50.964265277365115', '11.042652780566502')}
@@ -76,7 +82,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     backgroundColor: '#fff',
-    shadowColor: 'rgba(0,0,0,0.3)',
+    shadowColor: 'rgba(0,0,0,0.3)', //'rgba(0,0,0,0.3)'
     shadowOffset: {
       width: 0,
       height: 2,
@@ -116,3 +122,12 @@ const styles = StyleSheet.create({
     backgroundColor: darkGreen,
   },
 });
+
+// Breaking down the 'rgba(0,0,0,0.3)' value:
+
+// 0,0,0: These are the RGB (Red, Green, Blue) values, where 0 for each means no color 
+//contribution, resulting in black. 0.3: This is the alpha (transparency) value, which ranges from 0 
+//(completely transparent) to 1 (completely opaque). In this case, 0.3 indicates a slight transparency, 
+//making the shadow somewhat see-through. So, 'rgba(0,0,0,0.3)' represents a mostly black shadow with
+// a slight degree of transparency. You can adjust the RGB values and the alpha value to change the 
+//color and transparency of the shadow according to your design requirements.

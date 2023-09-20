@@ -29,7 +29,7 @@ const WelcomeScreen = () => {
 
   return (
     <ImageBackground
-      source={require("../../assets/images/welcome.png")}
+      source={require("../../assets/images/home_page_bg.png")}
       style={[
         styles.imageBackground,
         { backgroundColor: theme.colors.background },
@@ -39,7 +39,7 @@ const WelcomeScreen = () => {
         <StatusBar style="dark" />
         <View style={styles.imageContainer}>
           <Image
-            source={require("../../assets/images/logo-full-1.png")}
+            source={require("../../assets/images/eSanjevani_small.png")}
             resizeMode="contain"
             style={styles.image}
           />

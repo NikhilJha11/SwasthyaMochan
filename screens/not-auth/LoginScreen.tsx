@@ -96,7 +96,7 @@ const LoginScreen = () => {
           <View style={styles.container}>
             <View style={styles.topContainer}>
               <Image
-                source={require('../../assets/images/logo-3x.png')}
+                source={require('../../assets/images/login_screen_logo.png')}
                 resizeMode='contain'
                 style={styles.image}
               />
@@ -112,7 +112,7 @@ const LoginScreen = () => {
             </View>
 
             <TextInput
-              label='Kielstein ID'
+              label='Patient ID'
               mode='outlined'
               secureTextEntry={!showPassword}
               style={styles.input}
@@ -170,10 +170,10 @@ const LoginScreen = () => {
                       )
                     }
                   >
-                    <I18nextProvider i18n={i18n}>
+                    {/* <I18nextProvider i18n={i18n}>
                       {' '}
                       <Text>{t('nearestKielstein')}</Text>{' '}
-                    </I18nextProvider>
+                    </I18nextProvider> */}
                   </Text>
                 </Dialog.Content>
                 <Dialog.Actions>

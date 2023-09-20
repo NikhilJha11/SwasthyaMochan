@@ -60,7 +60,7 @@ const RegisterScreen = () => {
               activeOutlineColor={darkGreen}
               autoCapitalize='none'
             />
-             <TextInput
+            <TextInput
               label='Surename'
               placeholder='surename'
               mode='outlined'
@@ -93,7 +93,7 @@ const RegisterScreen = () => {
               autoCapitalize='none'
             />
             
-             <TextInput
+            <TextInput
               label='Zip'
               mode='outlined'
               left={<TextInput.Icon icon={'home-city'}/>}
@@ -102,7 +102,7 @@ const RegisterScreen = () => {
               activeOutlineColor={darkGreen}
               autoCapitalize='none'
             />
-             <TextInput
+            <TextInput
               label='City'
               mode='outlined'
               left={<TextInput.Icon icon={'home-city'}/>}
@@ -132,7 +132,7 @@ const RegisterScreen = () => {
               right={<TextInput.Icon icon='eye-off' />}
               autoCapitalize='none'
             />
-             <TextInput
+            <TextInput
               label='Telephone Number'
               mode='outlined'
               left={<TextInput.Icon icon='phone' color={darkGreen}/>}

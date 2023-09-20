@@ -28,12 +28,12 @@ const OneHealAppBar = (props: Props) => {
       ]}
     >
       {props.showAvatar ? (
-        <Avatar.Image source={require('../assets/images/avatar.jpg')} />
+        <Avatar.Image source={require('../assets/images/eSanjeevani icon.png')} />
       ) : null}
 
       <View style={{ backgroundColor: darkGreen }}>
         <Image
-          source={require('../assets/images/logo-reverted.png')}
+          source={require('../assets/images/eSanjeevani icon.png')}
           style={{ width: 150, height: 50 }}
           resizeMode='contain'
         />
@@ -42,7 +42,7 @@ const OneHealAppBar = (props: Props) => {
         visible={visible}
         onDismiss={closeMenu}
         anchor={
-          <Button onPress={openMenu} textColor='#fff'>
+          <Button onPress={openMenu} textColor='#285454'>
             <Ionicons name='earth' /> {t("language")}
           </Button>
         }
@@ -51,6 +51,7 @@ const OneHealAppBar = (props: Props) => {
         <Menu.Item onPress={() => i18n.changeLanguage('de')} title='DE' />
         <Menu.Item onPress={() => i18n.changeLanguage('ar')} title='AR' />
         <Menu.Item onPress={() => i18n.changeLanguage('es')} title='ES' />
+        <Menu.Item onPress={() => i18n.changeLanguage('ml')} title='ML' />
       </Menu>
     </View>
   );
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: darkGreen,
+    backgroundColor: '#34bccc',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
