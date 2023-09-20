@@ -1,0 +1,178 @@
+#include <LiquidCrystal.h>
+#include <SoftwareSerial.h>
+
+LiquidCrystal lcd(12, 6, 5, 4, 3, 2); // LCD pins (RS, E, D4, D5, D6, D7)
+SoftwareSerial gsm(10, 11); // GSM module pins (RX, TX)
+
+String user_data = "Name: Nikhil | Phone Number: +919175913123 | Age: 20 | Address: Mumbai | Allergies: No | Blood Group: O+ve | Adhaar: 3244 5282 9829";
+int pulseValue = 87; // Pulse rate value, you can replace this with the actual pulse value
+int spoValue = 92;
+
+bool helpSent = false; // Flag to track if help message has been sent
+bool ambulanceAssistanceDisplayed = false; // Flag to track if ambulance assistance has been displayed
+
+void sendSMS(const String& phoneNumber, const String& message) {
+  gsm.println("AT+CMGF=1"); // Set the GSM module to text mode
+  delay(1000);
+  gsm.println("AT+CMGS=\"" + phoneNumber + "\""); // Specify the recipient's phone number
+  delay(1000);
+  gsm.println(message); // Send the message
+  delay(1000);
+  gsm.println((char)26); // End the message by sending Ctrl+Z
+  delay(1000);
+}
+
+void sendHelpMessageToBoth(const String& nikhilNumber, const String& doctorNumber, const String& userDetails) {
+  // Compose the message
+  String message = "Ambulance Assistance!\n" + userDetails;
+
+  // Send the message to Nikhil
+  sendSMS(nikhilNumber, message);
+
+  // Send the message to the doctor
+  sendSMS(doctorNumber, message);
+}
+
+
+void displayScrollingText(const String& line1, const String& line2) {
+  // Display scrolling text for line 1
+  lcd.setCursor(0, 0);
+  lcd.print(line1);
+  for (int i = 0; i < line1.length() + 16; i++) {
+    lcd.scrollDisplayLeft();
+    delay(300);
+  }
+
+  // Display scrolling text for line 2
+  lcd.setCursor(0, 1);
+  lcd.print(line2);
+  for (int i = 0; i < line2.length() + 16; i++) {
+    lcd.scrollDisplayLeft();
+    delay(300);
+  }
+}
+
+void setup() {
+  lcd.begin(16, 2); // Initialize the LCD with 16 columns and 2 rows
+  gsm.begin(9600);
+  Serial.begin(9600);
+
+  lcd.setCursor(0, 0);
+  lcd.print("Fingerprint");
+  lcd.setCursor(0, 1);
+  lcd.print("Have a Scan");
+  delay(5000);
+  lcd.clear();
+  lcd.print("Fingerprint");
+  lcd.setCursor(1, 8);
+  lcd.print("Matched");
+  delay(2000);
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Hi Nikhil,");
+  lcd.setCursor(0, 1);
+  lcd.print("Please wait...");
+  delay(5000);
+  lcd.clear();
+
+  // Display "Details:" without a blank space
+  lcd.setCursor(0, 0);
+  lcd.print("Details:");
+  lcd.setCursor(0, 1);
+
+  // Display user data in scrolling text
+  int dataLength = user_data.length();
+  for (int i = 0; i < dataLength + 16; i++) {
+    lcd.scrollDisplayLeft();
+    if (i < dataLength)
+      lcd.print(user_data[i]);
+    delay(300);
+  }
+  delay(5000);
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Medical");
+  lcd.setCursor(1, 0);
+  lcd.print("Assisted:");
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Blood Test");
+  lcd.setCursor(0, 1);
+  lcd.print("11/9/2023");
+  delay(5000);
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Pulse / SpO2");
+  delay(2000);
+  lcd.setCursor(0, 1);
+  lcd.print("Loading...");
+  delay(10000);
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Pulse Value: ");
+  lcd.print(pulseValue); // Display the pulse rate value
+  lcd.setCursor(0, 1);
+  lcd.print("Spo2: ");
+  lcd.print(spoValue); // Display the spo2 rate value
+  delay(2000);
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Please interact");
+  lcd.setCursor(0, 1);
+  lcd.print("with Ai");
+  delay(2000);
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Doctor Parth");
+  lcd.setCursor(0, 1);
+  lcd.print("Recommended");
+  delay(10000); // Wait 10 seconds
+
+  // Display live video and ambulance assistance codes as scrolling text
+  displayScrollingText("Live Video Code: 5055", "Ambulance Assistance: 9665110847");
+
+  // Send "Help is on the way" message to both Nikhil and the doctor
+// Send "Help is on the way" message to both Nikhil and the doctor
+String userDetails = "Name: Nikhil\nPhone Number: +919175913123\nAge: 20\nAddress: Mumbai\nAllergies: No\nBlood Group: O+ve\nAdhaar: 3244 5282 9829";
+sendHelpMessageToBoth("+919175913123", "+919814056663", userDetails);
+}
+
+void loop() {
+  if (gsm.available()) {
+    String response = gsm.readString();
+    Serial.println(response);
+
+    // Check if a message is received from Nikhil
+    if (response.indexOf("+919175913123") != -1 && !helpSent) {
+      // Send a message to Nikhil, the doctor, and ambulance assistance that help is on the way
+      sendHelpMessageToBoth("+919175913123", "+919814056663", user_data);
+
+      // Set the flag to indicate that the help message has been sent
+      helpSent = true;
+
+      // Display "Thank you for choosing ambulance live assistance"
+      lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print("Thank you");
+      lcd.setCursor(0, 1);
+      lcd.print("for choosing");
+      delay(3000);
+      lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print("ambulance live");
+      lcd.setCursor(0, 1);
+      lcd.print("assistance");
+      delay(3000);
+    }
+    // Check if a message is received from the person
+    else if (response.indexOf("GSM") != -1) {
+      // Display "Ambulance Assistance Selected"
+      lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print("Ambulance");
+      lcd.setCursor(0, 1);
+      lcd.print("Assistance");
+      delay(3000);
+    }
+  }
+}
