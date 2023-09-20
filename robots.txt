@@ -1,0 +1,5 @@
+Sitemap: https://medbuddy.onrender.com/sitemap.xml
+User-agent: *
+Disallow: /patienthome/
+Disallow: /doctorhome/
+Disallow: /ambulancehome/
