@@ -4,11 +4,11 @@ SIH PS1325
 
 
 Team members -
-nikhil jha 
-palki nanda
-amrit pandey
-deepanshukumar
-parth bansal
+nikhil jha, 
+palki nanda,
+amrit pandey,
+deepanshukumar,
+parth bansal,
 harshsul
 
 
