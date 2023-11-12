@@ -8,7 +8,7 @@ nikhil jha,
 palki nanda,
 amrit pandey,
 deepanshukumar,
-parth bansal,
+parth bansal and
 harshul
 
 
